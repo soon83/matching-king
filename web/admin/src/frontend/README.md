@@ -1,29 +1,40 @@
-# frontend
+## vue cli installation
 
-## Project setup
-```
-npm install
-```
+- Link: [Vue CLI](https://cli.vuejs.org/#getting-started)
 
-### Compiles and hot-reloads for development
+install:
+
 ```
-npm run serve
+npm install -g @vue/cli
 ```
 
-### Compiles and minifies for production
+## create vue project
+create project:
+
 ```
-npm run build
+vue create vue-project
 ```
 
-### Run your unit tests
+select Manually select features:
+
 ```
-npm run test:unit
+Vue CLI v5.0.8
+? Please pick a preset:
+  Default ([Vue 3] babel, eslint)
+  Default ([Vue 2] babel, eslint)
+❯ Manually select features
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+final fetures:
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
+Vue CLI v5.0.8
+? Please pick a preset: Manually select features
+? Check the features needed for your project: Babel, Linter, Unit
+? Choose a version of Vue.js that you want to start the project with 2.x
+? Pick a linter / formatter config: Prettier
+? Pick additional lint features: Lint on save
+? Pick a unit testing solution: Jest
+? Where do you prefer placing config for Babel, ESLint, etc.? In dedicated config files
+? Save this as a preset for future projects? (y/N) y
+```
