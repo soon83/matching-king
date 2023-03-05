@@ -1,0 +1,20 @@
+apply from: '../common-web-build.gradle'
+
+dependencies {
+
+}
+
+node.nodeProjectDir = file("${project.projectDir}/src/frontend")
+
+task buildMember(type: NpmTask, dependsOn: setup) {
+    args = ['run', 'build']
+}
+
+task buildCopyMember(dependsOn: buildMember) {
+    copy {
+        from "${project.projectDir}/src/frontend/dist/"
+        into "${project.projectDir}/src/main/resources/static/"
+    }
+}
+
+processResources.dependsOn 'buildCopyMember'

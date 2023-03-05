@@ -1,0 +1,5 @@
+apply from: '../common-server-build.gradle'
+
+dependencies {
+
+}

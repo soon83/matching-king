@@ -1,0 +1,17 @@
+apply plugin: 'com.github.node-gradle.node'
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}
+
+node {
+    version = '16.19.0'
+    npmVersion = '8.15.0'
+    download = true
+}
+
+task setup(type: NpmTask) {
+    args = ['install']
+    inputs.files file('package.json')
+    outputs.files file('node_modules')
+}
