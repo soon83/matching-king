@@ -1,10 +1,10 @@
-application:
-  title: matching-king
-
 server:
   port: 8002
   shutdown: graceful
 
+application:
+  title: matching-king
+  
 spring:
   application:
     name: matching-api-service

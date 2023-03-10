@@ -14,6 +14,6 @@ public class MemberApplication {
     private final MemberService memberService;
 
     public Long registerMember(MemberCommand.CreateMember command) {
-        return memberService.createMember(command);
+        return memberService.registerMember(command);
     }
 }

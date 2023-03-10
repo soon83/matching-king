@@ -1,7 +1,7 @@
 package com.soon83.domain.member;
 
 import com.soon83.domain.member.model.MemberCommand;
-import com.soon83.infrastructure.member.MemberRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    private final MemberRepository memberRepository;
+    private final MemberStore memberStore;
 
     @Override
-    public Long createMember(MemberCommand.CreateMember command) {
-        Member createdMember = memberRepository.save(command.toEntity());
+    @Transactional
+    public Long registerMember(MemberCommand.CreateMember command) {
+        Member createdMember = memberStore.create(command.toEntity());
         return createdMember.getId();
     }
 }
