@@ -2,6 +2,7 @@ package com.soon83.domain.member;
 
 import com.soon83.domain.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -28,7 +29,7 @@ public class Member extends BaseEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private MBTI mbti;
+    private Mbti mbti;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -37,6 +38,30 @@ public class Member extends BaseEntity {
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Builder
+    public Member(
+            String email,
+            String password,
+            String nickname,
+            Gender gender,
+            Mbti mbti,
+            Type type,
+            Role role
+    ) {
+        if (email == null) throw new IllegalArgumentException("email");
+        if (nickname == null) throw new IllegalArgumentException("nickname");
+        if (gender == null) throw new IllegalArgumentException("gender");
+        if (mbti == null) throw new IllegalArgumentException("mbti");
+
+        this.email = email;
+        //this.password = password;
+        this.nickname = nickname;
+        this.gender = gender;
+        this.mbti = mbti;
+        this.type = Type.FREE;
+        this.role = Role.MEMBER;
+    }
 
     @Getter
     public enum Role {
@@ -54,7 +79,7 @@ public class Member extends BaseEntity {
     }
 
     @Getter
-    public enum MBTI {
+    public enum Mbti {
         ESFJ,
         ESFP,
         ENFJ,

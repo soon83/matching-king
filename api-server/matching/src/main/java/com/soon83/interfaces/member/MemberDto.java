@@ -1,6 +1,7 @@
 package com.soon83.interfaces.member;
 
 import com.soon83.domain.member.Member;
+import com.soon83.domain.member.model.MemberCommand;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,14 +19,23 @@ public class MemberDto {
         @NotNull(message = "필수값")
         private Member.Gender memberGender;
         @NotNull(message = "필수값")
-        private Member.MBTI memberMbti;
+        private Member.Mbti memberMbti;
+
+        public MemberCommand.CreateMember toCreateMemberCommand() {
+            return MemberCommand.CreateMember.builder()
+                    .email(memberEmail)
+                    .nickname(memberNickname)
+                    .gender(memberGender)
+                    .mbti(memberMbti)
+                    .build();
+        }
     }
 
     @Data
     public static class EditRequest {
         private String memberNickname;
         private Member.Gender memberGender;
-        private Member.MBTI memberMbti;
+        private Member.Mbti memberMbti;
     }
 
     @Data
@@ -44,7 +54,7 @@ public class MemberDto {
         private final String memberEmail;
         private final String memberNickname;
         private final Member.Gender memberGender;
-        private final Member.MBTI memberMbti;
+        private final Member.Mbti memberMbti;
         private final Member.Type memberType;
         private final Member.Role memberRole;
 
@@ -54,7 +64,7 @@ public class MemberDto {
                 String memberEmail,
                 String memberNickname,
                 Member.Gender memberGender,
-                Member.MBTI memberMbti,
+                Member.Mbti memberMbti,
                 Member.Type memberType,
                 Member.Role memberRole
         ) {

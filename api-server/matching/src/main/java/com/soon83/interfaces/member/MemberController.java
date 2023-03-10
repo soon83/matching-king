@@ -1,7 +1,9 @@
 package com.soon83.interfaces.member;
 
 import com.soon83.CommonResponse;
+import com.soon83.application.MemberApplication;
 import com.soon83.domain.member.Member;
+import com.soon83.domain.member.model.MemberCommand;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +18,8 @@ import java.util.List;
 @RequestMapping("/api/v1/members")
 public class MemberController {
 
+    private final MemberApplication memberApplication;
+
     /**
      * [회원] 단건 등록
      */
@@ -23,11 +27,11 @@ public class MemberController {
     @PostMapping
     public CommonResponse<MemberDto.CreateResponse> registerMember(@RequestBody @Valid MemberDto.RegisterRequest request) {
         log.debug("# registerMember # request: {}", request);
-        return CommonResponse.success(
-                MemberDto.CreateResponse.builder()
-                        .memberId(1L)
-                        .build()
-        );
+
+        MemberCommand.CreateMember command = request.toCreateMemberCommand();
+        Long registeredMemberId = memberApplication.registerMember(command);
+        MemberDto.CreateResponse response = new MemberDto.CreateResponse(registeredMemberId);
+        return CommonResponse.success(response);
     }
 
     /**
@@ -42,7 +46,7 @@ public class MemberController {
                                 .memberEmail("member@email.com")
                                 .memberNickname("matchingKing")
                                 .memberGender(Member.Gender.MALE)
-                                .memberMbti(Member.MBTI.ISTP)
+                                .memberMbti(Member.Mbti.ISTP)
                                 .memberType(Member.Type.FREE)
                                 .memberRole(Member.Role.MEMBER)
                                 .build()
@@ -62,7 +66,7 @@ public class MemberController {
                         .memberEmail("member@email.com")
                         .memberNickname("matchingKing")
                         .memberGender(Member.Gender.MALE)
-                        .memberMbti(Member.MBTI.ISTP)
+                        .memberMbti(Member.Mbti.ISTP)
                         .memberType(Member.Type.FREE)
                         .memberRole(Member.Role.MEMBER)
                         .build()
