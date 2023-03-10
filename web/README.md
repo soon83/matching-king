@@ -42,56 +42,57 @@ Vue CLI v5.0.8
 
 ## setting prettier
 
-### `.eslintrc.js` 파일내용 수정
+ - `.eslintrc.js` 파일내용 수정
 
-```javascript
-module.exports = {
-  root: true,
-  env: {
-    node: true,
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:vue/recommended', // Use this if you are using Vue.js 2.x.
-    'plugin:prettier/recommended',
-  ],
-  parserOptions: {
-    ecmaVersion: 2020,
-  },
-  rules: {
-    'prettier/prettier': [
-      'error',
-      {
-        singleQuote: true,
-        semi: true,
-        tabWidth: 2,
-        useTabs: false,
-        printWidth: 100,
-        trailingComma: 'es5',
-        arrowParens: 'always',
-        endOfLine: 'lf',
-        bracketSpacing: true,
+    ```javascript
+    module.exports = {
+      root: true,
+      env: {
+        node: true,
       },
-    ],
-    // override/add rules settings here, such as:
-    'vue/no-unused-vars': 'error',
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-  },
-};
-```
+      extends: [
+        'eslint:recommended',
+        'plugin:vue/recommended', // Use this if you are using Vue.js 2.x.
+        'plugin:prettier/recommended',
+      ],
+      parserOptions: {
+        ecmaVersion: 2020,
+      },
+      rules: {
+        'prettier/prettier': [
+          'error',
+          {
+            singleQuote: true,
+            semi: true,
+            tabWidth: 2,
+            useTabs: false,
+            printWidth: 100,
+            trailingComma: 'es5',
+            arrowParens: 'always',
+            endOfLine: 'lf',
+            bracketSpacing: true,
+          },
+        ],
+        // override/add rules settings here, such as:
+        'vue/no-unused-vars': 'error',
+        'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+      },
+    };
+    ```
 
-### 프로젝트에 `.vscode` 폴더 생성
+ - 프로젝트 최상위에 `.vscode` 폴더 생성
 
-### `.vscode` 폴더에 `settings.json` 파일 생성
+ - `.vscode` 폴더에 `settings.json` 파일 생성
 
-- workspace 의 vscode settings
+    ```json
+    {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      },
+      "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+      "editor.formatOnSave": true
+    }
+    ```
 
-```json
-{
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
-}
-```
-
-### vscode 의 prettier 플러그인을 workspace 만 enable
+ - vscode 에 prettier 플러그인을 안깔아도 됨
