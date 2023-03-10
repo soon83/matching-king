@@ -2,7 +2,9 @@ package com.soon83.domain.member;
 
 import com.soon83.domain.member.model.MemberCommand;
 import com.soon83.domain.member.model.MemberQuery;
+import com.soon83.exception.member.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,9 +28,16 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<MemberQuery.Main> searchMember(MemberQuery.SearchCondition condition) {
+    public List<MemberQuery.Main> searchMembers(MemberQuery.SearchCondition condition) {
         return memberReader.read(condition).stream()
                 .map(MemberQuery.Main::new)
                 .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public MemberQuery.Main searchMember(Long memberId) {
+        Member member = memberReader.read(memberId);
+        return new MemberQuery.Main(member);
     }
 }

@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface MemberService {
     Long registerMember(MemberCommand.CreateMember command);
-    List<MemberQuery.Main> searchMember(MemberQuery.SearchCondition condition);
+    List<MemberQuery.Main> searchMembers(MemberQuery.SearchCondition condition);
+    MemberQuery.Main searchMember(Long memberId);
 }

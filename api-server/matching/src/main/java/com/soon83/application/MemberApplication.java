@@ -20,7 +20,11 @@ public class MemberApplication {
         return memberService.registerMember(command);
     }
 
-    public List<MemberQuery.Main> searchMember(MemberQuery.SearchCondition condition) {
-        return memberService.searchMember(condition);
+    public List<MemberQuery.Main> searchMembers(MemberQuery.SearchCondition condition) {
+        return memberService.searchMembers(condition);
+    }
+
+    public MemberQuery.Main searchMember(Long memberId) {
+        return memberService.searchMember(memberId);
     }
 }

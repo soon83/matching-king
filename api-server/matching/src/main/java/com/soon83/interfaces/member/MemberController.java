@@ -2,7 +2,6 @@ package com.soon83.interfaces.member;
 
 import com.soon83.CommonResponse;
 import com.soon83.application.MemberApplication;
-import com.soon83.domain.member.Member;
 import com.soon83.domain.member.model.MemberCommand;
 import com.soon83.domain.member.model.MemberQuery;
 import jakarta.validation.Valid;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -44,8 +42,7 @@ public class MemberController {
         log.debug("# getMembers # request: {}", request);
 
         MemberQuery.SearchCondition condition = request.toSearchMemberCondition();
-        List<MemberQuery.Main> memberList = memberApplication.searchMember(condition);
-        log.debug("memberList = " + memberList);
+        List<MemberQuery.Main> memberList = memberApplication.searchMembers(condition);
         List<MemberDto.Main> response = memberList.stream()
                 .map(MemberDto.Main::new)
                 .toList();
@@ -59,17 +56,10 @@ public class MemberController {
     @GetMapping("/{memberId}")
     public CommonResponse<MemberDto.Main> searchMember(@PathVariable Long memberId) {
         log.debug("# getMember # memberId: {}", memberId);
-        return CommonResponse.success(
-                MemberDto.Main.builder()
-                        .memberId(1L)
-                        .memberEmail("member@email.com")
-                        .memberNickname("matchingKing")
-                        .memberGender(Member.Gender.MALE)
-                        .memberMbti(Member.Mbti.ISTP)
-                        .memberType(Member.Type.FREE)
-                        .memberRole(Member.Role.MEMBER)
-                        .build()
-        );
+
+        MemberQuery.Main member = memberApplication.searchMember(memberId);
+        MemberDto.Main response = new MemberDto.Main(member);
+        return CommonResponse.success(response);
     }
 
     /**
