@@ -2,9 +2,12 @@ package com.soon83.application;
 
 import com.soon83.domain.member.MemberService;
 import com.soon83.domain.member.model.MemberCommand;
+import com.soon83.domain.member.model.MemberQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -15,5 +18,9 @@ public class MemberApplication {
 
     public Long registerMember(MemberCommand.CreateMember command) {
         return memberService.registerMember(command);
+    }
+
+    public List<MemberQuery.Main> searchMember(MemberQuery.SearchCondition condition) {
+        return memberService.searchMember(condition);
     }
 }

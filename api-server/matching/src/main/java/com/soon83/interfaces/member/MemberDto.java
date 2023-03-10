@@ -2,13 +2,17 @@ package com.soon83.interfaces.member;
 
 import com.soon83.domain.member.Member;
 import com.soon83.domain.member.model.MemberCommand;
+import com.soon83.domain.member.model.MemberQuery;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 public class MemberDto {
+
     @Data
     public static class RegisterRequest {
         @Email(message = "올바른 이메일 형식을 입력해주세요")
@@ -49,6 +53,28 @@ public class MemberDto {
     }
 
     @Data
+    public static class SearchCondition {
+        @Email(message = "올바른 이메일 형식을 입력해주세요")
+        private String memberEmail;
+        private String memberNickname;
+        private Member.Gender memberGender;
+        private Member.Mbti memberMbti;
+        private Member.Type memberType;
+        private Member.Role memberRole;
+
+        public MemberQuery.SearchCondition toSearchMemberCondition() {
+            return MemberQuery.SearchCondition.builder()
+                    .email(memberEmail)
+                    .nickname(memberNickname)
+                    .gender(memberGender)
+                    .mbti(memberMbti)
+                    .type(memberType)
+                    .role(memberRole)
+                    .build();
+        }
+    }
+
+    @Data
     public static class Main {
         private final Long memberId;
         private final String memberEmail;
@@ -75,6 +101,17 @@ public class MemberDto {
             this.memberMbti = memberMbti;
             this.memberType = memberType;
             this.memberRole = memberRole;
+        }
+
+        @Builder
+        public Main(MemberQuery.Main main) {
+            this.memberId = main.getId();
+            this.memberEmail = main.getEmail();
+            this.memberNickname = main.getNickname();
+            this.memberGender = main.getGender();
+            this.memberMbti = main.getMbti();
+            this.memberType = main.getType();
+            this.memberRole = main.getRole();
         }
     }
 }

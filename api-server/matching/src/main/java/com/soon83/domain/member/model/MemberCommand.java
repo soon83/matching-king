@@ -35,34 +35,4 @@ public class MemberCommand {
                     .build();
         }
     }
-
-    @Data
-    public static class Main {
-        private final Long id;
-        private final String email;
-        private final String nickname;
-        private final Member.Gender gender;
-        private final Member.Mbti mbti;
-        private final Member.Type type;
-        private final Member.Role role;
-
-        @Builder
-        public Main(
-                Long id,
-                String email,
-                String nickname,
-                Member.Gender gender,
-                Member.Mbti mbti,
-                Member.Type type,
-                Member.Role role
-        ) {
-            this.id = id;
-            this.email = email;
-            this.nickname = nickname;
-            this.gender = gender;
-            this.mbti = mbti;
-            this.type = type;
-            this.role = role;
-        }
-    }
 }

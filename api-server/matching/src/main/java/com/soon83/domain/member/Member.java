@@ -2,10 +2,13 @@ package com.soon83.domain.member;
 
 import com.soon83.domain.BaseEntity;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table
 public class Member extends BaseEntity {
