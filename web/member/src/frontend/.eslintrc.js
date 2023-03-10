@@ -4,26 +4,31 @@ module.exports = {
     node: true,
   },
   extends: [
-    "plugin:vue/essential",
-    "eslint:recommended",
-    "plugin:prettier/recommended",
+    'eslint:recommended',
+    'plugin:vue/recommended', // Use this if you are using Vue.js 2.x.
+    'plugin:prettier/recommended',
   ],
   parserOptions: {
-    parser: "@babel/eslint-parser",
+    ecmaVersion: 2020,
   },
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
-  },
-  overrides: [
-    {
-      files: [
-        "**/__tests__/*.{j,t}s?(x)",
-        "**/tests/unit/**/*.spec.{j,t}s?(x)",
-      ],
-      env: {
-        jest: true,
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        semi: true,
+        tabWidth: 2,
+        useTabs: false,
+        printWidth: 100,
+        trailingComma: 'es5',
+        arrowParens: 'always',
+        endOfLine: 'lf',
+        bracketSpacing: true,
       },
-    },
-  ],
+    ],
+    // override/add rules settings here, such as:
+    'vue/no-unused-vars': 'error',
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+  },
 };
