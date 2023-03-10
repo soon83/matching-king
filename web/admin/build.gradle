@@ -6,15 +6,15 @@ dependencies {
 
 node.nodeProjectDir = file("${project.projectDir}/src/frontend")
 
-task buildAdmin(type: NpmTask, dependsOn: setup) {
+task buildFrontend(type: NpmTask, dependsOn: setup) {
     args = ['run', 'build']
 }
 
-task buildCopyAdmin(dependsOn: buildAdmin) {
+task copyBuild(dependsOn: buildFrontend) {
     copy {
         from "${project.projectDir}/src/frontend/dist/"
-        into "${project.projectDir}/src/main/resources/static/"
+        into file("${sourceSets.main.output.resourcesDir}/static/")
     }
 }
 
-processResources.dependsOn 'buildCopyAdmin'
+processResources.dependsOn 'copyBuild'
