@@ -1,3 +1,6 @@
+application:
+  title: matching-king
+
 server:
   port: 8002
   shutdown: graceful
@@ -24,5 +27,17 @@ spring:
         format_sql: true
 
 logging:
-  level:
-    com.soon83: debug
+  file:
+    path: ${file-path.root}/logs
+    name: ${spring.config.activate.on-profile}
+  config: classpath:logback-${spring.config.activate.on-profile}.xml
+
+---
+# LOCAL
+spring:
+  config:
+    activate:
+      on-profile: local
+
+file-path:
+  root: /Users/ds/Downloads/springboot/${application.title}/${spring.application.name}
