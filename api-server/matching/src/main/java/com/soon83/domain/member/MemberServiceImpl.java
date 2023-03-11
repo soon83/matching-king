@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService {
     public void editMember(Long memberId, MemberCommand.EditMember command) {
         Member member = memberReader.read(memberId);
         command.update(member);
-        memberStore.update(member);
+        memberStore.update(member); // 없어도 되지만 명시적으로 넣,,
     }
 
     @Override

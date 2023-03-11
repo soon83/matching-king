@@ -39,6 +39,7 @@ public class MemberController {
     @GetMapping
     public CommonResponse<List<MemberDto.Main>> searchMembers(@ModelAttribute @Valid MemberDto.SearchCondition request) {
         log.debug("# getMembers # request: {}", request);
+        // TODO 페이징 해야 함
         MemberQuery.SearchCondition condition = request.toSearchMemberCondition();
         List<MemberQuery.Main> memberList = memberApplication.searchMembers(condition);
         List<MemberDto.Main> response = memberList.stream()
