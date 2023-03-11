@@ -40,4 +40,11 @@ public class MemberServiceImpl implements MemberService {
         Member member = memberReader.read(memberId);
         return new MemberQuery.Main(member);
     }
+
+    @Override
+    @Transactional
+    public void editMember(Long memberId, MemberCommand.EditMember command) {
+        Member member = memberReader.read(memberId);
+        command.update(member);
+    }
 }

@@ -66,6 +66,12 @@ public class Member extends BaseEntity {
         this.role = Role.MEMBER;
     }
 
+    public void update(String nickname, Gender gender, Mbti mbti) {
+        if (nickname != null) this.nickname = nickname;
+        if (gender != null) this.gender = gender;
+        if (mbti != null) this.mbti = mbti;
+    }
+
     @Getter
     public enum Role {
         ADMIN, MANAGER, MEMBER;

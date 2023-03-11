@@ -9,4 +9,6 @@ public interface MemberService {
     Long registerMember(MemberCommand.CreateMember command);
     List<MemberQuery.Main> searchMembers(MemberQuery.SearchCondition condition);
     MemberQuery.Main searchMember(Long memberId);
+
+    void editMember(Long memberId, MemberCommand.EditMember command);
 }

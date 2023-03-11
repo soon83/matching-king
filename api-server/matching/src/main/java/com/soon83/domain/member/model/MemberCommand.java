@@ -35,4 +35,26 @@ public class MemberCommand {
                     .build();
         }
     }
+
+    @Data
+    public static class EditMember {
+        private String nickname;
+        private Member.Gender gender;
+        private Member.Mbti mbti;
+
+        @Builder
+        public EditMember(
+                String nickname,
+                Member.Gender gender,
+                Member.Mbti mbti
+        ) {
+            this.nickname = nickname;
+            this.gender = gender;
+            this.mbti = mbti;
+        }
+
+        public void update(Member member) {
+            member.update(nickname, gender, mbti);
+        }
+    }
 }

@@ -40,6 +40,14 @@ public class MemberDto {
         private String memberNickname;
         private Member.Gender memberGender;
         private Member.Mbti memberMbti;
+
+        public MemberCommand.EditMember EditMemberCommand() {
+            return MemberCommand.EditMember.builder()
+                    .nickname(memberNickname)
+                    .gender(memberGender)
+                    .mbti(memberMbti)
+                    .build();
+        }
     }
 
     @Data

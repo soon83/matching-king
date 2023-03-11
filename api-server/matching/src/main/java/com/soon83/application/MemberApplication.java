@@ -27,4 +27,8 @@ public class MemberApplication {
     public MemberQuery.Main searchMember(Long memberId) {
         return memberService.searchMember(memberId);
     }
+
+    public void editMember(Long memberId, MemberCommand.EditMember command) {
+        memberService.editMember(memberId, command);
+    }
 }
