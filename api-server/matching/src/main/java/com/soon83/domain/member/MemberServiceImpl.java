@@ -46,5 +46,13 @@ public class MemberServiceImpl implements MemberService {
     public void editMember(Long memberId, MemberCommand.EditMember command) {
         Member member = memberReader.read(memberId);
         command.update(member);
+        memberStore.update(member);
+    }
+
+    @Override
+    @Transactional
+    public void removeMember(Long memberId) {
+        Member member = memberReader.read(memberId);
+        memberStore.delete(member);
     }
 }

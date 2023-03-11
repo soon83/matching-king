@@ -31,4 +31,8 @@ public class MemberApplication {
     public void editMember(Long memberId, MemberCommand.EditMember command) {
         memberService.editMember(memberId, command);
     }
+
+    public void removeMember(Long memberId) {
+        memberService.removeMember(memberId);
+    }
 }

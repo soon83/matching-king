@@ -75,6 +75,7 @@ public class MemberController {
     @DeleteMapping("/{memberId}")
     public CommonResponse<Void> removeMember(@PathVariable Long memberId) {
         log.debug("# removeMember # memberId: {}", memberId);
+        memberApplication.removeMember(memberId);
         return CommonResponse.success();
     }
 }
