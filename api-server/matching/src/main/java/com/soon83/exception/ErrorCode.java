@@ -16,6 +16,9 @@ public enum ErrorCode {
     // 1. 회원 오류
     MEMBER_NOT_FOUND_ERROR(404, "MBR001", "존재하지 않는 회원입니다."),
     MEMBER_ALREADY_EXISTS_ERROR(409, "MBR002", "이미 존재하는 회원입니다."),
+
+    // 2. 회원 제약사항 오류
+    LIMIT_NOT_FOUND_ERROR(404, "LIM001", "존재하지 않는 제약사항 입니다."),
     ;
 
     private final int status;

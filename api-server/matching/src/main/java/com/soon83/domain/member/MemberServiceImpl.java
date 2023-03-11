@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional(readOnly = true)
     public List<MemberQuery.Main> searchMembers(MemberQuery.SearchCondition condition) {
-        return memberReader.read(condition).stream()
+        return memberReader.readAll(condition).stream()
                 .map(MemberQuery.Main::new)
                 .toList();
     }

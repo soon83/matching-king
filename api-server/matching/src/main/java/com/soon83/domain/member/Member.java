@@ -1,6 +1,7 @@
 package com.soon83.domain.member;
 
 import com.soon83.domain.BaseEntity;
+import com.soon83.domain.limit.Limit;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -16,31 +17,28 @@ public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column
     private String email;
-
     @Column
     private String password;
-
     @Column
     private String nickname;
-
     @Column
     @Enumerated(EnumType.STRING)
     private Gender gender;
-
     @Column
     @Enumerated(EnumType.STRING)
     private Mbti mbti;
-
     @Column
     @Enumerated(EnumType.STRING)
     private Type type;
-
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "limit_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_member_limit"))
+    private Limit limit;
 
     @Builder
     public Member(
@@ -50,20 +48,23 @@ public class Member extends BaseEntity {
             Gender gender,
             Mbti mbti,
             Type type,
-            Role role
+            Role role,
+            Limit limit
     ) {
         if (email == null) throw new IllegalArgumentException("email");
         if (nickname == null) throw new IllegalArgumentException("nickname");
         if (gender == null) throw new IllegalArgumentException("gender");
         if (mbti == null) throw new IllegalArgumentException("mbti");
+        if (limit == null) throw new IllegalArgumentException("limit");
 
         this.email = email;
         //this.password = password;
         this.nickname = nickname;
         this.gender = gender;
         this.mbti = mbti;
-        this.type = Type.FREE;
-        this.role = Role.MEMBER;
+        this.type = (type == null) ? Type.FREE : type;
+        this.role = (role == null) ? Role.MEMBER : role;
+        this.limit = limit;
     }
 
     public void update(String nickname, Gender gender, Mbti mbti) {
@@ -74,17 +75,17 @@ public class Member extends BaseEntity {
 
     @Getter
     public enum Role {
-        ADMIN, MANAGER, MEMBER;
+        ADMIN, MANAGER, MEMBER
     }
 
     @Getter
     public enum Type {
-        FREE, PAID;
+        FREE, PAID
     }
 
     @Getter
     public enum Gender {
-        MALE, FEMALE;
+        MALE, FEMALE
     }
 
     @Getter

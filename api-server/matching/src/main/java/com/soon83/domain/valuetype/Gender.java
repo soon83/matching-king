@@ -1,4 +1,4 @@
-package com.soon83.domain.member;
+package com.soon83.domain.valuetype;
 
 import jakarta.persistence.Embeddable;
 import lombok.Builder;

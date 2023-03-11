@@ -18,7 +18,7 @@ public class MemberReaderImpl implements MemberReader {
     private final MemberRepository memberRepository;
 
     @Override
-    public List<Member> read(MemberQuery.SearchCondition condition) {
+    public List<Member> readAll(MemberQuery.SearchCondition condition) {
         // TODO queryDsl 로 search condition 넣어서 조회할거야
         return memberRepository.findAll();
     }

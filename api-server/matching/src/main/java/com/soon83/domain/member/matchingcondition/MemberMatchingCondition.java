@@ -1,8 +1,8 @@
 package com.soon83.domain.member.matchingcondition;
 
 import com.soon83.domain.BaseEntity;
-import com.soon83.domain.member.Gender;
-import com.soon83.domain.member.Mbti;
+import com.soon83.domain.valuetype.Gender;
+import com.soon83.domain.valuetype.Mbti;
 import com.soon83.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -27,5 +27,6 @@ public class MemberMatchingCondition extends BaseEntity {
     private Mbti mbti;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", unique = true, foreignKey = @ForeignKey(name = "FK_memberMatchingCondition_member"))
     private Member member;
 }
