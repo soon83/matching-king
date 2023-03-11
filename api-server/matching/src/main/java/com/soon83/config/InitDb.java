@@ -20,14 +20,20 @@ public class InitDb implements InitializingBean {
     private final LimitRepository limitRepository;
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         // 회원 제약사항 생성
         List<Limit> limits = limitRepository.findAll();
         if (limits.isEmpty()) {
             limitRepository.saveAll(
                     List.of(
-                            Limit.builder().memberType(Member.Type.FREE).sendMessageCount(5).build(),
-                            Limit.builder().memberType(Member.Type.PAID).sendMessageCount(10).build()
+                            Limit.builder()
+                                    .memberType(Member.Type.FREE)
+                                    .sendMessageCount(5)
+                                    .build(),
+                            Limit.builder()
+                                    .memberType(Member.Type.PAID)
+                                    .sendMessageCount(10)
+                                    .build()
                     )
             );
         }
@@ -37,7 +43,6 @@ public class InitDb implements InitializingBean {
         if (adminById.isEmpty()) {
             Limit limit = limitRepository.findByMemberType(Member.Type.PAID)
                     .orElseThrow(LimitNotFoundException::new);
-
             memberRepository.save(Member.builder()
                     .email("2601948@gmail.com")
                     .nickname("DidierDrogba")

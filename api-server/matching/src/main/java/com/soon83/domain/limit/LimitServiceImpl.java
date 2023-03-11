@@ -35,7 +35,7 @@ public class LimitServiceImpl implements LimitService {
     @Override
     @Transactional(readOnly = true)
     public LimitQuery.Main searchLimit(Long limitId) {
-        Limit limit = limitReader.read(limitId);
+        Limit limit = limitReader.readById(limitId);
         return new LimitQuery.Main(limit);
     }
 }

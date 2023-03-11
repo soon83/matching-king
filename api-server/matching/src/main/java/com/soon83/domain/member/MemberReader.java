@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface MemberReader {
     List<Member> readAll(MemberQuery.SearchCondition condition);
-    Member read(Long memberId);
+    Member readById(Long memberId);
 }

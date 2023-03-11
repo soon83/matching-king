@@ -2,6 +2,7 @@ package com.soon83.infrastructure.limit;
 
 import com.soon83.domain.limit.Limit;
 import com.soon83.domain.limit.LimitReader;
+import com.soon83.domain.member.Member;
 import com.soon83.exception.limit.LimitNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +23,14 @@ public class LimitReaderImpl implements LimitReader {
     }
 
     @Override
-    public Limit read(Long limitId) {
+    public Limit readById(Long limitId) {
         return limitRepository.findById(limitId)
+                .orElseThrow(LimitNotFoundException::new);
+    }
+
+    @Override
+    public Limit readByMemberType(Member.Type memberType) {
+        return limitRepository.findByMemberType(memberType)
                 .orElseThrow(LimitNotFoundException::new);
     }
 }

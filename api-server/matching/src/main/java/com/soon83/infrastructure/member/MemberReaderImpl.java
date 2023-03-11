@@ -24,7 +24,7 @@ public class MemberReaderImpl implements MemberReader {
     }
 
     @Override
-    public Member read(Long memberId) {
+    public Member readById(Long memberId) {
         return memberRepository.findById(memberId)
                 .orElseThrow(MemberNotFoundException::new);
     }

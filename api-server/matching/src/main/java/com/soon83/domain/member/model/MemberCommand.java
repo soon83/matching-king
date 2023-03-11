@@ -1,5 +1,6 @@
 package com.soon83.domain.member.model;
 
+import com.soon83.domain.limit.Limit;
 import com.soon83.domain.member.Member;
 import lombok.Builder;
 import lombok.Data;
@@ -26,12 +27,15 @@ public class MemberCommand {
             this.mbti = mbti;
         }
 
-        public Member toEntity() {
+        public Member toEntity(Limit limit) {
             return Member.builder()
                     .email(email)
                     .nickname(nickname)
                     .gender(gender)
                     .mbti(mbti)
+                    .type(Member.Type.FREE)
+                    .role(Member.Role.MEMBER)
+                    .limit(limit)
                     .build();
         }
     }

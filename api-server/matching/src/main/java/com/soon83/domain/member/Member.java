@@ -37,7 +37,7 @@ public class Member extends BaseEntity {
     private Role role;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "limit_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_member_limit"))
+    @JoinColumn(name = "limit_id", nullable = false, foreignKey = @ForeignKey(name = "FK_member_limit"))
     private Limit limit;
 
     @Builder
@@ -55,6 +55,8 @@ public class Member extends BaseEntity {
         if (nickname == null) throw new IllegalArgumentException("nickname");
         if (gender == null) throw new IllegalArgumentException("gender");
         if (mbti == null) throw new IllegalArgumentException("mbti");
+        if (type == null) throw new IllegalArgumentException("type");
+        if (role == null) throw new IllegalArgumentException("role");
         if (limit == null) throw new IllegalArgumentException("limit");
 
         this.email = email;
@@ -62,8 +64,8 @@ public class Member extends BaseEntity {
         this.nickname = nickname;
         this.gender = gender;
         this.mbti = mbti;
-        this.type = (type == null) ? Type.FREE : type;
-        this.role = (role == null) ? Role.MEMBER : role;
+        this.type = type;
+        this.role = role;
         this.limit = limit;
     }
 
@@ -90,21 +92,6 @@ public class Member extends BaseEntity {
 
     @Getter
     public enum Mbti {
-        ESFJ,
-        ESFP,
-        ENFJ,
-        ENFP,
-        ESTJ,
-        ESTP,
-        ENTJ,
-        ENTP,
-        ISFJ,
-        ISFP,
-        INFJ,
-        INFP,
-        ISTJ,
-        ISTP,
-        INTJ,
-        INTP;
+        ESFJ, ESFP, ENFJ, ENFP, ESTJ, ESTP, ENTJ, ENTP, ISFJ, ISFP, INFJ, INFP, ISTJ, ISTP, INTJ, INTP
     }
 }
