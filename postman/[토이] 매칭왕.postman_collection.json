@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "b8307d94-4ae8-4d84-8443-a9cdc8813c93",
+		"name": "[토이] 매칭왕",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4819278"
+	},
+	"item": [
+		{
+			"name": "[회원]",
+			"item": [
+				{
+					"name": "회원 단건 등록",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"memberEmail\": \"{{$randomEmail}}\",\n    \"memberNickname\": \"{{$randomFirstName}}\",\n    \"memberGender\": \"{{randomArrayNumber0_1}}\",\n    \"memberMbti\": \"{{randomArrayNumber0_15}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/members",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "회원 목록 조회",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/members",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "회원 단건 조회",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/members/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"members",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "회원 단건 수정",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"memberNickname\":\"나를패고가라\",\n    \"memberGender\":\"MALE\",\n    \"memberMbti\":\"ISTP\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/members/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"members",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "회원 단건 삭제",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/members/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"members",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// 시간",
+					"var moment = require('moment');",
+					"pm.environment.set(\"currentDate\", moment().format(\"YYYY-MM-DD\"));",
+					"pm.environment.set(\"currentDateString\", moment().format(\"YYYYMMDD\"));",
+					"pm.environment.set(\"currentDateTime\", moment().format(\"YYYY-MM-DD HH:mm:ss\"));",
+					"",
+					"// 휴대폰번호",
+					"pm.environment.set(\"phoneNumber\", '010' + _.random(10000000, 99999999));",
+					"",
+					"// 랜덤Array",
+					"pm.environment.set(\"randomArrayNumber0_1\", _.random(0, 1));",
+					"pm.environment.set(\"randomArrayNumber0_2\", _.random(0, 2));",
+					"pm.environment.set(\"randomArrayNumber0_3\", _.random(0, 3));",
+					"pm.environment.set(\"randomArrayNumber0_4\", _.random(0, 4));",
+					"pm.environment.set(\"randomArrayNumber0_5\", _.random(0, 5));",
+					"pm.environment.set(\"randomArrayNumber0_6\", _.random(0, 6));",
+					"pm.environment.set(\"randomArrayNumber0_7\", _.random(0, 7));",
+					"pm.environment.set(\"randomArrayNumber0_8\", _.random(0, 8));",
+					"pm.environment.set(\"randomArrayNumber0_9\", _.random(0, 9));",
+					"pm.environment.set(\"randomArrayNumber0_10\", _.random(0, 10));",
+					"pm.environment.set(\"randomArrayNumber0_11\", _.random(0, 11));",
+					"pm.environment.set(\"randomArrayNumber0_12\", _.random(0, 12));",
+					"pm.environment.set(\"randomArrayNumber0_13\", _.random(0, 13));",
+					"pm.environment.set(\"randomArrayNumber0_14\", _.random(0, 14));",
+					"pm.environment.set(\"randomArrayNumber0_15\", _.random(0, 15));",
+					"",
+					"// 랜덤숫자",
+					"pm.environment.set(\"randomNumberLength1\", _.random(1, 9));",
+					"pm.environment.set(\"randomNumberLength2\", _.random(10, 99));",
+					"pm.environment.set(\"randomNumberLength3\", _.random(100, 999));",
+					"pm.environment.set(\"randomNumberLength4\", _.random(1000, 9999));",
+					"pm.environment.set(\"randomNumberLength5\", _.random(10000, 99999));",
+					"pm.environment.set(\"randomNumberLength6\", _.random(100000, 999999));",
+					"pm.environment.set(\"randomNumberLength7\", _.random(1000000, 9999999));",
+					"pm.environment.set(\"randomNumberLength8\", _.random(10000000, 99999999));",
+					"pm.environment.set(\"randomNumberLength9\", _.random(100000000, 999999999));",
+					"pm.environment.set(\"randomNumberLength10\", _.random(1000000000, 9999999999));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

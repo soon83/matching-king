@@ -6,17 +6,15 @@ import com.soon83.domain.member.model.MemberQuery;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 public class MemberDto {
 
     @Data
     public static class RegisterRequest {
-        @Email(message = "올바른 이메일 형식을 입력해주세요")
         @NotBlank(message = "필수값")
+        @Email(message = "올바른 이메일 형식을 입력해주세요")
         private String memberEmail;
         @NotBlank(message = "필수값")
         private String memberNickname;

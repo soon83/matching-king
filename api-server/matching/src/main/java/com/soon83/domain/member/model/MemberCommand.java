@@ -13,6 +13,8 @@ public class MemberCommand {
         private String nickname;
         private Member.Gender gender;
         private Member.Mbti mbti;
+        private Member.Type type = Member.Type.FREE;
+        private Member.Role role = Member.Role.MANAGER;
 
         @Builder
         public CreateMember(
@@ -33,8 +35,8 @@ public class MemberCommand {
                     .nickname(nickname)
                     .gender(gender)
                     .mbti(mbti)
-                    .type(Member.Type.FREE)
-                    .role(Member.Role.MEMBER)
+                    .type(type)
+                    .role(role)
                     .limit(limit)
                     .build();
         }

@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public Long registerMember(MemberCommand.CreateMember command) {
-        Limit limit = limitReader.readByMemberType(Member.Type.FREE);
+        Limit limit = limitReader.readByMemberType(command.getType());
         Member member = command.toEntity(limit);
         Member createdMember = memberStore.create(member);
         return createdMember.getId();
