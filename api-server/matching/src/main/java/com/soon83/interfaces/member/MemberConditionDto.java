@@ -1,10 +1,10 @@
-package com.soon83.domain.member.condition.model;
+package com.soon83.interfaces.member;
 
-import com.soon83.domain.member.condition.MemberCondition;
+import com.soon83.domain.member.condition.model.MemberConditionQuery;
 import lombok.Builder;
 import lombok.Data;
 
-public class MemberConditionQuery {
+public class MemberConditionDto {
 
     @Data
     public static class Main {
@@ -20,9 +20,9 @@ public class MemberConditionQuery {
             this.age = age;
         }
 
-        public Main(MemberCondition entity) {
-            this.id = entity.getId();
-            this.age = entity.getAge();
+        public Main(MemberConditionQuery.Main main) {
+            this.id = main.getId();
+            this.age = main.getAge();
         }
     }
 }

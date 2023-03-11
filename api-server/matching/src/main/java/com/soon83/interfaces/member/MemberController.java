@@ -27,8 +27,10 @@ public class MemberController {
     @PostMapping
     public CommonResponse<MemberDto.CreateResponse> registerMember(@RequestBody @Valid MemberDto.RegisterRequest request) {
         log.debug("# registerMember # request: {}", request);
-        MemberCommand.CreateMember command = request.toCreateMemberCommand();
-        Long memberId = memberApplication.registerMember(command);
+        var createMemberCommand = request.toCreateMemberCommand();
+        var createMemberConditionCommand = request.toCreateMemberConditionCommand();
+        var createMemberMatchingConditionCommand = request.toCreateMemberMatchingConditionCommand();
+        Long memberId = memberApplication.registerMember(createMemberCommand, createMemberConditionCommand, createMemberMatchingConditionCommand);
         MemberDto.CreateResponse response = new MemberDto.CreateResponse(memberId);
         return CommonResponse.success(response);
     }
@@ -38,7 +40,7 @@ public class MemberController {
      */
     @GetMapping
     public CommonResponse<List<MemberDto.Main>> searchMembers(@ModelAttribute @Valid MemberDto.SearchCondition request) {
-        log.debug("# getMembers # request: {}", request);
+        log.debug("# searchMembers # request: {}", request);
         // TODO 페이징 해야 함
         MemberQuery.SearchCondition condition = request.toSearchMemberCondition();
         List<MemberQuery.Main> memberList = memberApplication.searchMembers(condition);
@@ -53,9 +55,20 @@ public class MemberController {
      */
     @GetMapping("/{memberId}")
     public CommonResponse<MemberDto.Main> searchMember(@PathVariable Long memberId) {
-        log.debug("# getMember # memberId: {}", memberId);
+        log.debug("# searchMember # memberId: {}", memberId);
         MemberQuery.Main member = memberApplication.searchMember(memberId);
         MemberDto.Main response = new MemberDto.Main(member);
+        return CommonResponse.success(response);
+    }
+
+    /**
+     * [회원] 단건 상세 조회
+     */
+    @GetMapping("/{memberId}/detail")
+    public CommonResponse<MemberDto.Detail> searchMemberDetail(@PathVariable Long memberId) {
+        log.debug("# searchMemberDetail # memberId: {}", memberId);
+        MemberQuery.Detail member = memberApplication.searchMemberDetail(memberId);
+        MemberDto.Detail response = new MemberDto.Detail(member);
         return CommonResponse.success(response);
     }
 

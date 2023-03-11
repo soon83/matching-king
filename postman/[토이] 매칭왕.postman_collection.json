@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"memberEmail\": \"{{$randomEmail}}\",\n    \"memberNickname\": \"{{$randomFirstName}}\",\n    \"memberGender\": \"{{randomArrayNumber0_1}}\",\n    \"memberMbti\": \"{{randomArrayNumber0_15}}\"\n}",
+							"raw": "{\n    \"memberEmail\": \"{{$randomEmail}}\",\n    \"memberNickname\": \"{{$randomFirstName}}\",\n    \"memberGender\": \"{{randomArrayNumber0_1}}\",\n    \"memberMbti\": \"{{randomArrayNumber0_15}}\",\n    \"memberAge\": \"{{randomNumberLength2}}\",\n    \"matchingMinAge\": \"25\",\n    \"matchingMaxAge\": \"50\",\n    \"matchingGender\": {\n        \"male\": true,\n        \"female\": true\n    },\n    \"matchingMbti\": {\n        \"esfj\": false,\n        \"esfp\": false,\n        \"enfj\": false,\n        \"enfp\": false,\n        \"estj\": true,\n        \"estp\": false,\n        \"entj\": false,\n        \"entp\": true,\n        \"isfj\": false,\n        \"isfp\": false,\n        \"infj\": false,\n        \"infp\": false,\n        \"istj\": false,\n        \"istp\": true,\n        \"intj\": true,\n        \"intp\": true\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"

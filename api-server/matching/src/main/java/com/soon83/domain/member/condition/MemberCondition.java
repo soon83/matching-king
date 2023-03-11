@@ -3,9 +3,9 @@ package com.soon83.domain.member.condition;
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.valuetype.Gender;
 import com.soon83.domain.valuetype.Mbti;
-import com.soon83.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,7 +24,17 @@ public class MemberCondition extends BaseEntity {
     @Embedded
     private Mbti mbti;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", unique = true, foreignKey = @ForeignKey(name = "FK_memberCondition_member"))
-    private Member member;
+    @Builder
+    public MemberCondition(
+            int age,
+            Gender gender,
+            Mbti mbti
+    ) {
+        if (gender == null) throw new IllegalArgumentException("gender");
+        if (mbti == null) throw new IllegalArgumentException("mbti");
+
+        this.age = age;
+        this.gender = gender;
+        this.mbti = mbti;
+    }
 }

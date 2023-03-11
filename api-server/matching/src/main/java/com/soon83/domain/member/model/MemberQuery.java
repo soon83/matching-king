@@ -1,5 +1,8 @@
 package com.soon83.domain.member.model;
 
+import com.soon83.domain.limit.model.LimitQuery;
+import com.soon83.domain.member.condition.model.MemberConditionQuery;
+import com.soon83.domain.member.matchingcondition.model.MemberMatchingConditionQuery;
 import com.soon83.domain.member.Member;
 import lombok.Builder;
 import lombok.Data;
@@ -70,6 +73,34 @@ public class MemberQuery {
             this.mbti = entity.getMbti();
             this.type = entity.getType();
             this.role = entity.getRole();
+        }
+    }
+
+    @Data
+    public static class Detail {
+        private final Long id;
+        private final String email;
+        private final String nickname;
+        private final Member.Gender gender;
+        private final Member.Mbti mbti;
+        private final Member.Type type;
+        private final Member.Role role;
+        private final LimitQuery.Main limit;
+        private final MemberConditionQuery.Main memberCondition;
+        private final MemberMatchingConditionQuery.Main memberMatchingCondition;
+
+        @Builder
+        public Detail(Member entity) {
+            this.id = entity.getId();
+            this.email = entity.getEmail();
+            this.nickname = entity.getNickname();
+            this.gender = entity.getGender();
+            this.mbti = entity.getMbti();
+            this.type = entity.getType();
+            this.role = entity.getRole();
+            this.limit = new LimitQuery.Main(entity.getLimit());
+            this.memberCondition = new MemberConditionQuery.Main(entity.getMemberCondition());
+            this.memberMatchingCondition = new MemberMatchingConditionQuery.Main(entity.getMemberMatchingCondition());
         }
     }
 }

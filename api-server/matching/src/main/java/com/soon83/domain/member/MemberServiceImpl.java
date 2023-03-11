@@ -2,6 +2,8 @@ package com.soon83.domain.member;
 
 import com.soon83.domain.limit.Limit;
 import com.soon83.domain.limit.LimitReader;
+import com.soon83.domain.member.condition.model.MemberConditionCommand;
+import com.soon83.domain.member.matchingcondition.model.MemberMatchingConditionCommand;
 import com.soon83.domain.member.model.MemberCommand;
 import com.soon83.domain.member.model.MemberQuery;
 import lombok.RequiredArgsConstructor;
@@ -16,15 +18,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
+    private final LimitReader limitReader;
     private final MemberReader memberReader;
     private final MemberStore memberStore;
-    private final LimitReader limitReader;
 
     @Override
     @Transactional
-    public Long registerMember(MemberCommand.CreateMember command) {
-        Limit limit = limitReader.readByMemberType(command.getType());
-        Member member = command.toEntity(limit);
+    public Long registerMember(
+            MemberCommand.CreateMember createMemberCommand,
+            MemberConditionCommand.CreateMemberCondition createMemberConditionCommand,
+            MemberMatchingConditionCommand.CreateMemberMatchingCondition createMemberMatchingConditionCommand
+    ) {
+        Limit limit = limitReader.readByMemberType(createMemberCommand.getType());
+        Member member = createMemberCommand.toEntity(limit, createMemberConditionCommand.toEntity(), createMemberMatchingConditionCommand.toEntity());
         Member createdMember = memberStore.create(member);
         return createdMember.getId();
     }
@@ -42,6 +48,12 @@ public class MemberServiceImpl implements MemberService {
     public MemberQuery.Main searchMember(Long memberId) {
         Member member = memberReader.readById(memberId);
         return new MemberQuery.Main(member);
+    }
+
+    @Override
+    public MemberQuery.Detail searchMemberDetail(Long memberId) {
+        Member member = memberReader.readMemberDetailById(memberId);
+        return new MemberQuery.Detail(member);
     }
 
     @Override

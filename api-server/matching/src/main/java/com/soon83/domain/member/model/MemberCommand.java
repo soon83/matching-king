@@ -1,7 +1,9 @@
 package com.soon83.domain.member.model;
 
 import com.soon83.domain.limit.Limit;
+import com.soon83.domain.member.matchingcondition.MemberMatchingCondition;
 import com.soon83.domain.member.Member;
+import com.soon83.domain.member.condition.MemberCondition;
 import lombok.Builder;
 import lombok.Data;
 
@@ -29,7 +31,7 @@ public class MemberCommand {
             this.mbti = mbti;
         }
 
-        public Member toEntity(Limit limit) {
+        public Member toEntity(Limit limit, MemberCondition memberCondition, MemberMatchingCondition memberMatchingCondition) {
             return Member.builder()
                     .email(email)
                     .nickname(nickname)
@@ -38,6 +40,8 @@ public class MemberCommand {
                     .type(type)
                     .role(role)
                     .limit(limit)
+                    .memberCondition(memberCondition)
+                    .memberMatchingCondition(memberMatchingCondition)
                     .build();
         }
     }

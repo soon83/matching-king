@@ -1,7 +1,11 @@
 package com.soon83.config;
 
 import com.soon83.domain.limit.Limit;
+import com.soon83.domain.member.matchingcondition.MemberMatchingCondition;
 import com.soon83.domain.member.Member;
+import com.soon83.domain.member.condition.MemberCondition;
+import com.soon83.domain.valuetype.Gender;
+import com.soon83.domain.valuetype.Mbti;
 import com.soon83.exception.limit.LimitNotFoundException;
 import com.soon83.infrastructure.limit.LimitRepository;
 import com.soon83.infrastructure.member.MemberRepository;
@@ -16,8 +20,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class InitDb implements InitializingBean {
 
-    private final MemberRepository memberRepository;
     private final LimitRepository limitRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public void afterPropertiesSet() {
@@ -43,6 +47,7 @@ public class InitDb implements InitializingBean {
         if (adminById.isEmpty()) {
             Limit limit = limitRepository.findByMemberType(Member.Type.PAID)
                     .orElseThrow(LimitNotFoundException::new);
+
             memberRepository.save(Member.builder()
                     .email("2601948@gmail.com")
                     .nickname("DidierDrogba")
@@ -51,6 +56,25 @@ public class InitDb implements InitializingBean {
                     .type(Member.Type.PAID)
                     .role(Member.Role.ADMIN)
                     .limit(limit)
+                    .memberCondition(MemberCondition.builder()
+                            .age(41)
+                            .gender(new Gender(Member.Gender.MALE))
+                            .mbti(new Mbti(Member.Mbti.ISTP))
+                            .build())
+                    .memberMatchingCondition(MemberMatchingCondition.builder()
+                            .minAge(25)
+                            .maxAge(50)
+                            .gender(Gender.builder()
+                                    .male(true)
+                                    .female(true)
+                                    .build())
+                            .mbti(Mbti.builder()
+                                    .enfj(true)
+                                    .entp(true)
+                                    .intj(true)
+                                    .intp(true)
+                                    .build())
+                            .build())
                     .build());
         }
     }

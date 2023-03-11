@@ -2,6 +2,8 @@ package com.soon83.domain.member;
 
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.limit.Limit;
+import com.soon83.domain.member.matchingcondition.MemberMatchingCondition;
+import com.soon83.domain.member.condition.MemberCondition;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -36,9 +38,16 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "limit_id", nullable = false, foreignKey = @ForeignKey(name = "FK_member_limit"))
     private Limit limit;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "member_condition_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_member_memberCondition"))
+    private MemberCondition memberCondition;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "member_matching_condition_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_member_memberMatchingCondition"))
+    private MemberMatchingCondition memberMatchingCondition;
 
     @Builder
     public Member(
@@ -49,7 +58,9 @@ public class Member extends BaseEntity {
             Mbti mbti,
             Type type,
             Role role,
-            Limit limit
+            Limit limit,
+            MemberCondition memberCondition,
+            MemberMatchingCondition memberMatchingCondition
     ) {
         if (email == null) throw new IllegalArgumentException("email");
         if (nickname == null) throw new IllegalArgumentException("nickname");
@@ -58,6 +69,8 @@ public class Member extends BaseEntity {
         if (type == null) throw new IllegalArgumentException("type");
         if (role == null) throw new IllegalArgumentException("role");
         if (limit == null) throw new IllegalArgumentException("limit");
+        if (memberCondition == null) throw new IllegalArgumentException("memberCondition");
+        if (memberMatchingCondition == null) throw new IllegalArgumentException("memberMatchingCondition");
 
         this.email = email;
         //this.password = password;
@@ -67,6 +80,8 @@ public class Member extends BaseEntity {
         this.type = type;
         this.role = role;
         this.limit = limit;
+        this.memberCondition = memberCondition;
+        this.memberMatchingCondition = memberMatchingCondition;
     }
 
     public void update(String nickname, Gender gender, Mbti mbti) {

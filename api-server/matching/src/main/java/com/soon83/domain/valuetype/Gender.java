@@ -1,5 +1,6 @@
 package com.soon83.domain.valuetype;
 
+import com.soon83.domain.member.Member;
 import jakarta.persistence.Embeddable;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,5 +21,10 @@ public class Gender {
     ) {
         this.male = male;
         this.female = female;
+    }
+
+    public Gender(Member.Gender gender) {
+        this.male = gender == Member.Gender.MALE;
+        this.female = gender == Member.Gender.FEMALE;
     }
 }
