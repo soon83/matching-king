@@ -58,9 +58,15 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public void editMember(Long memberId, MemberCommand.EditMember command) {
+    public void editMember(
+            Long memberId, MemberCommand.EditMember editMemberCommand,
+            MemberConditionCommand.EditMemberCondition editMemberConditionCommand,
+            MemberMatchingConditionCommand.EditMemberMatchingCondition editMemberMatchingConditionCommand
+    ) {
         Member member = memberReader.readById(memberId);
-        command.update(member);
+        editMemberCommand.update(member);
+        editMemberConditionCommand.update(member);
+        editMemberMatchingConditionCommand.update(member);
         memberStore.update(member); // 없어도 되지만 명시적으로 넣,,
     }
 

@@ -37,4 +37,10 @@ public class MemberCondition extends BaseEntity {
         this.gender = gender;
         this.mbti = mbti;
     }
+
+    public void update(int age, Gender gender, Mbti mbti) {
+        this.age = age;
+        if (gender != null) this.gender = gender;
+        if (mbti != null) this.mbti = mbti;
+    }
 }

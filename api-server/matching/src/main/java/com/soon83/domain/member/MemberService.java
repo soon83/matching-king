@@ -16,7 +16,12 @@ public interface MemberService {
     List<MemberQuery.Main> searchMembers(MemberQuery.SearchCondition condition);
     MemberQuery.Main searchMember(Long memberId);
     MemberQuery.Detail searchMemberDetail(Long memberId);
-    void editMember(Long memberId, MemberCommand.EditMember command);
+    void editMember(
+            Long memberId,
+            MemberCommand.EditMember command,
+            MemberConditionCommand.EditMemberCondition editMemberConditionCommand,
+            MemberMatchingConditionCommand.EditMemberMatchingCondition editMemberMatchingConditionCommand
+    );
     void removeMember(Long memberId);
 
 }

@@ -38,4 +38,11 @@ public class MemberMatchingCondition extends BaseEntity {
         this.gender = gender;
         this.mbti = mbti;
     }
+
+    public void update(int minAge, int maxAge, Gender gender, Mbti mbti) {
+        this.minAge = minAge;
+        this.maxAge = maxAge;
+        if (gender != null) this.gender = gender;
+        if (mbti != null) this.mbti = mbti;
+    }
 }

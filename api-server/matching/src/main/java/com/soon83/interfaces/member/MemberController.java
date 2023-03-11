@@ -2,7 +2,6 @@ package com.soon83.interfaces.member;
 
 import com.soon83.CommonResponse;
 import com.soon83.application.MemberApplication;
-import com.soon83.domain.member.model.MemberCommand;
 import com.soon83.domain.member.model.MemberQuery;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -78,8 +77,10 @@ public class MemberController {
     @PutMapping("/{memberId}")
     public CommonResponse<Void> editMember(@PathVariable Long memberId, @RequestBody @Valid MemberDto.EditRequest request) {
         log.debug("# editMember # memberId: {}, request: {}", memberId, request);
-        MemberCommand.EditMember command = request.EditMemberCommand();
-        memberApplication.editMember(memberId, command);
+        var editMemberCommand = request.toEditMemberCommand();
+        var editMemberConditionCommand = request.toEditMemberConditionCommand();
+        var editMemberMatchingConditionCommand = request.toEditMemberMatchingConditionCommand();
+        memberApplication.editMember(memberId, editMemberCommand, editMemberConditionCommand, editMemberMatchingConditionCommand);
         return CommonResponse.success();
     }
 

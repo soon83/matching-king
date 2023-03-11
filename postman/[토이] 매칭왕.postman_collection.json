@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"memberEmail\": \"{{$randomEmail}}\",\n    \"memberNickname\": \"{{$randomFirstName}}\",\n    \"memberGender\": \"{{randomArrayNumber0_1}}\",\n    \"memberMbti\": \"{{randomArrayNumber0_15}}\",\n    \"memberAge\": \"{{randomNumberLength2}}\",\n    \"matchingMinAge\": \"25\",\n    \"matchingMaxAge\": \"50\",\n    \"matchingGender\": {\n        \"male\": true,\n        \"female\": true\n    },\n    \"matchingMbti\": {\n        \"esfj\": false,\n        \"esfp\": false,\n        \"enfj\": false,\n        \"enfp\": false,\n        \"estj\": true,\n        \"estp\": false,\n        \"entj\": false,\n        \"entp\": true,\n        \"isfj\": false,\n        \"isfp\": false,\n        \"infj\": false,\n        \"infp\": false,\n        \"istj\": false,\n        \"istp\": true,\n        \"intj\": true,\n        \"intp\": true\n    }\n}",
+							"raw": "{\n    \"memberEmail\": \"{{$randomEmail}}\",\n    \"memberNickname\": \"{{$randomFirstName}}\",\n    \"memberGender\": \"{{randomArrayNumber0_1}}\",\n    \"memberMbti\": \"{{randomArrayNumber0_15}}\",\n    \"memberAge\": {{randomNumberLength2}},\n    \"memberMatchingCondition\": {\n        \"minAge\": 25,\n        \"maxAge\": 50,\n        \"gender\": {\n            \"male\": true,\n            \"female\": true\n        },\n        \"mbti\": {\n            \"esfj\": false,\n            \"esfp\": false,\n            \"enfj\": true,\n            \"enfp\": false,\n            \"estj\": false,\n            \"estp\": false,\n            \"entj\": false,\n            \"entp\": true,\n            \"isfj\": false,\n            \"isfp\": false,\n            \"infj\": false,\n            \"infp\": false,\n            \"istj\": false,\n            \"istp\": false,\n            \"intj\": true,\n            \"intp\": true\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -62,7 +62,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/v1/members/1",
+							"raw": "{{url}}/api/v1/members/2",
 							"host": [
 								"{{url}}"
 							],
@@ -70,7 +70,28 @@
 								"api",
 								"v1",
 								"members",
-								"1"
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "회원 단건 상세 조회",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/members/2/detail",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"members",
+								"2",
+								"detail"
 							]
 						}
 					},
@@ -83,7 +104,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"memberNickname\":\"나를패고가라\",\n    \"memberGender\":\"MALE\",\n    \"memberMbti\":\"ISTP\"\n}",
+							"raw": "{\n    \"memberNickname\": \"나를패고가라\",\n    \"memberGender\": \"FEMALE\",\n    \"memberMbti\": \"ENFJ\",\n    \"memberAge\": 100,\n    \"memberMatchingCondition\": {\n        \"minAge\": 90,\n        \"maxAge\": 100,\n        \"gender\": {\n            \"male\": false,\n            \"female\": false\n        },\n        \"mbti\": {\n            \"esfj\": false,\n            \"esfp\": false,\n            \"enfj\": false,\n            \"enfp\": false,\n            \"estj\": false,\n            \"estp\": false,\n            \"entj\": false,\n            \"entp\": false,\n            \"isfj\": false,\n            \"isfp\": false,\n            \"infj\": false,\n            \"infp\": false,\n            \"istj\": false,\n            \"istp\": false,\n            \"intj\": false,\n            \"intp\": false\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -91,7 +112,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/members/1",
+							"raw": "{{url}}/api/v1/members/2",
 							"host": [
 								"{{url}}"
 							],
@@ -99,7 +120,7 @@
 								"api",
 								"v1",
 								"members",
-								"1"
+								"2"
 							]
 						}
 					},

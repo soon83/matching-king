@@ -65,15 +65,41 @@ public class MemberDto {
 
     @Data
     public static class EditRequest {
+        @NotBlank(message = "필수값")
         private String memberNickname;
+        @NotNull(message = "필수값")
         private Member.Gender memberGender;
+        @NotNull(message = "필수값")
         private Member.Mbti memberMbti;
+        @NotNull(message = "필수값")
+        @Min(value = 1, message = "1 이상")
+        private int memberAge = 0;
+        @Valid
+        @NotNull(message = "필수값")
+        private MemberMatchingConditionDto.RegisterRequest memberMatchingCondition;
 
-        public MemberCommand.EditMember EditMemberCommand() {
+        public MemberCommand.EditMember toEditMemberCommand() {
             return MemberCommand.EditMember.builder()
                     .nickname(memberNickname)
                     .gender(memberGender)
                     .mbti(memberMbti)
+                    .build();
+        }
+
+        public MemberConditionCommand.EditMemberCondition toEditMemberConditionCommand() {
+            return MemberConditionCommand.EditMemberCondition.builder()
+                    .age(memberAge)
+                    .gender(new Gender(memberGender))
+                    .mbti(new Mbti(memberMbti))
+                    .build();
+        }
+
+        public MemberMatchingConditionCommand.EditMemberMatchingCondition toEditMemberMatchingConditionCommand() {
+            return MemberMatchingConditionCommand.EditMemberMatchingCondition.builder()
+                    .minAge(memberMatchingCondition.getMinAge())
+                    .maxAge(memberMatchingCondition.getMaxAge())
+                    .gender(memberMatchingCondition.getGender())
+                    .mbti(memberMatchingCondition.getMbti())
                     .build();
         }
     }

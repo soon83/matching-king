@@ -25,6 +25,20 @@ public class MemberMatchingConditionDto {
     }
 
     @Data
+    public static class EditRequest {
+        @NotNull(message = "필수값")
+        @Min(value = 1, message = "1 이상")
+        private int minAge = 0;
+        @NotNull(message = "필수값")
+        @Min(value = 1, message = "1 이상")
+        private int maxAge = 0;
+        @NotNull(message = "필수값")
+        private Gender gender;
+        @NotNull(message = "필수값")
+        private Mbti mbti;
+    }
+
+    @Data
     public static class Main {
         private final Long id;
         private final int minAge;

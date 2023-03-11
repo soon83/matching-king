@@ -38,8 +38,13 @@ public class MemberApplication {
         return memberService.searchMemberDetail(memberId);
     }
 
-    public void editMember(Long memberId, MemberCommand.EditMember command) {
-        memberService.editMember(memberId, command);
+    public void editMember(
+            Long memberId,
+            MemberCommand.EditMember editMemberCommand,
+            MemberConditionCommand.EditMemberCondition editMemberConditionCommand,
+            MemberMatchingConditionCommand.EditMemberMatchingCondition editMemberMatchingConditionCommand
+    ) {
+        memberService.editMember(memberId, editMemberCommand, editMemberConditionCommand, editMemberMatchingConditionCommand);
     }
 
     public void removeMember(Long memberId) {
