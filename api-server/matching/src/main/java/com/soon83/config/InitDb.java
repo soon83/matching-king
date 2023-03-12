@@ -37,7 +37,7 @@ public class InitDb implements InitializingBean {
                             Limit.builder()
                                     .memberType(Member.Type.PAID)
                                     .sendMessageCount(10)
-                                    .sendMessageCount(10)
+                                    .sendMessageNotificationCount(10)
                                     .build()
                     )
             );
