@@ -1,5 +1,6 @@
 package com.soon83.interfaces.member;
 
+import com.soon83.domain.member.matchingcondition.MatchingConditionCommand;
 import com.soon83.domain.member.matchingcondition.MatchingConditionQuery;
 import com.soon83.domain.valuetype.Gender;
 import com.soon83.domain.valuetype.Mbti;
@@ -25,6 +26,15 @@ public class MatchingConditionDto {
         private Gender gender;
         @NotNull(message = "필수값")
         private Mbti mbti;
+
+        public MatchingConditionCommand.CreateMatchingCondition toCreateMatchingConditionCommand() {
+            return MatchingConditionCommand.CreateMatchingCondition.builder()
+                    .minAge(minAge)
+                    .maxAge(maxAge)
+                    .gender(gender)
+                    .mbti(mbti)
+                    .build();
+        }
     }
 
     @Data
@@ -41,6 +51,15 @@ public class MatchingConditionDto {
         private Gender gender;
         @NotNull(message = "필수값")
         private Mbti mbti;
+
+        public MatchingConditionCommand.EditMatchingCondition toEditMatchingConditionCommand() {
+            return MatchingConditionCommand.EditMatchingCondition.builder()
+                    .minAge(minAge)
+                    .maxAge(maxAge)
+                    .gender(gender)
+                    .mbti(mbti)
+                    .build();
+        }
     }
 
     @Data

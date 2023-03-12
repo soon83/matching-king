@@ -27,7 +27,7 @@ public class MemberController {
     public CommonResponse<MemberDto.CreateResponse> registerMember(@RequestBody @Valid MemberDto.RegisterRequest request) {
         log.debug("# registerMember # request: {}", request);
         var createMemberCommand = request.toCreateMemberCommand();
-        var createMatchingConditionCommand = request.toCreateMatchingConditionCommand();
+        var createMatchingConditionCommand = request.getMemberMatchingCondition().toCreateMatchingConditionCommand();
         Long memberId = memberApplication.registerMember(createMemberCommand, createMatchingConditionCommand);
         MemberDto.CreateResponse response = new MemberDto.CreateResponse(memberId);
         return CommonResponse.success(response);
@@ -76,7 +76,7 @@ public class MemberController {
     public CommonResponse<Void> editMember(@PathVariable Long memberId, @RequestBody @Valid MemberDto.EditRequest request) {
         log.debug("# editMember # memberId: {}, request: {}", memberId, request);
         var editMemberCommand = request.toEditMemberCommand();
-        var editMatchingConditionCommand = request.toEditMatchingConditionCommand();
+        var editMatchingConditionCommand = request.getMemberMatchingCondition().toEditMatchingConditionCommand();
         memberApplication.editMember(memberId, editMemberCommand, editMatchingConditionCommand);
         return CommonResponse.success();
     }

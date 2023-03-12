@@ -158,7 +158,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"messageContent\": \"{{$randomLoremSentence}}\",\n    \"messageWriterMemberId\": 1\n}",
+							"raw": "{\n    \"messageContent\": \"{{$randomLoremSentence}}\",\n    \"messageSenderId\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -185,7 +185,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/v1/messages?messageWriterMemberId=1",
+							"raw": "{{url}}/api/v1/messages?messageSenderId=1",
 							"host": [
 								"{{url}}"
 							],
@@ -196,7 +196,7 @@
 							],
 							"query": [
 								{
-									"key": "messageWriterMemberId",
+									"key": "messageSenderId",
 									"value": "1"
 								}
 							]

@@ -1,7 +1,6 @@
 package com.soon83.interfaces.member;
 
 import com.soon83.domain.member.Member;
-import com.soon83.domain.member.matchingcondition.MatchingConditionCommand;
 import com.soon83.domain.member.MemberCommand;
 import com.soon83.domain.member.MemberQuery;
 import com.soon83.interfaces.limit.LimitDto;
@@ -40,15 +39,6 @@ public class MemberDto {
                     .mbti(memberMbti)
                     .build();
         }
-
-        public MatchingConditionCommand.CreateMatchingCondition toCreateMatchingConditionCommand() {
-            return MatchingConditionCommand.CreateMatchingCondition.builder()
-                    .minAge(memberMatchingCondition.getMinAge())
-                    .maxAge(memberMatchingCondition.getMaxAge())
-                    .gender(memberMatchingCondition.getGender())
-                    .mbti(memberMatchingCondition.getMbti())
-                    .build();
-        }
     }
 
     @Data
@@ -65,7 +55,7 @@ public class MemberDto {
         private Member.Mbti memberMbti;
         @Valid
         @NotNull(message = "필수값")
-        private MatchingConditionDto.RegisterRequest memberMatchingCondition;
+        private MatchingConditionDto.EditRequest memberMatchingCondition;
 
         public MemberCommand.EditMember toEditMemberCommand() {
             return MemberCommand.EditMember.builder()
@@ -73,15 +63,6 @@ public class MemberDto {
                     .age(memberAge)
                     .gender(memberGender)
                     .mbti(memberMbti)
-                    .build();
-        }
-
-        public MatchingConditionCommand.EditMatchingCondition toEditMatchingConditionCommand() {
-            return MatchingConditionCommand.EditMatchingCondition.builder()
-                    .minAge(memberMatchingCondition.getMinAge())
-                    .maxAge(memberMatchingCondition.getMaxAge())
-                    .gender(memberMatchingCondition.getGender())
-                    .mbti(memberMatchingCondition.getMbti())
                     .build();
         }
     }
