@@ -51,6 +51,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MemberQuery.Detail searchMemberDetail(Long memberId) {
         Member member = memberReader.readMemberDetailById(memberId);
         return new MemberQuery.Detail(member);
@@ -59,7 +60,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public void editMember(
-            Long memberId, MemberCommand.EditMember editMemberCommand,
+            Long memberId,
+            MemberCommand.EditMember editMemberCommand,
             MemberConditionCommand.EditMemberCondition editMemberConditionCommand,
             MemberMatchingConditionCommand.EditMemberMatchingCondition editMemberMatchingConditionCommand
     ) {
