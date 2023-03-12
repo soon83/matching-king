@@ -69,7 +69,6 @@ public class MemberServiceImpl implements MemberService {
         editMemberCommand.update(member);
         editMemberConditionCommand.update(member);
         editMemberMatchingConditionCommand.update(member);
-        memberStore.update(member); // 없어도 되지만 명시적으로 넣,,
     }
 
     @Override
