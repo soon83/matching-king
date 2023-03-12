@@ -32,6 +32,11 @@ logging:
     name: ${spring.config.activate.on-profile}
   config: classpath:logback-${spring.config.activate.on-profile}.xml
 
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: false
+
 ---
 # LOCAL
 spring:
@@ -41,3 +46,8 @@ spring:
 
 file-path:
   root: /Users/ds/Downloads/springboot/${application.title}/${spring.application.name}
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
