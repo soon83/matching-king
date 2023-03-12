@@ -32,10 +32,12 @@ public class InitDb implements InitializingBean {
                     List.of(
                             Limit.builder()
                                     .memberType(Member.Type.FREE)
-                                    .sendMessageCount(5)
+                                    .sendMessageCount(3)
+                                    .sendMessageNotificationCount(5)
                                     .build(),
                             Limit.builder()
                                     .memberType(Member.Type.PAID)
+                                    .sendMessageCount(10)
                                     .sendMessageCount(10)
                                     .build()
                     )

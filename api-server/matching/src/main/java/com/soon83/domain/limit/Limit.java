@@ -21,14 +21,18 @@ public class Limit extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Member.Type memberType;
     @Column
-    private int SendMessageCount;
+    private int sendMessageCount;
+    @Column
+    private int sendMessageNotificationCount;
 
     @Builder
     public Limit(
             Member.Type memberType,
-            int sendMessageCount
+            int sendMessageCount,
+            int sendMessageNotificationCount
     ) {
         this.memberType = memberType;
-        this.SendMessageCount = sendMessageCount;
+        this.sendMessageCount = sendMessageCount;
+        this.sendMessageNotificationCount = sendMessageNotificationCount;
     }
 }

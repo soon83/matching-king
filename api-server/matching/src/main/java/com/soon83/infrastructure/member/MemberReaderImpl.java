@@ -39,6 +39,13 @@ public class MemberReaderImpl implements MemberReader {
     }
 
     @Override
+    public Member readMemberLimitById(Long memberId) {
+        return memberRepository.readMemberLimitById(memberId)
+                .filter(Member::isActivated)
+                .orElseThrow(MemberNotFoundException::new);
+    }
+
+    @Override
     public void checkAlreadyExistsEmail(String email) {
         if (memberRepository.findByEmail(email).isPresent()) {
             throw new MemberAlreadyExistsException();

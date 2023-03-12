@@ -23,4 +23,13 @@ public class MemberRepositoryQuerydslImpl implements MemberRepositoryQuerydsl {
                 .where(member.id.eq(memberId))
                 .fetchOne());
     }
+
+    @Override
+    public Optional<Member> readMemberLimitById(Long memberId) {
+        return Optional.ofNullable(queryFactory
+                .selectFrom(member)
+                .innerJoin(member.limit).fetchJoin()
+                .where(member.id.eq(memberId))
+                .fetchOne());
+    }
 }

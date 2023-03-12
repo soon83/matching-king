@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface MemberRepositoryQuerydsl {
     Optional<Member> readMemberDetailById(Long memberId);
+    Optional<Member> readMemberLimitById(Long memberId);
 }

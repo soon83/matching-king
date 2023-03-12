@@ -21,7 +21,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     @Transactional
     public Long registerMessage(MessageCommand.CreateMessage createMessageCommand) {
-        Member member = memberReader.readMemberDetailById(createMessageCommand.getWriterMemberId());
+        Member member = memberReader.readMemberLimitById(createMessageCommand.getWriterMemberId());
         messageReader.checkMessageLimit(member.getId(), member.getLimit().getSendMessageCount());
         Message createdMessage = messageStore.create(createMessageCommand.toEntity(member));
         return createdMessage.getId();
