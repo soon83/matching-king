@@ -2,10 +2,8 @@ package com.soon83.domain.member;
 
 import com.soon83.domain.limit.Limit;
 import com.soon83.domain.limit.LimitReader;
-import com.soon83.domain.member.condition.model.MemberConditionCommand;
-import com.soon83.domain.member.matchingcondition.model.MemberMatchingConditionCommand;
-import com.soon83.domain.member.model.MemberCommand;
-import com.soon83.domain.member.model.MemberQuery;
+import com.soon83.domain.member.condition.MemberConditionCommand;
+import com.soon83.domain.member.matchingcondition.MemberMatchingConditionCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,6 +27,7 @@ public class MemberServiceImpl implements MemberService {
             MemberConditionCommand.CreateMemberCondition createMemberConditionCommand,
             MemberMatchingConditionCommand.CreateMemberMatchingCondition createMemberMatchingConditionCommand
     ) {
+        memberReader.checkAlreadyExistsEmail(createMemberCommand.getEmail());
         Limit limit = limitReader.readByMemberType(createMemberCommand.getType());
         Member member = createMemberCommand.toEntity(limit, createMemberConditionCommand.toEntity(), createMemberMatchingConditionCommand.toEntity());
         Member createdMember = memberStore.create(member);
@@ -75,6 +74,6 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public void removeMember(Long memberId) {
         Member member = memberReader.readById(memberId);
-        memberStore.delete(member);
+        member.delete();
     }
 }

@@ -2,7 +2,8 @@ package com.soon83.infrastructure.member;
 
 import com.soon83.domain.member.Member;
 import com.soon83.domain.member.MemberReader;
-import com.soon83.domain.member.model.MemberQuery;
+import com.soon83.domain.member.MemberQuery;
+import com.soon83.exception.member.MemberAlreadyExistsException;
 import com.soon83.exception.member.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,12 +27,21 @@ public class MemberReaderImpl implements MemberReader {
     @Override
     public Member readById(Long memberId) {
         return memberRepository.findById(memberId)
+                .filter(Member::isActivated)
                 .orElseThrow(MemberNotFoundException::new);
     }
 
     @Override
     public Member readMemberDetailById(Long memberId) {
         return memberRepository.readMemberDetailById(memberId)
+                .filter(Member::isActivated)
                 .orElseThrow(MemberNotFoundException::new);
+    }
+
+    @Override
+    public void checkAlreadyExistsEmail(String email) {
+        if (memberRepository.findByEmail(email).isPresent()) {
+            throw new MemberAlreadyExistsException();
+        }
     }
 }

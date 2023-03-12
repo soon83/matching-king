@@ -1,9 +1,8 @@
-package com.soon83.domain.member.model;
+package com.soon83.domain.member;
 
 import com.soon83.domain.limit.model.LimitQuery;
-import com.soon83.domain.member.condition.model.MemberConditionQuery;
-import com.soon83.domain.member.matchingcondition.model.MemberMatchingConditionQuery;
-import com.soon83.domain.member.Member;
+import com.soon83.domain.member.condition.MemberConditionQuery;
+import com.soon83.domain.member.matchingcondition.MemberMatchingConditionQuery;
 import lombok.Builder;
 import lombok.Data;
 

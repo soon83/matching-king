@@ -1,9 +1,7 @@
 package com.soon83.domain.member;
 
-import com.soon83.domain.member.condition.model.MemberConditionCommand;
-import com.soon83.domain.member.matchingcondition.model.MemberMatchingConditionCommand;
-import com.soon83.domain.member.model.MemberCommand;
-import com.soon83.domain.member.model.MemberQuery;
+import com.soon83.domain.member.condition.MemberConditionCommand;
+import com.soon83.domain.member.matchingcondition.MemberMatchingConditionCommand;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
-package com.soon83.domain.member.condition.model;
+package com.soon83.domain.member.condition;
 
 import com.soon83.domain.member.Member;
-import com.soon83.domain.member.condition.MemberCondition;
 import com.soon83.domain.valuetype.Gender;
 import com.soon83.domain.valuetype.Mbti;
 import lombok.Builder;

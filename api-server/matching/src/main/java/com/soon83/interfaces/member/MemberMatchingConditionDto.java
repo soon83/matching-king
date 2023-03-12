@@ -1,6 +1,6 @@
 package com.soon83.interfaces.member;
 
-import com.soon83.domain.member.matchingcondition.model.MemberMatchingConditionQuery;
+import com.soon83.domain.member.matchingcondition.MemberMatchingConditionQuery;
 import com.soon83.domain.valuetype.Gender;
 import com.soon83.domain.valuetype.Mbti;
 import jakarta.validation.constraints.Min;

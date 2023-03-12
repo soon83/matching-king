@@ -1,6 +1,5 @@
-package com.soon83.domain.member.condition.model;
+package com.soon83.domain.member.condition;
 
-import com.soon83.domain.member.condition.MemberCondition;
 import lombok.Builder;
 import lombok.Data;
 

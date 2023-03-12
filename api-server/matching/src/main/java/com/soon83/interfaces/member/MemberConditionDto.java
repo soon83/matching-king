@@ -1,6 +1,6 @@
 package com.soon83.interfaces.member;
 
-import com.soon83.domain.member.condition.model.MemberConditionQuery;
+import com.soon83.domain.member.condition.MemberConditionQuery;
 import lombok.Builder;
 import lombok.Data;
 

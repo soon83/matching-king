@@ -1,10 +1,10 @@
 package com.soon83.interfaces.member;
 
 import com.soon83.domain.member.Member;
-import com.soon83.domain.member.condition.model.MemberConditionCommand;
-import com.soon83.domain.member.matchingcondition.model.MemberMatchingConditionCommand;
-import com.soon83.domain.member.model.MemberCommand;
-import com.soon83.domain.member.model.MemberQuery;
+import com.soon83.domain.member.condition.MemberConditionCommand;
+import com.soon83.domain.member.matchingcondition.MemberMatchingConditionCommand;
+import com.soon83.domain.member.MemberCommand;
+import com.soon83.domain.member.MemberQuery;
 import com.soon83.domain.valuetype.Gender;
 import com.soon83.domain.valuetype.Mbti;
 import com.soon83.interfaces.limit.LimitDto;

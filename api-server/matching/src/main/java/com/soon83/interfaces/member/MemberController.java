@@ -2,7 +2,7 @@ package com.soon83.interfaces.member;
 
 import com.soon83.CommonResponse;
 import com.soon83.application.MemberApplication;
-import com.soon83.domain.member.model.MemberQuery;
+import com.soon83.domain.member.MemberQuery;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

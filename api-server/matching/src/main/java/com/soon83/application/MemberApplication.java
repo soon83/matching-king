@@ -1,10 +1,10 @@
 package com.soon83.application;
 
 import com.soon83.domain.member.MemberService;
-import com.soon83.domain.member.condition.model.MemberConditionCommand;
-import com.soon83.domain.member.matchingcondition.model.MemberMatchingConditionCommand;
-import com.soon83.domain.member.model.MemberCommand;
-import com.soon83.domain.member.model.MemberQuery;
+import com.soon83.domain.member.condition.MemberConditionCommand;
+import com.soon83.domain.member.matchingcondition.MemberMatchingConditionCommand;
+import com.soon83.domain.member.MemberCommand;
+import com.soon83.domain.member.MemberQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

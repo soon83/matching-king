@@ -2,13 +2,15 @@ package com.soon83.domain.member;
 
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.limit.Limit;
-import com.soon83.domain.member.matchingcondition.MemberMatchingCondition;
 import com.soon83.domain.member.condition.MemberCondition;
+import com.soon83.domain.member.matchingcondition.MemberMatchingCondition;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -37,7 +39,8 @@ public class Member extends BaseEntity {
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
-
+    @Column
+    private boolean isActivated;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "limit_id", nullable = false, foreignKey = @ForeignKey(name = "FK_member_limit"))
@@ -82,12 +85,18 @@ public class Member extends BaseEntity {
         this.limit = limit;
         this.memberCondition = memberCondition;
         this.memberMatchingCondition = memberMatchingCondition;
+        this.isActivated = true;
     }
 
     public void update(String nickname, Gender gender, Mbti mbti) {
         if (nickname != null) this.nickname = nickname;
         if (gender != null) this.gender = gender;
         if (mbti != null) this.mbti = mbti;
+    }
+
+    public void delete() {
+        this.email = String.format("%s_%s", this.email, UUID.randomUUID());
+        this.isActivated = false;
     }
 
     @Getter
