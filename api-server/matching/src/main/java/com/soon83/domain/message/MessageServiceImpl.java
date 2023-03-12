@@ -21,13 +21,16 @@ public class MessageServiceImpl implements MessageService {
     @Override
     @Transactional
     public Long registerMessage(MessageCommand.CreateMessage createMessageCommand) {
-        Member member = memberReader.readMemberLimitById(createMessageCommand.getWriterMemberId());
+        Member member = memberReader.readMemberMatchingConditionAndLimitById(createMessageCommand.getSenderId());
         messageReader.checkMessageLimit(member.getId(), member.getLimit().getSendMessageCount());
         Message createdMessage = messageStore.create(createMessageCommand.toEntity(member));
+        List<Member> members = memberReader.readLimitMembersByMatchingCondition(member.getMatchingCondition());
+        log.debug("### members: {}", members);
         return createdMessage.getId();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<MessageQuery.Main> searchMessages(MessageQuery.SearchCondition condition) {
         return messageReader.readAllBySearchCondition(condition).stream()
                 .map(MessageQuery.Main::new)

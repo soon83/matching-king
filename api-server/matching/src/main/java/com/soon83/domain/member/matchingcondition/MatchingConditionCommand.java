@@ -6,25 +6,25 @@ import com.soon83.domain.valuetype.Mbti;
 import lombok.Builder;
 import lombok.Data;
 
-public class MemberMatchingConditionCommand {
+public class MatchingConditionCommand {
 
     @Data
-    public static class CreateMemberMatchingCondition {
+    public static class CreateMatchingCondition {
         private int minAge;
         private int maxAge;
         private Gender gender;
         private Mbti mbti;
 
         @Builder
-        public CreateMemberMatchingCondition(int minAge, int maxAge, Gender gender, Mbti mbti) {
+        public CreateMatchingCondition(int minAge, int maxAge, Gender gender, Mbti mbti) {
             this.minAge = minAge;
             this.maxAge = maxAge;
             this.gender = gender;
             this.mbti = mbti;
         }
 
-        public MemberMatchingCondition toEntity() {
-            return MemberMatchingCondition.builder()
+        public MatchingCondition toEntity() {
+            return MatchingCondition.builder()
                     .minAge(minAge)
                     .maxAge(maxAge)
                     .gender(gender)
@@ -34,14 +34,14 @@ public class MemberMatchingConditionCommand {
     }
 
     @Data
-    public static class EditMemberMatchingCondition {
+    public static class EditMatchingCondition {
         private int minAge;
         private int maxAge;
         private Gender gender;
         private Mbti mbti;
 
         @Builder
-        public EditMemberMatchingCondition(
+        public EditMatchingCondition(
                 int minAge,
                 int maxAge,
                 Gender gender,
@@ -54,7 +54,7 @@ public class MemberMatchingConditionCommand {
         }
 
         public void update(Member member) {
-            member.getMemberMatchingCondition().update(minAge, maxAge, gender, mbti);
+            member.getMatchingCondition().update(minAge, maxAge, gender, mbti);
         }
     }
 }

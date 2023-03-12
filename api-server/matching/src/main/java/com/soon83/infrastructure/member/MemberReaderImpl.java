@@ -3,6 +3,7 @@ package com.soon83.infrastructure.member;
 import com.soon83.domain.member.Member;
 import com.soon83.domain.member.MemberReader;
 import com.soon83.domain.member.MemberQuery;
+import com.soon83.domain.member.matchingcondition.MatchingCondition;
 import com.soon83.exception.member.MemberAlreadyExistsException;
 import com.soon83.exception.member.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,11 @@ public class MemberReaderImpl implements MemberReader {
     }
 
     @Override
+    public List<Member> readLimitMembersByMatchingCondition(MatchingCondition matchingCondition) {
+        return memberRepository.readLimitMembersByMatchingCondition(matchingCondition);
+    }
+
+    @Override
     public Member readById(Long memberId) {
         return memberRepository.findById(memberId)
                 .filter(Member::isActivated)
@@ -39,8 +45,8 @@ public class MemberReaderImpl implements MemberReader {
     }
 
     @Override
-    public Member readMemberLimitById(Long memberId) {
-        return memberRepository.readMemberLimitById(memberId)
+    public Member readMemberMatchingConditionAndLimitById(Long memberId) {
+        return memberRepository.readMemberMatchingConditionAndLimitById(memberId)
                 .filter(Member::isActivated)
                 .orElseThrow(MemberNotFoundException::new);
     }

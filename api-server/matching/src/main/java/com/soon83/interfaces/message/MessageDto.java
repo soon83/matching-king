@@ -16,12 +16,12 @@ public class MessageDto {
         @Size(max = 1000, message = "1000 자 이내")
         private String messageContent;
         @NotNull(message = "필수값")
-        private Long messageWriterMemberId;
+        private Long messageSenderId;
 
         public MessageCommand.CreateMessage toCreateMessageCommand() {
             return MessageCommand.CreateMessage.builder()
                     .content(messageContent)
-                    .writerMemberId(messageWriterMemberId)
+                    .senderId(messageSenderId)
                     .build();
         }
     }
@@ -39,12 +39,12 @@ public class MessageDto {
     @Data
     public static class SearchCondition {
         private String messageContent;
-        private Long messageWriterMemberId;
+        private Long messageSenderId;
 
         public MessageQuery.SearchCondition toSearchMessageCondition() {
             return MessageQuery.SearchCondition.builder()
                     .content(messageContent)
-                    .writerMemberId(messageWriterMemberId)
+                    .senderId(messageSenderId)
                     .build();
         }
     }
@@ -53,24 +53,24 @@ public class MessageDto {
     public static class Main {
         private final Long messageId;
         private final String messageContent;
-        private final Long messageWriterMemberId;
+        private final Long messageSenderId;
 
         @Builder
         public Main(
                 Long messageId,
                 String messageContent,
-                Long messageWriterMemberId
+                Long messageSenderId
         ) {
             this.messageId = messageId;
             this.messageContent = messageContent;
-            this.messageWriterMemberId = messageWriterMemberId;
+            this.messageSenderId = messageSenderId;
         }
 
         @Builder
         public Main(MessageQuery.Main messageMain) {
             this.messageId = messageMain.getId();
             this.messageContent = messageMain.getContent();
-            this.messageWriterMemberId = messageMain.getWriterMemberId();
+            this.messageSenderId = messageMain.getSenderId();
         }
     }
 }

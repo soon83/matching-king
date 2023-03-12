@@ -24,7 +24,7 @@ public class MessageRepositoryQuerydslImpl implements MessageRepositoryQuerydsl 
     public List<Message> readAllBySearchCondition(MessageQuery.SearchCondition condition) {
         return queryFactory
                 .selectFrom(message)
-                .where(eq(message.writerMember.id, condition.getWriterMemberId()))
+                .where(eq(message.sender.id, condition.getSenderId()))
                 .fetch();
     }
 
@@ -33,7 +33,7 @@ public class MessageRepositoryQuerydslImpl implements MessageRepositoryQuerydsl 
         return queryFactory
                 .selectFrom(message)
                 .where(
-                        eq(message.writerMember.id, memberId),
+                        eq(message.sender.id, memberId),
                         goe(message.createdAt, DateTimeUtil.ofStartTime(LocalDateTime.now()))
                 )
                 .limit(sendMessageCount)

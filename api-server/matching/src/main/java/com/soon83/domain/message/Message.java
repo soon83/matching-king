@@ -25,18 +25,18 @@ public class Message extends BaseEntity {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "writer_member_id", foreignKey = @ForeignKey(name = "FK_message_member"))
-    private Member writerMember;
+    @JoinColumn(name = "sender_id", foreignKey = @ForeignKey(name = "FK_message_member"))
+    private Member sender;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "message")
     private List<MessageReply> messageReplies = new ArrayList<>();
 
     @Builder
     public Message(
             String content,
-            Member writerMember
+            Member sender
     ) {
         this.content = content;
-        this.writerMember = writerMember;
+        this.sender = sender;
     }
 
     public void addMessageReplies(MessageReply messageReply) {

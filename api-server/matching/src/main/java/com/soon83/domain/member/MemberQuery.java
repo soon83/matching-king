@@ -1,8 +1,7 @@
 package com.soon83.domain.member;
 
 import com.soon83.domain.limit.LimitQuery;
-import com.soon83.domain.member.condition.MemberConditionQuery;
-import com.soon83.domain.member.matchingcondition.MemberMatchingConditionQuery;
+import com.soon83.domain.member.matchingcondition.MatchingConditionQuery;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,6 +11,7 @@ public class MemberQuery {
     public static class SearchCondition {
         private String email;
         private String nickname;
+        private int age;
         private Member.Gender gender;
         private Member.Mbti mbti;
         private Member.Type type;
@@ -21,6 +21,7 @@ public class MemberQuery {
         public SearchCondition(
                 String email,
                 String nickname,
+                int age,
                 Member.Gender gender,
                 Member.Mbti mbti,
                 Member.Type type,
@@ -28,6 +29,7 @@ public class MemberQuery {
         ) {
             this.email = email;
             this.nickname = nickname;
+            this.age = age;
             this.gender = gender;
             this.mbti = mbti;
             this.type = type;
@@ -40,6 +42,7 @@ public class MemberQuery {
         private final Long id;
         private final String email;
         private final String nickname;
+        private final int age;
         private final Member.Gender gender;
         private final Member.Mbti mbti;
         private final Member.Type type;
@@ -50,6 +53,7 @@ public class MemberQuery {
                 Long id,
                 String email,
                 String nickname,
+                int age,
                 Member.Gender gender,
                 Member.Mbti mbti,
                 Member.Type type,
@@ -58,6 +62,7 @@ public class MemberQuery {
             this.id = id;
             this.email = email;
             this.nickname = nickname;
+            this.age = age;
             this.gender = gender;
             this.mbti = mbti;
             this.type = type;
@@ -68,6 +73,7 @@ public class MemberQuery {
             this.id = entity.getId();
             this.email = entity.getEmail();
             this.nickname = entity.getNickname();
+            this.age = entity.getAge();
             this.gender = entity.getGender();
             this.mbti = entity.getMbti();
             this.type = entity.getType();
@@ -80,26 +86,26 @@ public class MemberQuery {
         private final Long id;
         private final String email;
         private final String nickname;
+        private final int age;
         private final Member.Gender gender;
         private final Member.Mbti mbti;
         private final Member.Type type;
         private final Member.Role role;
         private final LimitQuery.Main limit;
-        private final MemberConditionQuery.Main memberCondition;
-        private final MemberMatchingConditionQuery.Main memberMatchingCondition;
+        private final MatchingConditionQuery.Main matchingCondition;
 
         @Builder
         public Detail(Member entity) {
             this.id = entity.getId();
             this.email = entity.getEmail();
             this.nickname = entity.getNickname();
+            this.age = entity.getAge();
             this.gender = entity.getGender();
             this.mbti = entity.getMbti();
             this.type = entity.getType();
             this.role = entity.getRole();
             this.limit = new LimitQuery.Main(entity.getLimit());
-            this.memberCondition = new MemberConditionQuery.Main(entity.getMemberCondition());
-            this.memberMatchingCondition = new MemberMatchingConditionQuery.Main(entity.getMemberMatchingCondition());
+            this.matchingCondition = new MatchingConditionQuery.Main(entity.getMatchingCondition());
         }
     }
 }

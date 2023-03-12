@@ -2,8 +2,7 @@ package com.soon83.domain.member;
 
 import com.soon83.domain.limit.Limit;
 import com.soon83.domain.limit.LimitReader;
-import com.soon83.domain.member.condition.MemberConditionCommand;
-import com.soon83.domain.member.matchingcondition.MemberMatchingConditionCommand;
+import com.soon83.domain.member.matchingcondition.MatchingConditionCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,12 +23,11 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public Long registerMember(
             MemberCommand.CreateMember createMemberCommand,
-            MemberConditionCommand.CreateMemberCondition createMemberConditionCommand,
-            MemberMatchingConditionCommand.CreateMemberMatchingCondition createMemberMatchingConditionCommand
+            MatchingConditionCommand.CreateMatchingCondition createMatchingConditionCommand
     ) {
         memberReader.checkAlreadyExistsEmail(createMemberCommand.getEmail());
         Limit limit = limitReader.readByMemberType(createMemberCommand.getType());
-        Member member = createMemberCommand.toEntity(limit, createMemberConditionCommand.toEntity(), createMemberMatchingConditionCommand.toEntity());
+        Member member = createMemberCommand.toEntity(limit, createMatchingConditionCommand.toEntity());
         Member createdMember = memberStore.create(member);
         return createdMember.getId();
     }
@@ -61,13 +59,11 @@ public class MemberServiceImpl implements MemberService {
     public void editMember(
             Long memberId,
             MemberCommand.EditMember editMemberCommand,
-            MemberConditionCommand.EditMemberCondition editMemberConditionCommand,
-            MemberMatchingConditionCommand.EditMemberMatchingCondition editMemberMatchingConditionCommand
+            MatchingConditionCommand.EditMatchingCondition editMatchingConditionCommand
     ) {
         Member member = memberReader.readById(memberId);
         editMemberCommand.update(member);
-        editMemberConditionCommand.update(member);
-        editMemberMatchingConditionCommand.update(member);
+        editMatchingConditionCommand.update(member);
     }
 
     @Override

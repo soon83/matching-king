@@ -1,9 +1,8 @@
 package com.soon83.config;
 
 import com.soon83.domain.limit.Limit;
-import com.soon83.domain.member.matchingcondition.MemberMatchingCondition;
 import com.soon83.domain.member.Member;
-import com.soon83.domain.member.condition.MemberCondition;
+import com.soon83.domain.member.matchingcondition.MatchingCondition;
 import com.soon83.domain.valuetype.Gender;
 import com.soon83.domain.valuetype.Mbti;
 import com.soon83.exception.limit.LimitNotFoundException;
@@ -58,12 +57,7 @@ public class InitDb implements InitializingBean {
                     .type(Member.Type.PAID)
                     .role(Member.Role.ADMIN)
                     .limit(limit)
-                    .memberCondition(MemberCondition.builder()
-                            .age(41)
-                            .gender(new Gender(Member.Gender.MALE))
-                            .mbti(new Mbti(Member.Mbti.ISTP))
-                            .build())
-                    .memberMatchingCondition(MemberMatchingCondition.builder()
+                    .matchingCondition(MatchingCondition.builder()
                             .minAge(25)
                             .maxAge(50)
                             .gender(Gender.builder()

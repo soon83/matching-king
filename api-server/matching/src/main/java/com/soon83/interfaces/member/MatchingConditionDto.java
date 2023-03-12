@@ -1,6 +1,6 @@
 package com.soon83.interfaces.member;
 
-import com.soon83.domain.member.matchingcondition.MemberMatchingConditionQuery;
+import com.soon83.domain.member.matchingcondition.MatchingConditionQuery;
 import com.soon83.domain.valuetype.Gender;
 import com.soon83.domain.valuetype.Mbti;
 import jakarta.validation.constraints.Max;
@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
-public class MemberMatchingConditionDto {
+public class MatchingConditionDto {
 
     @Data
     public static class RegisterRequest {
@@ -66,7 +66,7 @@ public class MemberMatchingConditionDto {
             this.mbti = mbti;
         }
 
-        public Main(MemberMatchingConditionQuery.Main main) {
+        public Main(MatchingConditionQuery.Main main) {
             this.id = main.getId();
             this.minAge = main.getMinAge();
             this.maxAge = main.getMaxAge();

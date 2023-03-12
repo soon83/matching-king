@@ -5,7 +5,7 @@ import com.soon83.domain.valuetype.Mbti;
 import lombok.Builder;
 import lombok.Data;
 
-public class MemberMatchingConditionQuery {
+public class MatchingConditionQuery {
 
     @Data
     public static class Main {
@@ -30,7 +30,7 @@ public class MemberMatchingConditionQuery {
             this.mbti = mbti;
         }
 
-        public Main(MemberMatchingCondition entity) {
+        public Main(MatchingCondition entity) {
             this.id = entity.getId();
             this.minAge = entity.getMinAge();
             this.maxAge = entity.getMaxAge();

@@ -9,21 +9,21 @@ public class MessageCommand {
     @Data
     public static class CreateMessage {
         private String content;
-        private Long writerMemberId;
+        private Long senderId;
 
         @Builder
         public CreateMessage(
                 String content,
-                Long writerMemberId
+                Long senderId
         ) {
             this.content = content;
-            this.writerMemberId = writerMemberId;
+            this.senderId = senderId;
         }
 
-        public Message toEntity(Member writerMember) {
+        public Message toEntity(Member sender) {
             return Message.builder()
                     .content(content)
-                    .writerMember(writerMember)
+                    .sender(sender)
                     .build();
         }
     }

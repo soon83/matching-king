@@ -1,10 +1,9 @@
 package com.soon83.application;
 
-import com.soon83.domain.member.MemberService;
-import com.soon83.domain.member.condition.MemberConditionCommand;
-import com.soon83.domain.member.matchingcondition.MemberMatchingConditionCommand;
 import com.soon83.domain.member.MemberCommand;
 import com.soon83.domain.member.MemberQuery;
+import com.soon83.domain.member.MemberService;
+import com.soon83.domain.member.matchingcondition.MatchingConditionCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,10 +19,9 @@ public class MemberApplication {
 
     public Long registerMember(
             MemberCommand.CreateMember createMemberCommand,
-            MemberConditionCommand.CreateMemberCondition createMemberConditionCommand,
-            MemberMatchingConditionCommand.CreateMemberMatchingCondition createMemberMatchingConditionCommand
+            MatchingConditionCommand.CreateMatchingCondition createMatchingConditionCommand
     ) {
-        return memberService.registerMember(createMemberCommand, createMemberConditionCommand, createMemberMatchingConditionCommand);
+        return memberService.registerMember(createMemberCommand, createMatchingConditionCommand);
     }
 
     public List<MemberQuery.Main> searchMembers(MemberQuery.SearchCondition condition) {
@@ -41,10 +39,9 @@ public class MemberApplication {
     public void editMember(
             Long memberId,
             MemberCommand.EditMember editMemberCommand,
-            MemberConditionCommand.EditMemberCondition editMemberConditionCommand,
-            MemberMatchingConditionCommand.EditMemberMatchingCondition editMemberMatchingConditionCommand
+            MatchingConditionCommand.EditMatchingCondition editMatchingConditionCommand
     ) {
-        memberService.editMember(memberId, editMemberCommand, editMemberConditionCommand, editMemberMatchingConditionCommand);
+        memberService.editMember(memberId, editMemberCommand, editMatchingConditionCommand);
     }
 
     public void removeMember(Long memberId) {

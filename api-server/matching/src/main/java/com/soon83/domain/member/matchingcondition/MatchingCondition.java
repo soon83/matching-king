@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table
-public class MemberMatchingCondition extends BaseEntity {
+@Table(name = "member_matching_condition")
+public class MatchingCondition extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,13 +21,13 @@ public class MemberMatchingCondition extends BaseEntity {
     private int minAge;
     @Column
     private int maxAge;
-    @Embedded
+    @Column
     private Gender gender;
     @Embedded
     private Mbti mbti;
 
     @Builder
-    public MemberMatchingCondition(
+    public MatchingCondition(
             int minAge,
             int maxAge,
             Gender gender,
