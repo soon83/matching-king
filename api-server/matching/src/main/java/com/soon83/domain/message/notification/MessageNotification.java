@@ -26,4 +26,12 @@ public class MessageNotification extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "message_id", foreignKey = @ForeignKey(name = "FK_messageNotification_message"))
     private Message message;
+
+    public void setMessage(Message message) {
+        if(this.message != null) {
+            this.message.getMessageNotifications().remove(this);
+        }
+        this.message = message;
+        message.getMessageNotifications().add(this);
+    }
 }

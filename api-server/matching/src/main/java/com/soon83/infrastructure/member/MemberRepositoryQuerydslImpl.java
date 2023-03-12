@@ -1,9 +1,7 @@
 package com.soon83.infrastructure.member;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.core.types.dsl.BooleanPath;
-import com.querydsl.core.types.dsl.EnumPath;
-import com.querydsl.core.types.dsl.NumberPath;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.*;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.soon83.domain.member.Member;
 import com.soon83.domain.member.matchingcondition.MatchingCondition;
@@ -21,14 +19,17 @@ public class MemberRepositoryQuerydslImpl implements MemberRepositoryQuerydsl {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Member> readLimitMembersByMatchingCondition(MatchingCondition matchingCondition) {
+    public List<Member> readLimitMembersByMatchingCondition(MatchingCondition matchingCondition, int limit) {
         return queryFactory
                 .selectFrom(member)
                 .where(
                         eq(member.isActivated, true),
-                        in(member.gender, List.of(Member.Gender.FEMALE)),
-                        in(member.mbti, List.of(Member.Mbti.ISTP, Member.Mbti.ESTP))
+                        between(member.age, matchingCondition.getMinAge(), matchingCondition.getMaxAge()),
+                        in(member.gender, matchingCondition.getGenders()),
+                        in(member.mbti, matchingCondition.getMbtiList())
                 )
+                .orderBy(randomOrder())
+                .limit(limit)
                 .fetch();
     }
 
@@ -52,6 +53,10 @@ public class MemberRepositoryQuerydslImpl implements MemberRepositoryQuerydsl {
                 .fetchOne());
     }
 
+    private static OrderSpecifier<Double> randomOrder() {
+        return Expressions.numberTemplate(Double.class, "function('rand')").asc();
+    }
+
     public static BooleanExpression eq(BooleanPath domainValue, Boolean value) {
         if (ObjectUtils.isEmpty(value)) return null;
         return domainValue.eq(value);
@@ -65,5 +70,10 @@ public class MemberRepositoryQuerydslImpl implements MemberRepositoryQuerydsl {
     private static <T extends Enum<T>> BooleanExpression in(EnumPath<T> domainValue, List<T> valueList) {
         if (ObjectUtils.isEmpty(valueList)) return null;
         return domainValue.in(valueList);
+    }
+
+    private static <T extends Number & Comparable<?>> BooleanExpression between(NumberPath<T> domainValue, T start, T end) {
+        if (ObjectUtils.isEmpty(start) || ObjectUtils.isEmpty(end)) return null;
+        return domainValue.goe(start).and(domainValue.loe(end));
     }
 }

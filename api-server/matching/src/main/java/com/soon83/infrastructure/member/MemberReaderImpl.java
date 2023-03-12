@@ -26,8 +26,8 @@ public class MemberReaderImpl implements MemberReader {
     }
 
     @Override
-    public List<Member> readLimitMembersByMatchingCondition(MatchingCondition matchingCondition) {
-        return memberRepository.readLimitMembersByMatchingCondition(matchingCondition);
+    public List<Member> readLimitMembersByMatchingCondition(MatchingCondition matchingCondition, int limit) {
+        return memberRepository.readLimitMembersByMatchingCondition(matchingCondition, limit);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.soon83.domain.message;
 
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.member.Member;
+import com.soon83.domain.message.notification.MessageNotification;
 import com.soon83.domain.message.reply.MessageReply;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -29,6 +30,8 @@ public class Message extends BaseEntity {
     private Member sender;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "message")
     private List<MessageReply> messageReplies = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "message")
+    private List<MessageNotification> messageNotifications = new ArrayList<>();
 
     @Builder
     public Message(
@@ -37,12 +40,5 @@ public class Message extends BaseEntity {
     ) {
         this.content = content;
         this.sender = sender;
-    }
-
-    public void addMessageReplies(MessageReply messageReply) {
-        this.messageReplies.add(messageReply);
-        messageReply.setMessage(this);
-        /*if (messageReply.getMessage() != this) {
-        }*/
     }
 }

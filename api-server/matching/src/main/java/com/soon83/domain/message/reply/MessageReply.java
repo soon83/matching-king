@@ -35,7 +35,5 @@ public class MessageReply extends BaseEntity {
         }
         this.message = message;
         message.getMessageReplies().add(this);
-        /*if (!Objects.equals(message.getMessageReplies(), this)) {
-        }*/
     }
 }
