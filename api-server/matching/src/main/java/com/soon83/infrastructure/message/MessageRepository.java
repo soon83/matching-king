@@ -1,4 +1,7 @@
 package com.soon83.infrastructure.message;
 
-public interface MessageRepository {
+import com.soon83.domain.message.Message;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MessageRepository extends JpaRepository<Message, Long>, MessageRepositoryQuerydsl {
 }

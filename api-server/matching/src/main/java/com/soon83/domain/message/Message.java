@@ -5,6 +5,7 @@ import com.soon83.domain.member.Member;
 import com.soon83.domain.message.reply.MessageReply;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,10 +25,19 @@ public class Message extends BaseEntity {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "writer_member", foreignKey = @ForeignKey(name = "FK_message_member"))
+    @JoinColumn(name = "writer_member_id", foreignKey = @ForeignKey(name = "FK_message_member"))
     private Member writerMember;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "message")
     private List<MessageReply> messageReplies = new ArrayList<>();
+
+    @Builder
+    public Message(
+            String content,
+            Member writerMember
+    ) {
+        this.content = content;
+        this.writerMember = writerMember;
+    }
 
     public void addMessageReplies(MessageReply messageReply) {
         this.messageReplies.add(messageReply);

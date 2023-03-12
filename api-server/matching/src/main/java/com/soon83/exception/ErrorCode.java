@@ -18,7 +18,11 @@ public enum ErrorCode {
     MEMBER_ALREADY_EXISTS_ERROR(409, "MBR002", "이미 존재하는 회원입니다."),
 
     // 2. 회원 제약사항 오류
-    LIMIT_NOT_FOUND_ERROR(404, "LIM001", "존재하지 않는 제약사항 입니다."),
+    LIMIT_NOT_FOUND_ERROR(404, "LIM001", "존재하지 않는 제약사항입니다."),
+
+    // 3. 메시지 오류
+    MESSAGE_NOT_FOUND_ERROR(404, "MSG001", "존재하지 않는 메시지입니다."),
+    MESSAGE_TRANSFER_LIMIT_EXCEEDED(400, "MSG002", "전송 가능한 메시지 수를 초과하였습니다.")
     ;
 
     private final int status;

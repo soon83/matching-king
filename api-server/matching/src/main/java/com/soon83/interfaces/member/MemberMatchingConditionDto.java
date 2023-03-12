@@ -3,6 +3,7 @@ package com.soon83.interfaces.member;
 import com.soon83.domain.member.matchingcondition.MemberMatchingConditionQuery;
 import com.soon83.domain.valuetype.Gender;
 import com.soon83.domain.valuetype.Mbti;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -13,10 +14,12 @@ public class MemberMatchingConditionDto {
     @Data
     public static class RegisterRequest {
         @NotNull(message = "필수값")
-        @Min(value = 1, message = "1 이상")
+        @Min(value = 5, message = "최소 5 이상")
+        @Max(value = 100, message = "최대 100 이하")
         private int minAge = 0;
         @NotNull(message = "필수값")
-        @Min(value = 1, message = "1 이상")
+        @Min(value = 5, message = "최소 5 이상")
+        @Max(value = 100, message = "최대 100 이하")
         private int maxAge = 0;
         @NotNull(message = "필수값")
         private Gender gender;
@@ -27,10 +30,12 @@ public class MemberMatchingConditionDto {
     @Data
     public static class EditRequest {
         @NotNull(message = "필수값")
-        @Min(value = 1, message = "1 이상")
+        @Min(value = 5, message = "최소 5 이상")
+        @Max(value = 100, message = "최대 100 이하")
         private int minAge = 0;
         @NotNull(message = "필수값")
-        @Min(value = 1, message = "1 이상")
+        @Min(value = 5, message = "최소 5 이상")
+        @Max(value = 100, message = "최대 100 이하")
         private int maxAge = 0;
         @NotNull(message = "필수값")
         private Gender gender;
