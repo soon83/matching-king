@@ -35,8 +35,16 @@ public class MessageNotification extends BaseEntity {
             Member targetMember,
             Message message
     ) {
-        this.targetMember = targetMember;
+        setTargetMember(targetMember);
         setMessage(message);
+    }
+
+    public void setTargetMember(Member targetMember) {
+        if(this.targetMember != null) {
+            this.targetMember.getMessageNotifications().remove(this);
+        }
+        this.targetMember = targetMember;
+        targetMember.getMessageNotifications().add(this);
     }
 
     public void setMessage(Message message) {

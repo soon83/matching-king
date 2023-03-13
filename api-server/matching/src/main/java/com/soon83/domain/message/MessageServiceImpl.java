@@ -25,9 +25,9 @@ public class MessageServiceImpl implements MessageService {
         Member member = memberReader.readMemberMatchingConditionAndLimitById(createMessageCommand.getSenderId());
         messageReader.checkMessageLimit(member.getId(), member.getLimit().getSendMessageCount());
         Message createdMessage = messageStore.create(createMessageCommand.toEntity(member));
-        List<Member> members = memberReader.readLimitMembersByMatchingCondition(member.getMatchingCondition(), member.getLimit().getSendMessageCount());
-        members.forEach(m -> MessageNotification.builder()
-                        .targetMember(m)
+        List<Member> members = memberReader.readLimitMembersByMatchingCondition(member.getMatchingCondition(), member.getLimit().getSendMessageNotificationCount());
+        members.forEach(targetMember -> MessageNotification.builder()
+                        .targetMember(targetMember)
                         .message(createdMessage)
                         .build());
         return createdMessage.getId();
