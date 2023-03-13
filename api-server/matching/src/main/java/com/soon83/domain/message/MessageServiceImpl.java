@@ -3,6 +3,7 @@ package com.soon83.domain.message;
 import com.soon83.domain.member.Member;
 import com.soon83.domain.member.MemberReader;
 import com.soon83.domain.receivemessage.ReceiveMessage;
+import com.soon83.domain.receivemessage.notification.Notification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,11 +26,8 @@ public class MessageServiceImpl implements MessageService {
         Member member = memberReader.readMemberMatchingConditionAndLimitById(createMessageCommand.getSenderId());
         messageReader.checkMessageLimit(member.getId(), member.getLimit().getSendMessageCount());
         Message createdMessage = messageStore.create(createMessageCommand.toEntity(member));
-        List<Member> members = memberReader.readLimitMembersByMatchingCondition(member.getMatchingCondition(), member.getLimit().getSendMessageNotificationCount());
-        members.forEach(targetMember -> ReceiveMessage.builder()
-                        .targetMember(targetMember)
-                        .message(createdMessage)
-                        .build());
+        List<Member> matchingMembers = memberReader.readLimitMembersByMatchingCondition(member.getMatchingCondition(), member.getLimit().getSendMessageNotificationCount());
+        createReceiveMessages(member, createdMessage, matchingMembers);
         return createdMessage.getId();
     }
 
@@ -39,5 +37,18 @@ public class MessageServiceImpl implements MessageService {
         return messageReader.readAllBySearchCondition(condition).stream()
                 .map(MessageQuery.Main::new)
                 .toList();
+    }
+
+    private static void createReceiveMessages(Member member, Message createdMessage, List<Member> members) {
+        members.forEach(targetMember -> ReceiveMessage.builder()
+                .targetMember(targetMember)
+                .message(createdMessage)
+                .notification(Notification.builder().build())
+                .build());
+        ReceiveMessage.builder()
+                .targetMember(member)
+                .message(createdMessage)
+                .notification(Notification.builder().build())
+                .build();
     }
 }

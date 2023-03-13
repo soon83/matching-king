@@ -19,6 +19,10 @@ public class ReceiveMessage extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
+    private boolean hiddenFromSender;
+    @Column
+    private boolean hiddenFromTargetMember;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "target_member_id", foreignKey = @ForeignKey(name = "FK_receiveMessage_member"))

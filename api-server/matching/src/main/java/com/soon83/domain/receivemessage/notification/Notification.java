@@ -3,6 +3,7 @@ package com.soon83.domain.receivemessage.notification;
 import com.soon83.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,7 @@ public class Notification extends BaseEntity {
     @Column
     private boolean isDeleted;
 
+    @Builder
     public Notification(
             boolean isRead,
             boolean isDeleted
