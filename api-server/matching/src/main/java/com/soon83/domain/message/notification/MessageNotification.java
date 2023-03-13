@@ -5,6 +5,7 @@ import com.soon83.domain.member.Member;
 import com.soon83.domain.message.Message;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,8 @@ public class MessageNotification extends BaseEntity {
     private Long id;
     @Column
     private boolean isRead;
+    @Column
+    private boolean isDeleted;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "target_member_id", foreignKey = @ForeignKey(name = "FK_messageNotification_member"))
@@ -26,6 +29,15 @@ public class MessageNotification extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "message_id", foreignKey = @ForeignKey(name = "FK_messageNotification_message"))
     private Message message;
+
+    @Builder
+    public MessageNotification(
+            Member targetMember,
+            Message message
+    ) {
+        this.targetMember = targetMember;
+        setMessage(message);
+    }
 
     public void setMessage(Message message) {
         if(this.message != null) {

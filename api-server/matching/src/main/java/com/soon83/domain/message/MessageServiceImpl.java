@@ -2,6 +2,7 @@ package com.soon83.domain.message;
 
 import com.soon83.domain.member.Member;
 import com.soon83.domain.member.MemberReader;
+import com.soon83.domain.message.notification.MessageNotification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,12 @@ public class MessageServiceImpl implements MessageService {
         messageReader.checkMessageLimit(member.getId(), member.getLimit().getSendMessageCount());
         Message createdMessage = messageStore.create(createMessageCommand.toEntity(member));
         List<Member> members = memberReader.readLimitMembersByMatchingCondition(member.getMatchingCondition(), member.getLimit().getSendMessageCount());
-        log.debug("### members: {}", members.stream().map(Member::getGender).toList());
-        log.debug("### members: {}", members.stream().map(Member::getMbti).toList());
-        // TODO save messageNotification
+        messageStore.create(members.stream()
+                .map(m -> MessageNotification.builder()
+                        .targetMember(m)
+                        .message(createdMessage)
+                        .build())
+                .toList());
         return createdMessage.getId();
     }
 

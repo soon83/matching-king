@@ -52,6 +52,7 @@ public class InitDb implements InitializingBean {
             memberRepository.save(Member.builder()
                     .email("2601948@gmail.com")
                     .nickname("DidierDrogba")
+                    .age(41)
                     .gender(Member.Gender.MALE)
                     .mbti(Member.Mbti.ISTP)
                     .type(Member.Type.PAID)
