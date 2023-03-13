@@ -2,7 +2,7 @@ package com.soon83.domain.message;
 
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.member.Member;
-import com.soon83.domain.message.notification.MessageNotification;
+import com.soon83.domain.notification.MessageNotification;
 import com.soon83.domain.message.reply.MessageReply;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

@@ -2,7 +2,7 @@ package com.soon83.domain.message;
 
 import com.soon83.domain.member.Member;
 import com.soon83.domain.member.MemberReader;
-import com.soon83.domain.message.notification.MessageNotification;
+import com.soon83.domain.notification.MessageNotification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -3,15 +3,12 @@ package com.soon83.domain.member;
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.limit.Limit;
 import com.soon83.domain.member.matchingcondition.MatchingCondition;
-import com.soon83.domain.message.notification.MessageNotification;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -52,8 +49,6 @@ public class Member extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "matching_condition_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_member_memberMatchingCondition"))
     private MatchingCondition matchingCondition;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "targetMember")
-    private List<MessageNotification> messageNotifications = new ArrayList<>();
 
     @Builder
     public Member(

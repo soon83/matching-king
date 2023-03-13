@@ -1,4 +1,4 @@
-package com.soon83.domain.message.notification;
+package com.soon83.domain.notification;
 
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.member.Member;
@@ -35,16 +35,8 @@ public class MessageNotification extends BaseEntity {
             Member targetMember,
             Message message
     ) {
-        setTargetMember(targetMember);
-        setMessage(message);
-    }
-
-    public void setTargetMember(Member targetMember) {
-        if(this.targetMember != null) {
-            this.targetMember.getMessageNotifications().remove(this);
-        }
         this.targetMember = targetMember;
-        targetMember.getMessageNotifications().add(this);
+        setMessage(message);
     }
 
     public void setMessage(Message message) {
