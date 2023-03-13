@@ -1,19 +1,16 @@
-package com.soon83.domain.messagemeta.notification;
+package com.soon83.domain.receivemessage.notification;
 
 import com.soon83.domain.BaseEntity;
-import com.soon83.domain.member.Member;
-import com.soon83.domain.message.Message;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table
-public class MessageNotification extends BaseEntity {
+@Table(name = "message_notification")
+public class Notification extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +20,7 @@ public class MessageNotification extends BaseEntity {
     @Column
     private boolean isDeleted;
 
-    public MessageNotification(
+    public Notification(
             boolean isRead,
             boolean isDeleted
     ) {

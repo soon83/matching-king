@@ -5,6 +5,7 @@ import com.soon83.domain.member.Member;
 import com.soon83.domain.message.Message;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,6 +29,23 @@ public class MessageReply extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "message_id", foreignKey = @ForeignKey(name = "FK_messageReply_message"))
     private Message message;
+
+    @Builder
+    public MessageReply(
+            String content,
+            boolean isRead,
+            Member replyMember,
+            Message message
+    ) {
+        if (content == null) throw new IllegalArgumentException("content");
+        if (replyMember == null) throw new IllegalArgumentException("replyMember");
+        if (message == null) throw new IllegalArgumentException("message");
+
+        this.content = content;
+        this.isRead = isRead;
+        this.replyMember = replyMember;
+        this.message = message;
+    }
 
     public void setMessage(Message message) {
         if(this.message != null) {

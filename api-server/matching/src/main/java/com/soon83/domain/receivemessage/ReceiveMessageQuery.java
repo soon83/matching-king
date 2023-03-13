@@ -1,9 +1,9 @@
-package com.soon83.domain.messagemeta;
+package com.soon83.domain.receivemessage;
 
 import lombok.Builder;
 import lombok.Data;
 
-public class MessageMetaQuery {
+public class ReceiveMessageQuery {
 
     @Data
     public static class Main {
@@ -25,7 +25,7 @@ public class MessageMetaQuery {
             this.messageId = messageId;
         }
 
-        public Main(MessageMeta entity) {
+        public Main(ReceiveMessage entity) {
             this.id = entity.getId();
             this.isDeleted = entity.isDeleted();
             this.targetMemberId = entity.getTargetMember().getId();

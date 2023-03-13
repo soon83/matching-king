@@ -1,6 +1,5 @@
 package com.soon83.domain.limit;
 
-import com.soon83.domain.limit.Limit;
 import com.soon83.domain.member.Member;
 import lombok.Builder;
 import lombok.Data;
