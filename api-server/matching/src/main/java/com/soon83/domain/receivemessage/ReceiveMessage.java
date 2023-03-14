@@ -25,10 +25,10 @@ public class ReceiveMessage extends BaseEntity {
     private boolean hiddenFromTargetMember;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "target_member_id", foreignKey = @ForeignKey(name = "FK_receiveMessage_member"))
+    @JoinColumn(name = "target_member_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_member"))
     private Member targetMember;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "message_id", foreignKey = @ForeignKey(name = "FK_receiveMessage_message"))
+    @JoinColumn(name = "message_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_message"))
     private Message message;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "notification_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_receiveMessage_messageNotification"))

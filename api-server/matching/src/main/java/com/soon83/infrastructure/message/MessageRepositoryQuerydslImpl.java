@@ -29,15 +29,4 @@ public class MessageRepositoryQuerydslImpl implements MessageRepositoryQuerydsl 
                 .fetch()
                 .size();
     }
-
-    public static BooleanExpression eq(NumberPath<Long> domainValue, Long value) {
-        if (ObjectUtils.isEmpty(value)) return null;
-        return domainValue.eq(value);
-    }
-
-    public static BooleanExpression goe(DateTimePath<LocalDateTime> domainValue, LocalDateTime value) {
-        if (ObjectUtils.isEmpty(value)) return null;
-        return domainValue.goe(value);
-    }
-
 }

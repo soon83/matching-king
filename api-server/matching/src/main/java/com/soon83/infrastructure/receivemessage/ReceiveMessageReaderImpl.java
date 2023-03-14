@@ -17,6 +17,6 @@ public class ReceiveMessageReaderImpl implements ReceiveMessageReader {
 
     @Override
     public List<ReceiveMessage> searchReceiveMessagesOfMember(Long targetMemberId) {
-        return receiveMessageRepository.findByTargetMemberId(targetMemberId);
+        return receiveMessageRepository.searchReceiveMessagesOfMember(targetMemberId);
     }
 }
