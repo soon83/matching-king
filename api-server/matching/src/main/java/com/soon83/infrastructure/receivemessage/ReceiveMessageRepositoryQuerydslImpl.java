@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 import static com.soon83.domain.receivemessage.QReceiveMessage.receiveMessage;
+import static com.soon83.infrastructure.CustomExpressionUtil.*;
 
 @RequiredArgsConstructor
 public class ReceiveMessageRepositoryQuerydslImpl implements ReceiveMessageRepositoryQuerydsl {
@@ -14,9 +15,23 @@ public class ReceiveMessageRepositoryQuerydslImpl implements ReceiveMessageRepos
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<ReceiveMessage> searchReceiveMessagesOfMember(Long targetMemberId) {
+    public List<ReceiveMessage> searchReceiveMessagesNotificationsOfTargetMember(Long targetMemberId) {
         return queryFactory
                 .selectFrom(receiveMessage)
-                .join();
+                .join(receiveMessage.notification).fetchJoin()
+                .join(receiveMessage.sender).fetchJoin()
+                .where(eq(receiveMessage.targetMember.id, targetMemberId))
+                .fetch();
+    }
+
+    @Override
+    public List<ReceiveMessage> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
+        return queryFactory
+                .selectFrom(receiveMessage)
+                .join(receiveMessage.message).fetchJoin()
+                .join(receiveMessage.notification).fetchJoin()
+                .join(receiveMessage.sender).fetchJoin()
+                .where(eq(receiveMessage.targetMember.id, targetMemberId))
+                .fetch();
     }
 }

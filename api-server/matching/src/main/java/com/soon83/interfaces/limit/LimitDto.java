@@ -15,11 +15,11 @@ public class LimitDto {
         private final int sendMessageNotificationCount;
 
         @Builder
-        public Main(LimitQuery.Main main) {
-            this.id = main.getId();
-            this.memberType = main.getMemberType();
-            this.sendMessageCount = main.getSendMessageCount();
-            this.sendMessageNotificationCount = main.getSendMessageNotificationCount();
+        public Main(LimitQuery.Main query) {
+            this.id = query.getId();
+            this.memberType = query.getMemberType();
+            this.sendMessageCount = query.getSendMessageCount();
+            this.sendMessageNotificationCount = query.getSendMessageNotificationCount();
         }
 
         public Main(

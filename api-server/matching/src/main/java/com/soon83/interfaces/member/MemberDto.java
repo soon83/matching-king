@@ -134,15 +134,15 @@ public class MemberDto {
         }
 
         @Builder
-        public Main(MemberQuery.Main memberMain) {
-            this.memberId = memberMain.getId();
-            this.memberEmail = memberMain.getEmail();
-            this.memberNickname = memberMain.getNickname();
-            this.memberAge = memberMain.getAge();
-            this.memberGender = memberMain.getGender();
-            this.memberMbti = memberMain.getMbti();
-            this.memberType = memberMain.getType();
-            this.memberRole = memberMain.getRole();
+        public Main(MemberQuery.Main query) {
+            this.memberId = query.getId();
+            this.memberEmail = query.getEmail();
+            this.memberNickname = query.getNickname();
+            this.memberAge = query.getAge();
+            this.memberGender = query.getGender();
+            this.memberMbti = query.getMbti();
+            this.memberType = query.getType();
+            this.memberRole = query.getRole();
         }
     }
 
@@ -160,17 +160,17 @@ public class MemberDto {
         private final MatchingConditionDto.Main memberMatchingCondition;
 
         @Builder
-        public Detail(MemberQuery.Detail detail) {
-            this.memberId = detail.getId();
-            this.memberEmail = detail.getEmail();
-            this.memberNickname = detail.getNickname();
-            this.memberAge = detail.getAge();
-            this.memberGender = detail.getGender();
-            this.memberMbti = detail.getMbti();
-            this.memberType = detail.getType();
-            this.memberRole = detail.getRole();
-            this.memberLimit = new LimitDto.Main(detail.getLimit());
-            this.memberMatchingCondition = new MatchingConditionDto.Main(detail.getMatchingCondition());
+        public Detail(MemberQuery.Detail query) {
+            this.memberId = query.getId();
+            this.memberEmail = query.getEmail();
+            this.memberNickname = query.getNickname();
+            this.memberAge = query.getAge();
+            this.memberGender = query.getGender();
+            this.memberMbti = query.getMbti();
+            this.memberType = query.getType();
+            this.memberRole = query.getRole();
+            this.memberLimit = new LimitDto.Main(query.getLimit());
+            this.memberMatchingCondition = new MatchingConditionDto.Main(query.getMatchingCondition());
         }
     }
 }

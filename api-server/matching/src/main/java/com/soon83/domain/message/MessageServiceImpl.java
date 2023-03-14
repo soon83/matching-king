@@ -22,21 +22,23 @@ public class MessageServiceImpl implements MessageService {
     @Override
     @Transactional
     public Long registerMessage(MessageCommand.CreateMessage createMessageCommand) {
-        Member member = memberReader.readMemberMatchingConditionAndLimitById(createMessageCommand.getSenderId());
-        messageReader.checkMessageLimit(member.getId(), member.getLimit().getSendMessageCount());
-        Message createdMessage = messageStore.create(createMessageCommand.toEntity(member));
-        List<Member> matchingMembers = memberReader.readLimitMembersByMatchingCondition(member.getMatchingCondition(), member.getLimit().getSendMessageNotificationCount());
-        createReceiveMessages(member, createdMessage, matchingMembers);
+        Member sender = memberReader.readMemberMatchingConditionAndLimitById(createMessageCommand.getSenderId());
+        messageReader.checkMessageLimit(sender.getId(), sender.getLimit().getSendMessageCount());
+        Message createdMessage = messageStore.create(createMessageCommand.toEntity(sender));
+        List<Member> targetMembers = memberReader.readLimitMembersByMatchingCondition(sender.getId(), sender.getMatchingCondition(), sender.getLimit().getSendMessageNotificationCount());
+        createReceiveMessages(sender, createdMessage, targetMembers);
         return createdMessage.getId();
     }
 
-    private static void createReceiveMessages(Member member, Message createdMessage, List<Member> members) {
-        members.forEach(targetMember -> ReceiveMessage.builder()
+    private static void createReceiveMessages(Member sender, Message createdMessage, List<Member> targetMembers) {
+        targetMembers.forEach(targetMember -> ReceiveMessage.builder()
+                .sender(sender)
                 .targetMember(targetMember)
                 .message(createdMessage)
                 .build());
         ReceiveMessage.builder()
-                .targetMember(member)
+                .sender(sender)
+                .targetMember(sender)
                 .message(createdMessage)
                 .build();
     }

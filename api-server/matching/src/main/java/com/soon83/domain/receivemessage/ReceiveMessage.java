@@ -28,20 +28,26 @@ public class ReceiveMessage extends BaseEntity {
     @JoinColumn(name = "target_member_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_member"))
     private Member targetMember;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_member"))
+    private Member sender;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "message_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_message"))
     private Message message;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "notification_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_receiveMessage_messageNotification"))
+    @JoinColumn(name = "message_notification_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_receiveMessage_messageNotification"))
     private Notification notification;
 
     @Builder
     public ReceiveMessage(
+            Member sender,
             Member targetMember,
             Message message
     ) {
+        if (sender == null) throw new IllegalArgumentException("sender");
         if (targetMember == null) throw new IllegalArgumentException("targetMember");
         if (message == null) throw new IllegalArgumentException("message");
 
+        this.sender = sender;
         this.targetMember = targetMember;
         setMessage(message);
         this.notification = Notification.builder().build();

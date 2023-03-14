@@ -16,7 +16,12 @@ public class ReceiveMessageReaderImpl implements ReceiveMessageReader {
     private final ReceiveMessageRepository receiveMessageRepository;
 
     @Override
-    public List<ReceiveMessage> searchReceiveMessagesOfMember(Long targetMemberId) {
-        return receiveMessageRepository.searchReceiveMessagesOfMember(targetMemberId);
+    public List<ReceiveMessage> searchReceiveMessagesNotificationsOfTargetMember(Long targetMemberId) {
+        return receiveMessageRepository.searchReceiveMessagesNotificationsOfTargetMember(targetMemberId);
+    }
+
+    @Override
+    public List<ReceiveMessage> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
+        return receiveMessageRepository.searchReceiveMessagesOfTargetMember(targetMemberId);
     }
 }

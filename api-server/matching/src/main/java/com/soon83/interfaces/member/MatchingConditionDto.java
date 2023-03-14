@@ -85,12 +85,12 @@ public class MatchingConditionDto {
             this.mbti = mbti;
         }
 
-        public Main(MatchingConditionQuery.Main main) {
-            this.id = main.getId();
-            this.minAge = main.getMinAge();
-            this.maxAge = main.getMaxAge();
-            this.gender = main.getGender();
-            this.mbti = main.getMbti();
+        public Main(MatchingConditionQuery.Main query) {
+            this.id = query.getId();
+            this.minAge = query.getMinAge();
+            this.maxAge = query.getMaxAge();
+            this.gender = query.getGender();
+            this.mbti = query.getMbti();
         }
     }
 }

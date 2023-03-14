@@ -15,7 +15,11 @@ public class ReceiveMessageApplication {
 
     private final ReceiveMessageService receiveMessageService;
 
-    public List<ReceiveMessageQuery.Main> searchReceiveMessagesOfMember(Long targetMemberId) {
-        return receiveMessageService.searchReceiveMessagesOfMember(targetMemberId);
+    public List<ReceiveMessageQuery.Notification> searchReceiveMessagesNotificationsOfTargetMember(Long targetMemberId) {
+        return receiveMessageService.searchReceiveMessagesNotificationsOfTargetMember(targetMemberId);
+    }
+
+    public List<ReceiveMessageQuery.Main> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
+        return receiveMessageService.searchReceiveMessagesOfTargetMember(targetMemberId);
     }
 }

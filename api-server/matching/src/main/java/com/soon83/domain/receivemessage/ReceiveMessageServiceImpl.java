@@ -15,9 +15,16 @@ public class ReceiveMessageServiceImpl implements ReceiveMessageService {
     private final ReceiveMessageReader receiveMessageReader;
 
     @Override
+    public List<ReceiveMessageQuery.Notification> searchReceiveMessagesNotificationsOfTargetMember(Long targetMemberId) {
+        return receiveMessageReader.searchReceiveMessagesNotificationsOfTargetMember(targetMemberId).stream()
+                .map(ReceiveMessageQuery.Notification::new)
+                .toList();
+    }
+
+    @Override
     @Transactional(readOnly = true)
-    public List<ReceiveMessageQuery.Main> searchReceiveMessagesOfMember(Long targetMemberId) {
-        return receiveMessageReader.searchReceiveMessagesOfMember(targetMemberId).stream()
+    public List<ReceiveMessageQuery.Main> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
+        return receiveMessageReader.searchReceiveMessagesOfTargetMember(targetMemberId).stream()
                 .map(ReceiveMessageQuery.Main::new)
                 .toList();
     }

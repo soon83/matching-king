@@ -15,8 +15,8 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/members/{memberId}/receive-messages")
-public class ReceiveMessageController {
+@RequestMapping("/api/v1/members/{memberId}/notifications")
+public class NotificationController {
 
     private final ReceiveMessageApplication receiveMessageApplication;
 
@@ -24,11 +24,11 @@ public class ReceiveMessageController {
      * [메시지 함] 목록 조회
      */
     @GetMapping
-    public CommonResponse<List<ReceiveMessageDto.Main>> searchReceiveMessagesOfTargetMember(@PathVariable Long memberId) {
-        log.debug("# searchReceiveMessagesOfTargetMember # memberId: {}", memberId);
-        List<ReceiveMessageQuery.Main> receiveMessagesOfMember = receiveMessageApplication.searchReceiveMessagesOfTargetMember(memberId);
-        List<ReceiveMessageDto.Main> response = receiveMessagesOfMember.stream()
-                .map(ReceiveMessageDto.Main::new)
+    public CommonResponse<List<ReceiveMessageDto.NotificationResponse>> searchReceiveMessagesNotificationsOfTargetMember(@PathVariable Long memberId) {
+        log.debug("# searchReceiveMessagesNotificationOfTargetMember # memberId: {}", memberId);
+        List<ReceiveMessageQuery.Notification> receiveMessagesNotificationsOfMember = receiveMessageApplication.searchReceiveMessagesNotificationsOfTargetMember(memberId);
+        List<ReceiveMessageDto.NotificationResponse> response = receiveMessagesNotificationsOfMember.stream()
+                .map(ReceiveMessageDto.NotificationResponse::new)
                 .toList();
         return CommonResponse.success(response);
     }

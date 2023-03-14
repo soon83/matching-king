@@ -1,16 +1,14 @@
 package com.soon83.infrastructure.message;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.core.types.dsl.DateTimePath;
-import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.soon83.DateTimeUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDateTime;
 
 import static com.soon83.domain.message.QMessage.message;
+import static com.soon83.infrastructure.CustomExpressionUtil.eq;
+import static com.soon83.infrastructure.CustomExpressionUtil.goe;
 
 @RequiredArgsConstructor
 public class MessageRepositoryQuerydslImpl implements MessageRepositoryQuerydsl {

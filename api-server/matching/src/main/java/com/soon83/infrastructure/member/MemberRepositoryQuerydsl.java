@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepositoryQuerydsl {
-    List<Member> readLimitMembersByMatchingCondition(MatchingCondition matchingCondition, int limit);
+    List<Member> readLimitMembersByMatchingCondition(Long senderId, MatchingCondition matchingCondition, int limit);
     Optional<Member> readMemberDetailById(Long memberId);
     Optional<Member> readMemberMatchingConditionAndLimitById(Long memberId);
 }

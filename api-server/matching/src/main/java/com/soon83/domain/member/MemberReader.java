@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MemberReader {
     List<Member> readAll(MemberQuery.SearchCondition condition);
-    List<Member> readLimitMembersByMatchingCondition(MatchingCondition matchingCondition, int limit);
+    List<Member> readLimitMembersByMatchingCondition(Long senderId, MatchingCondition matchingCondition, int limit);
     Member readById(Long memberId);
     Member readMemberDetailById(Long memberId);
     Member readMemberMatchingConditionAndLimitById(Long memberId);
