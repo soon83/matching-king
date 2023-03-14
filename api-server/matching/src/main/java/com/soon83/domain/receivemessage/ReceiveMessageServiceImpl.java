@@ -15,8 +15,8 @@ public class ReceiveMessageServiceImpl implements ReceiveMessageService {
     private final ReceiveMessageReader receiveMessageReader;
 
     @Override
-    public List<ReceiveMessageQuery.Notification> searchReceiveMessagesNotificationsOfTargetMember(Long targetMemberId) {
-        return receiveMessageReader.searchReceiveMessagesNotificationsOfTargetMember(targetMemberId).stream()
+    public List<ReceiveMessageQuery.Notification> searchNotificationsOfTargetMember(Long targetMemberId) {
+        return receiveMessageReader.searchNotificationsOfTargetMember(targetMemberId).stream()
                 .map(ReceiveMessageQuery.Notification::new)
                 .toList();
     }

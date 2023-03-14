@@ -1,35 +1,28 @@
 package com.soon83.interfaces.receivemessage;
 
 import com.soon83.CommonResponse;
-import com.soon83.application.ReceiveMessageApplication;
-import com.soon83.domain.receivemessage.ReceiveMessageQuery;
+import com.soon83.application.NotificationApplication;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/members/{memberId}/notifications")
+@RequestMapping("/api/v1/members/{memberId}/receive-messages/{receiveMessageId}/notifications")
 public class NotificationController {
 
-    private final ReceiveMessageApplication receiveMessageApplication;
+    private final NotificationApplication notificationApplication;
 
-    /**
-     * [메시지 함] 목록 조회
-     */
-    @GetMapping
-    public CommonResponse<List<ReceiveMessageDto.NotificationResponse>> searchReceiveMessagesNotificationsOfTargetMember(@PathVariable Long memberId) {
-        log.debug("# searchReceiveMessagesNotificationOfTargetMember # memberId: {}", memberId);
-        List<ReceiveMessageQuery.Notification> receiveMessagesNotificationsOfMember = receiveMessageApplication.searchReceiveMessagesNotificationsOfTargetMember(memberId);
-        List<ReceiveMessageDto.NotificationResponse> response = receiveMessagesNotificationsOfMember.stream()
-                .map(ReceiveMessageDto.NotificationResponse::new)
-                .toList();
-        return CommonResponse.success(response);
+    @PatchMapping("{messageNotificationId}/change-to-read")
+    public CommonResponse<Void> changeToRead(@PathVariable Long memberId, @PathVariable Long receiveMessageId, @PathVariable Long messageNotificationId) {
+        notificationApplication.changeToRead(memberId, receiveMessageId, messageNotificationId);
+        return CommonResponse.success();
+    }
+
+    @DeleteMapping("{messageNotificationId}")
+    public CommonResponse<Void> removeNotification(@PathVariable Long memberId, @PathVariable Long receiveMessageId, @PathVariable Long messageNotificationId) {
+        notificationApplication.removeNotification(memberId, receiveMessageId, messageNotificationId);
+        return CommonResponse.success();
     }
 }

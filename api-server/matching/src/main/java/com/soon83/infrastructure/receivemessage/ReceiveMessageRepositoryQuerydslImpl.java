@@ -15,12 +15,14 @@ public class ReceiveMessageRepositoryQuerydslImpl implements ReceiveMessageRepos
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<ReceiveMessage> searchReceiveMessagesNotificationsOfTargetMember(Long targetMemberId) {
+    public List<ReceiveMessage> searchNotificationsOfTargetMember(Long targetMemberId) {
         return queryFactory
                 .selectFrom(receiveMessage)
                 .join(receiveMessage.notification).fetchJoin()
                 .join(receiveMessage.sender).fetchJoin()
-                .where(eq(receiveMessage.targetMember.id, targetMemberId))
+                .where(
+                        eq(receiveMessage.targetMember.id, targetMemberId),
+                        eq(receiveMessage.notification.isDeleted, false))
                 .fetch();
     }
 

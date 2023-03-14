@@ -5,6 +5,6 @@ import com.soon83.domain.receivemessage.ReceiveMessage;
 import java.util.List;
 
 public interface ReceiveMessageRepositoryQuerydsl {
-    List<ReceiveMessage> searchReceiveMessagesNotificationsOfTargetMember(Long targetMemberId);
+    List<ReceiveMessage> searchNotificationsOfTargetMember(Long targetMemberId);
     List<ReceiveMessage> searchReceiveMessagesOfTargetMember(Long targetMemberId);
 }

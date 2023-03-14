@@ -29,4 +29,12 @@ public class Notification extends BaseEntity {
         this.isRead = isRead;
         this.isDeleted = isDeleted;
     }
+
+    public void changeToRead(boolean isRead) {
+        this.isRead = isRead;
+    }
+
+    public void delete() {
+        this.isDeleted = true;
+    }
 }

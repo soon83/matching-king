@@ -17,7 +17,7 @@ public class MessageController {
     private final MessageApplication messageApplication;
 
     /**
-     * [메시지] 단건 등록
+     * [쪽지] 단건 등록
      */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping

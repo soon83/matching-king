@@ -21,7 +21,7 @@ public class ReceiveMessageController {
     private final ReceiveMessageApplication receiveMessageApplication;
 
     /**
-     * [메시지 함] 목록 조회
+     * [쪽지함] 목록 조회
      */
     @GetMapping
     public CommonResponse<List<ReceiveMessageDto.Main>> searchReceiveMessagesOfTargetMember(@PathVariable Long memberId) {
@@ -29,6 +29,20 @@ public class ReceiveMessageController {
         List<ReceiveMessageQuery.Main> receiveMessagesOfMember = receiveMessageApplication.searchReceiveMessagesOfTargetMember(memberId);
         List<ReceiveMessageDto.Main> response = receiveMessagesOfMember.stream()
                 .map(ReceiveMessageDto.Main::new)
+                .toList();
+        return CommonResponse.success(response);
+    }
+
+    /**
+     * [알림] 목록 조회
+     */
+    @GetMapping("/notifications")
+    public CommonResponse<List<ReceiveMessageDto.NotificationResponse>> searchNotificationsOfTargetMember(@PathVariable Long memberId) {
+        log.debug("# searchNotificationsOfTargetMember # memberId: {}", memberId);
+        List<ReceiveMessageQuery.Notification> notifications = receiveMessageApplication.searchNotificationsOfTargetMember(memberId);
+        log.debug("### notifications: {} 건", notifications.size());
+        List<ReceiveMessageDto.NotificationResponse> response = notifications.stream()
+                .map(ReceiveMessageDto.NotificationResponse::new)
                 .toList();
         return CommonResponse.success(response);
     }
