@@ -3,7 +3,6 @@ package com.soon83.domain.message;
 import com.soon83.domain.member.Member;
 import com.soon83.domain.member.MemberReader;
 import com.soon83.domain.receivemessage.ReceiveMessage;
-import com.soon83.domain.receivemessage.notification.Notification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,24 +30,14 @@ public class MessageServiceImpl implements MessageService {
         return createdMessage.getId();
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<MessageQuery.Main> searchMessages(MessageQuery.SearchCondition condition) {
-        return messageReader.readAllBySearchCondition(condition).stream()
-                .map(MessageQuery.Main::new)
-                .toList();
-    }
-
     private static void createReceiveMessages(Member member, Message createdMessage, List<Member> members) {
         members.forEach(targetMember -> ReceiveMessage.builder()
                 .targetMember(targetMember)
                 .message(createdMessage)
-                .notification(Notification.builder().build())
                 .build());
         ReceiveMessage.builder()
                 .targetMember(member)
                 .message(createdMessage)
-                .notification(Notification.builder().build())
                 .build();
     }
 }

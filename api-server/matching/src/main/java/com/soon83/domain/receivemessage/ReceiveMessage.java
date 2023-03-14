@@ -37,16 +37,14 @@ public class ReceiveMessage extends BaseEntity {
     @Builder
     public ReceiveMessage(
             Member targetMember,
-            Message message,
-            Notification notification
+            Message message
     ) {
         if (targetMember == null) throw new IllegalArgumentException("targetMember");
         if (message == null) throw new IllegalArgumentException("message");
-        if (notification == null) throw new IllegalArgumentException("notification");
 
         this.targetMember = targetMember;
         setMessage(message);
-        this.notification = notification;
+        this.notification = Notification.builder().build();
     }
 
     public void setMessage(Message message) {

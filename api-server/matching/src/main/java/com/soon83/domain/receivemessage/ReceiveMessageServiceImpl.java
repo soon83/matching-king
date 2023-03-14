@@ -10,7 +10,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ReceiveReceiveMessageServiceImpl implements ReceiveMessageService {
+public class ReceiveMessageServiceImpl implements ReceiveMessageService {
 
     private final ReceiveMessageReader receiveMessageReader;
 
