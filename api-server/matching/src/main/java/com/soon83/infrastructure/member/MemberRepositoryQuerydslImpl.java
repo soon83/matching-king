@@ -25,8 +25,8 @@ public class MemberRepositoryQuerydslImpl implements MemberRepositoryQuerydsl {
                 .where(
                         eq(member.isActivated, true),
                         between(member.age, matchingCondition.getMinAge(), matchingCondition.getMaxAge()),
-                        in(member.gender, matchingCondition.getGenders()),
-                        in(member.mbti, matchingCondition.getMbtiList())
+                        in(member.gender, matchingCondition.getGender().checkedList()),
+                        in(member.mbti, matchingCondition.getMbti().checkedList())
                 )
                 .orderBy(randomOrder())
                 .limit(limit)

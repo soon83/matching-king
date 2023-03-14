@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @ToString
 @NoArgsConstructor
@@ -84,5 +87,26 @@ public class Mbti {
         this.istp = Member.Mbti.ISTP == memberMbti;
         this.intj = Member.Mbti.INTJ == memberMbti;
         this.intp = Member.Mbti.INTP == memberMbti;
+    }
+
+    public List<Member.Mbti> checkedList() {
+        List<Member.Mbti> mbtiList = new ArrayList<>();
+        if (this.esfj) mbtiList.add(Member.Mbti.ESFJ);
+        if (this.esfp) mbtiList.add(Member.Mbti.ESFP);
+        if (this.enfj) mbtiList.add(Member.Mbti.ENFJ);
+        if (this.enfp) mbtiList.add(Member.Mbti.ENFP);
+        if (this.estj) mbtiList.add(Member.Mbti.ESTJ);
+        if (this.estp) mbtiList.add(Member.Mbti.ESTP);
+        if (this.entj) mbtiList.add(Member.Mbti.ENTJ);
+        if (this.entp) mbtiList.add(Member.Mbti.ENTP);
+        if (this.isfj) mbtiList.add(Member.Mbti.ISFJ);
+        if (this.isfp) mbtiList.add(Member.Mbti.ISFP);
+        if (this.infj) mbtiList.add(Member.Mbti.INFJ);
+        if (this.infp) mbtiList.add(Member.Mbti.INFP);
+        if (this.istj) mbtiList.add(Member.Mbti.ISTJ);
+        if (this.istp) mbtiList.add(Member.Mbti.ISTP);
+        if (this.intj) mbtiList.add(Member.Mbti.INTJ);
+        if (this.intp) mbtiList.add(Member.Mbti.INTP);
+        return mbtiList;
     }
 }
