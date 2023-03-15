@@ -28,7 +28,7 @@ public class MessageReaderImpl implements MessageReader {
     @Override
     public MessageReply findLatelyMessageReplyById(Long messageId) {
         return messageReplyRepository.findLatelyMessageReplyById(messageId)
-                .orElseThrow(MessageReplyNotFoundException::new);
+                .orElse(null);
     }
 
     @Override

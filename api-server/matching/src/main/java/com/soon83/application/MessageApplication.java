@@ -18,7 +18,7 @@ public class MessageApplication {
         return messageService.registerMessage(createMessageCommand);
     }
 
-    public Long registerMessageReply(MessageReplyCommand.CreateReply createMessageReplyCommand) {
-        return messageService.registerMessageReply(createMessageReplyCommand);
+    public Long registerMessageReply(Long receiveMessageId, MessageReplyCommand.CreateReply createMessageReplyCommand) {
+        return messageService.registerMessageReply(receiveMessageId, createMessageReplyCommand);
     }
 }

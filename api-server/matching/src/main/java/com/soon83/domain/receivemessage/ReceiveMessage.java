@@ -4,6 +4,7 @@ import com.soon83.domain.BaseEntity;
 import com.soon83.domain.member.Member;
 import com.soon83.domain.message.Message;
 import com.soon83.domain.receivemessage.notification.Notification;
+import com.soon83.exception.receivemessage.NotMyReceiveMessageException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -68,6 +69,18 @@ public class ReceiveMessage extends BaseEntity {
             hiddenFromSender = true;
         } else {
             hiddenFromTargetMember = true;
+        }
+    }
+
+    public void validateTargetMemberIdEqual(Long replyMemberId) {
+        if (!Objects.equals(this.targetMember.getId(), replyMemberId)) {
+            throw new NotMyReceiveMessageException();
+        }
+    }
+
+    public void validateMessageIdEqual(Long messageId) {
+        if (!Objects.equals(this.message.getId(), messageId)) {
+            throw new NotMyReceiveMessageException();
         }
     }
 

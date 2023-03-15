@@ -4,6 +4,7 @@ import com.soon83.domain.BaseEntity;
 import com.soon83.domain.member.Member;
 import com.soon83.domain.message.reply.MessageReply;
 import com.soon83.domain.receivemessage.ReceiveMessage;
+import com.soon83.exception.message.MessageReplySeriesException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -47,5 +49,11 @@ public class Message extends BaseEntity {
 
         this.content = content;
         this.sender = sender;
+    }
+
+    public void validateSenderEqual(Long replyMemberId) {
+        if (Objects.equals(this.sender.getId(), replyMemberId)) {
+            throw new MessageReplySeriesException();
+        }
     }
 }

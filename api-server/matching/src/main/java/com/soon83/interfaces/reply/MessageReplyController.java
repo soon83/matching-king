@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/members/{memberId}/messages/{messageId}/replies")
+@RequestMapping("/api/v1/members/{memberId}/receive-messages/{receiveMessageId}/messages/{messageId}/replies")
 public class MessageReplyController {
 
     private final MessageApplication messageApplication;
@@ -24,12 +24,13 @@ public class MessageReplyController {
     @PostMapping
     public CommonResponse<MessageReplyDto.RegisterResponse> registerMessageReply(
             @PathVariable Long memberId,
+            @PathVariable Long receiveMessageId,
             @PathVariable Long messageId,
             @RequestBody @Valid MessageReplyDto.RegisterRequest request
     ) {
         log.debug("# registerMessageReply # request: {}", request);
         var createMessageReplyCommand = request.toCreateMessageReplyCommand(memberId, messageId);
-        Long messageReplyId = messageApplication.registerMessageReply(createMessageReplyCommand);
+        Long messageReplyId = messageApplication.registerMessageReply(receiveMessageId, createMessageReplyCommand);
         MessageReplyDto.RegisterResponse response = new MessageReplyDto.RegisterResponse(messageReplyId);
         return CommonResponse.success(response);
     }
