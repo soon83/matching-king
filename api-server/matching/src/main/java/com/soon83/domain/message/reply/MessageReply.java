@@ -24,10 +24,10 @@ public class MessageReply extends BaseEntity {
     private boolean isRead;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reply_member_id", foreignKey = @ForeignKey(name = "FK_messageReply_member"))
+    @JoinColumn(name = "reply_member_id", nullable = false, foreignKey = @ForeignKey(name = "FK_messageReply_member"))
     private Member replyMember;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "message_id", foreignKey = @ForeignKey(name = "FK_messageReply_message"))
+    @JoinColumn(name = "message_id", nullable = false, foreignKey = @ForeignKey(name = "FK_messageReply_message"))
     private Message message;
 
     @Builder

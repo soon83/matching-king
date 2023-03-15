@@ -16,7 +16,11 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table
+@Table(
+        indexes = {
+                @Index(columnList = "createdAt", name = "IX_createdAt"),
+        }
+)
 public class Message extends BaseEntity {
 
     @Id
@@ -26,7 +30,7 @@ public class Message extends BaseEntity {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sender_id", foreignKey = @ForeignKey(name = "FK_message_member"))
+    @JoinColumn(name = "sender_id", nullable = false, foreignKey = @ForeignKey(name = "FK_message_member"))
     private Member sender;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "message")
     private List<MessageReply> messageReplies = new ArrayList<>();

@@ -13,7 +13,15 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"message_notification_id"}, name = "UIX_messageNotificationId"),
+        },
+        indexes = {
+                @Index(columnList = "hiddenFromSender", name = "IX_hiddenFromSender"),
+                @Index(columnList = "hiddenFromTargetMember", name = "IX_hiddenFromTargetMember"),
+        }
+)
 public class ReceiveMessage extends BaseEntity {
 
     @Id
@@ -25,16 +33,16 @@ public class ReceiveMessage extends BaseEntity {
     private boolean hiddenFromTargetMember;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "target_member_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_member"))
+    @JoinColumn(name = "target_member_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_targetMember"))
     private Member targetMember;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sender_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_member"))
+    @JoinColumn(name = "sender_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_sender"))
     private Member sender;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "message_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_message"))
     private Message message;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "message_notification_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_receiveMessage_messageNotification"))
+    @JoinColumn(name = "message_notification_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_messageNotification"))
     private Notification notification;
 
     @Builder

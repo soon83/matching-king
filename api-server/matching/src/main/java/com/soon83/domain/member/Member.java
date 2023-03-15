@@ -14,7 +14,18 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"matching_condition_id"}, name = "UIX_matchingConditionId"),
+        },
+        indexes = {
+                @Index(columnList = "email", name = "IX_email"),
+                @Index(columnList = "age", name = "IX_age"),
+                @Index(columnList = "gender", name = "IX_gender"),
+                @Index(columnList = "mbti", name = "IX_mbti"),
+                @Index(columnList = "isActivated", name = "IX_isActivated"),
+        }
+)
 public class Member extends BaseEntity {
 
     @Id
@@ -44,10 +55,10 @@ public class Member extends BaseEntity {
     private boolean isActivated;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "limit_id", nullable = false, foreignKey = @ForeignKey(name = "FK_member_limit"))
+    @JoinColumn(name = "limit_id", nullable = false, foreignKey = @ForeignKey(name = "FK_memberLimit"))
     private Limit limit;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "matching_condition_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "FK_member_memberMatchingCondition"))
+    @JoinColumn(name = "matching_condition_id", nullable = false, foreignKey = @ForeignKey(name = "FK_member_memberMatchingCondition"))
     private MatchingCondition matchingCondition;
 
     @Builder
