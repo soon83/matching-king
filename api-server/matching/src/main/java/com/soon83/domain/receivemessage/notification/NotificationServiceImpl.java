@@ -21,7 +21,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Transactional
     public void changeToRead(Long memberId, Long receiveMessageId, Long messageNotificationId) {
         ReceiveMessage receiveMessage = receiveMessageReader.readById(receiveMessageId);
-        checkMyMessageNotification(memberId, messageNotificationId, receiveMessage);
+        checkMyReceiveMessage(memberId, receiveMessage);
         receiveMessage.getNotification().changeToRead(true);
     }
 
@@ -29,14 +29,17 @@ public class NotificationServiceImpl implements NotificationService {
     @Transactional
     public void removeNotification(Long memberId, Long receiveMessageId, Long messageNotificationId) {
         ReceiveMessage receiveMessage = receiveMessageReader.readById(receiveMessageId);
-        checkMyMessageNotification(memberId, messageNotificationId, receiveMessage);
+        checkMyReceiveMessageNotification(messageNotificationId, receiveMessage);
         receiveMessage.getNotification().delete();
     }
 
-    private static void checkMyMessageNotification(Long memberId, Long messageNotificationId, ReceiveMessage receiveMessage) {
+    private static void checkMyReceiveMessage(Long memberId, ReceiveMessage receiveMessage) {
         if (!Objects.equals(receiveMessage.getTargetMember().getId(), memberId)) {
             throw new NotMyReceiveMessageException();
         }
+    }
+
+    private static void checkMyReceiveMessageNotification(Long messageNotificationId, ReceiveMessage receiveMessage) {
         if (!Objects.equals(receiveMessage.getNotification().getId(), messageNotificationId)) {
             throw new NotMyReceiveMessageException();
         }

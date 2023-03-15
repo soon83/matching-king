@@ -7,6 +7,14 @@
 	},
 	"item": [
 		{
+			"name": "[공통코드]",
+			"item": []
+		},
+		{
+			"name": "[인증]",
+			"item": []
+		},
+		{
 			"name": "[회원]",
 			"item": [
 				{
@@ -207,7 +215,7 @@
 					"response": []
 				},
 				{
-					"name": "단건 수정 (쪽지 읽음/읽음표시)",
+					"name": "단건 수정 (쪽지 읽음 / 읽음표시)",
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -232,7 +240,7 @@
 					"response": []
 				},
 				{
-					"name": "단건 삭제 (쪽지 삭제)",
+					"name": "단건 삭제 (쪽지 알림 삭제)",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -276,6 +284,56 @@
 								"members",
 								"12",
 								"receive-messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "단건 삭제 (쪽지 삭제)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/members/12/receive-messages/426",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"members",
+								"12",
+								"receive-messages",
+								"426"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "[답장]",
+			"item": [
+				{
+					"name": "단건 등록 (쪽지 답장)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/members/12/receive-messages/12/replies",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"members",
+								"12",
+								"receive-messages",
+								"12",
+								"replies"
 							]
 						}
 					},

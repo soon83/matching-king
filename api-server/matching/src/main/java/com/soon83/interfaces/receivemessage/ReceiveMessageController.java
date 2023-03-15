@@ -5,10 +5,7 @@ import com.soon83.application.ReceiveMessageApplication;
 import com.soon83.domain.receivemessage.ReceiveMessageQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class ReceiveMessageController {
     private final ReceiveMessageApplication receiveMessageApplication;
 
     /**
-     * [쪽지함] 목록 조회
+     * [쪽지함] 메시지 목록 조회
      */
     @GetMapping
     public CommonResponse<List<ReceiveMessageDto.Main>> searchReceiveMessagesOfTargetMember(@PathVariable Long memberId) {
@@ -34,13 +31,22 @@ public class ReceiveMessageController {
     }
 
     /**
-     * [알림] 목록 조회
+     * [쪽지함] 단건 삭제
+     */
+    @DeleteMapping("{receiveMessageId}")
+    public CommonResponse<Void> removeReceiveMessage(@PathVariable Long memberId, @PathVariable Long receiveMessageId) {
+        log.debug("# searchReceiveMessagesOfTargetMember # memberId: {}, receiveMessageId: {}", memberId, receiveMessageId);
+        receiveMessageApplication.removeReceiveMessage(memberId, receiveMessageId);
+        return CommonResponse.success();
+    }
+
+    /**
+     * [쪽지함] 알림 목록 조회
      */
     @GetMapping("/notifications")
     public CommonResponse<List<ReceiveMessageDto.NotificationResponse>> searchNotificationsOfTargetMember(@PathVariable Long memberId) {
         log.debug("# searchNotificationsOfTargetMember # memberId: {}", memberId);
         List<ReceiveMessageQuery.Notification> notifications = receiveMessageApplication.searchNotificationsOfTargetMember(memberId);
-        log.debug("### notifications: {} 건", notifications.size());
         List<ReceiveMessageDto.NotificationResponse> response = notifications.stream()
                 .map(ReceiveMessageDto.NotificationResponse::new)
                 .toList();

@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -67,5 +69,13 @@ public class ReceiveMessage extends BaseEntity {
         }
         this.message = message;
         message.getReceiveMessages().add(this);
+    }
+
+    public void removeReceiveMessage() {
+        if (Objects.equals(sender.getId(), targetMember.getId())) {
+            hiddenFromSender = true;
+        } else {
+            hiddenFromTargetMember = true;
+        }
     }
 }

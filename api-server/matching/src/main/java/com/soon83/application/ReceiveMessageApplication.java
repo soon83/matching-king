@@ -22,4 +22,8 @@ public class ReceiveMessageApplication {
     public List<ReceiveMessageQuery.Main> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
         return receiveMessageService.searchReceiveMessagesOfTargetMember(targetMemberId);
     }
+
+    public void removeReceiveMessage(Long memberId, Long receiveMessageId) {
+        receiveMessageService.removeReceiveMessage(memberId, receiveMessageId);
+    }
 }
