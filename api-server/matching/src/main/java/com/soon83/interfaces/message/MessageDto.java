@@ -13,8 +13,7 @@ public class MessageDto {
     @Data
     public static class RegisterRequest {
         @NotBlank(message = "필수값")
-        @Size(max = 1000,
-                message = "1000 자 이내")
+        @Size(max = 1000, message = "1000 자 이내")
         private String messageContent;
         @NotNull(message = "필수값")
         private Long messageSenderId;
@@ -28,11 +27,11 @@ public class MessageDto {
     }
 
     @Data
-    public static class CreateResponse {
+    public static class RegisterResponse {
         private final Long messageId;
 
         @Builder
-        public CreateResponse(Long messageId) {
+        public RegisterResponse(Long messageId) {
             this.messageId = messageId;
         }
     }

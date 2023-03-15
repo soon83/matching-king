@@ -27,6 +27,10 @@ public enum ErrorCode {
     // 4. 받은 메시지 오류
     RECEIVE_MESSAGE_NOT_FOUND_ERROR(404, "RCV001", "존재하지 않는 수신 메시지입니다."),
     NOT_MY_RECEIVE_MESSAGE_ERROR(403, "RCV002", "메시지 수정권한이 없습니다."),
+
+    // 5. 메시지 답장 오류
+    MESSAGE_REPLY_NOT_FOUND_ERROR(404, "MRP001", "존재하지 않는 메시지입니다."),
+    MESSAGE_REPLY_SERIES_ERROR(404, "MRP002", "연속된 답장은 불가합니다."),
     ;
 
     private final int status;

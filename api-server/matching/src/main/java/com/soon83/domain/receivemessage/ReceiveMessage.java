@@ -63,19 +63,19 @@ public class ReceiveMessage extends BaseEntity {
         this.notification = Notification.builder().build();
     }
 
-    public void setMessage(Message message) {
-        if(this.message != null) {
-            this.message.getReceiveMessages().remove(this);
-        }
-        this.message = message;
-        message.getReceiveMessages().add(this);
-    }
-
     public void removeReceiveMessage() {
         if (Objects.equals(sender.getId(), targetMember.getId())) {
             hiddenFromSender = true;
         } else {
             hiddenFromTargetMember = true;
         }
+    }
+
+    public void setMessage(Message message) {
+        if(this.message != null) {
+            this.message.getReceiveMessages().remove(this);
+        }
+        this.message = message;
+        message.getReceiveMessages().add(this);
     }
 }
