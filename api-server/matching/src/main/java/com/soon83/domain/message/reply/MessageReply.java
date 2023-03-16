@@ -3,11 +3,14 @@ package com.soon83.domain.message.reply;
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.member.Member;
 import com.soon83.domain.message.Message;
+import com.soon83.exception.message.MessageReplySeriesException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.Objects;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -45,6 +48,12 @@ public class MessageReply extends BaseEntity {
         this.isRead = isRead;
         this.replyMember = replyMember;
         this.message = message;
+    }
+
+    public void validateReplyMemberEqual(Long replyMemberId) {
+        if (Objects.equals(this.replyMember.getId(), replyMemberId)) {
+            throw new MessageReplySeriesException();
+        }
     }
 
     public void setMessage(Message message) {

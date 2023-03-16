@@ -41,8 +41,12 @@ public class MessageServiceImpl implements MessageService {
         receiveMessage.validateTargetMemberIdEqual(createMessageReplyCommand.getReplyMemberId());
         receiveMessage.validateMessageIdEqual(createMessageReplyCommand.getMessageId());
         MessageReply messageReply = messageReader.findLatelyMessageReplyById(createMessageReplyCommand.getMessageId());
-        if (messageReply == null) receiveMessage.getMessage().validateSenderEqual(createMessageReplyCommand.getReplyMemberId());
-        MessageReply createdMessageReply = messageStore.create(createMessageReplyCommand.toEntity(messageReply.getReplyMember(), messageReply.getMessage()));
+        if (messageReply == null) {
+            receiveMessage.getMessage().validateSenderEqual(createMessageReplyCommand.getReplyMemberId());
+        } else {
+            messageReply.validateReplyMemberEqual(createMessageReplyCommand.getReplyMemberId());
+        }
+        MessageReply createdMessageReply = messageStore.create(createMessageReplyCommand.toEntity(receiveMessage.getTargetMember(), receiveMessage.getMessage()));
         return createdMessageReply.getId();
     }
 
