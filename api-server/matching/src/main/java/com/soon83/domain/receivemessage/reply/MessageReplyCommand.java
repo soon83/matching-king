@@ -1,7 +1,7 @@
-package com.soon83.domain.message.reply;
+package com.soon83.domain.receivemessage.reply;
 
 import com.soon83.domain.member.Member;
-import com.soon83.domain.message.Message;
+import com.soon83.domain.receivemessage.ReceiveMessage;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,24 +11,24 @@ public class MessageReplyCommand {
     public static class CreateReply {
         private String content;
         private Long replyMemberId;
-        private Long messageId;
 
         @Builder
         public CreateReply(
                 String content,
-                Long replyMemberId,
-                Long messageId
+                Long replyMemberId
         ) {
             this.content = content;
             this.replyMemberId = replyMemberId;
-            this.messageId = messageId;
         }
 
-        public MessageReply toEntity(Member replyMember, Message message) {
+        public MessageReply toEntity(
+                Member replyMember,
+                ReceiveMessage receiveMessage
+        ) {
             return MessageReply.builder()
                     .content(content)
                     .replyMember(replyMember)
-                    .message(message)
+                    .receiveMessage(receiveMessage)
                     .build();
         }
     }

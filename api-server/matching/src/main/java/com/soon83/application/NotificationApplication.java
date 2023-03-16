@@ -1,6 +1,7 @@
 package com.soon83.application;
 
-import com.soon83.domain.receivemessage.notification.NotificationService;
+import com.soon83.domain.receivemessage.ReceiveMessageService;
+import com.soon83.domain.receivemessage.notification.NotificationCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -10,13 +11,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class NotificationApplication {
 
-    private final NotificationService notificationService;
+    private final ReceiveMessageService receiveMessageService;
 
-    public void changeToRead(Long memberId, Long receiveMessageId, Long messageNotificationId) {
-        notificationService.changeToRead(memberId, receiveMessageId, messageNotificationId);
+    public void changeToReadNotification(Long receiveMessageId, NotificationCommand.UpdateToRead command) {
+        receiveMessageService.changeToReadNotification(receiveMessageId, command);
     }
 
-    public void removeNotification(Long memberId, Long receiveMessageId, Long messageNotificationId) {
-        notificationService.removeNotification(memberId, receiveMessageId, messageNotificationId);
+    public void removeNotification(Long receiveMessageId, NotificationCommand.DeleteNotification command) {
+        receiveMessageService.removeReceiveMessageNotification(receiveMessageId, command);
     }
 }

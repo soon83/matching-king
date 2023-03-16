@@ -15,6 +15,33 @@ public class ReceiveMessageRepositoryQuerydslImpl implements ReceiveMessageRepos
     private final JPAQueryFactory queryFactory;
 
     @Override
+    public List<ReceiveMessage> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
+        return queryFactory
+                .selectFrom(receiveMessage)
+                .join(receiveMessage.message).fetchJoin()
+                .join(receiveMessage.notification).fetchJoin()
+                .join(receiveMessage.sender).fetchJoin()
+                .where(
+                        eq(receiveMessage.targetMember.id, targetMemberId),
+                        (
+                                receiveMessage.sender.id.eq(receiveMessage.targetMember.id)
+                                        .and(receiveMessage.hiddenFromSender.isFalse())
+                                        .or(receiveMessage.sender.id.ne(receiveMessage.targetMember.id)
+                                                .and(receiveMessage.hiddenFromTargetMember.isFalse()))
+                        )
+                )
+                .fetch();
+        /**
+         * where target_member_id = 1
+         *   and (
+         *         (sender_id = 1 and hidden_from_sender = false)
+         *         or
+         *         (sender_id != 1 and hidden_from_target_member = false)
+         *   )
+         */
+    }
+
+    @Override
     public List<ReceiveMessage> searchNotificationsOfTargetMember(Long targetMemberId) {
         return queryFactory
                 .selectFrom(receiveMessage)
@@ -22,18 +49,8 @@ public class ReceiveMessageRepositoryQuerydslImpl implements ReceiveMessageRepos
                 .join(receiveMessage.sender).fetchJoin()
                 .where(
                         eq(receiveMessage.targetMember.id, targetMemberId),
+                        ne(receiveMessage.sender.id, targetMemberId),
                         eq(receiveMessage.notification.isDeleted, false))
-                .fetch();
-    }
-
-    @Override
-    public List<ReceiveMessage> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
-        return queryFactory
-                .selectFrom(receiveMessage)
-                .join(receiveMessage.message).fetchJoin()
-                .join(receiveMessage.notification).fetchJoin()
-                .join(receiveMessage.sender).fetchJoin()
-                .where(eq(receiveMessage.targetMember.id, targetMemberId))
                 .fetch();
     }
 }

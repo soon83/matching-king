@@ -1,8 +1,9 @@
 package com.soon83.application;
 
-import com.soon83.domain.message.reply.MessageReplyCommand;
+import com.soon83.domain.receivemessage.ReceiveMessageCommand;
 import com.soon83.domain.receivemessage.ReceiveMessageQuery;
 import com.soon83.domain.receivemessage.ReceiveMessageService;
+import com.soon83.domain.receivemessage.reply.MessageReplyCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,11 @@ public class ReceiveMessageApplication {
         return receiveMessageService.searchReceiveMessagesOfTargetMember(targetMemberId);
     }
 
-    public void removeReceiveMessage(Long memberId, Long receiveMessageId) {
-        receiveMessageService.removeReceiveMessage(memberId, receiveMessageId);
+    public void removeReceiveMessage(Long receiveMessageId, ReceiveMessageCommand.DeleteReceiveMessage command) {
+        receiveMessageService.removeReceiveMessage(receiveMessageId, command);
+    }
+
+    public Long registerMessageReply(Long receiveMessageId, MessageReplyCommand.CreateReply command) {
+        return receiveMessageService.registerMessageReply(receiveMessageId, command);
     }
 }

@@ -1,12 +1,32 @@
 package com.soon83.interfaces.receivemessage;
 
+import com.soon83.domain.receivemessage.ReceiveMessageCommand;
 import com.soon83.domain.receivemessage.ReceiveMessageQuery;
 import com.soon83.interfaces.member.MemberDto;
 import com.soon83.interfaces.message.MessageDto;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
 public class ReceiveMessageDto {
+
+    @Data
+    public static class SearchCondition {
+        @NotNull(message = "필수값")
+        private Long targetMemberId;
+    }
+
+    @Data
+    public static class RemoveRequest {
+        @NotNull(message = "필수값")
+        private Long targetMemberId;
+
+        public ReceiveMessageCommand.DeleteReceiveMessage toDeleteReceiveMessageCommand() {
+            return ReceiveMessageCommand.DeleteReceiveMessage.builder()
+                    .targetMemberId(targetMemberId)
+                    .build();
+        }
+    }
 
     @Data
     public static class NotificationResponse {

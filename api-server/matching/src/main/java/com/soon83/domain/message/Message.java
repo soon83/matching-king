@@ -2,7 +2,6 @@ package com.soon83.domain.message;
 
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.member.Member;
-import com.soon83.domain.message.reply.MessageReply;
 import com.soon83.domain.receivemessage.ReceiveMessage;
 import com.soon83.exception.message.MessageReplySeriesException;
 import jakarta.persistence.*;
@@ -35,8 +34,6 @@ public class Message extends BaseEntity {
     @JoinColumn(name = "sender_id", nullable = false, foreignKey = @ForeignKey(name = "FK_message_member"))
     private Member sender;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "message")
-    private List<MessageReply> messageReplies = new ArrayList<>();
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "message")
     private List<ReceiveMessage> receiveMessages = new ArrayList<>();
 
     @Builder
@@ -51,7 +48,7 @@ public class Message extends BaseEntity {
         this.sender = sender;
     }
 
-    public void validateSenderEqual(Long replyMemberId) {
+    public void validateMessageBy(Long replyMemberId) {
         if (Objects.equals(this.sender.getId(), replyMemberId)) {
             throw new MessageReplySeriesException();
         }

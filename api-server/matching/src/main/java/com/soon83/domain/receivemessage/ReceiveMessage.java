@@ -3,6 +3,7 @@ package com.soon83.domain.receivemessage;
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.member.Member;
 import com.soon83.domain.message.Message;
+import com.soon83.domain.receivemessage.reply.MessageReply;
 import com.soon83.domain.receivemessage.notification.Notification;
 import com.soon83.exception.receivemessage.NotMyReceiveMessageException;
 import jakarta.persistence.*;
@@ -11,6 +12,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -47,6 +50,8 @@ public class ReceiveMessage extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "message_notification_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_messageNotification"))
     private Notification notification;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "receiveMessage")
+    private List<MessageReply> messageReplies = new ArrayList<>();
 
     @Builder
     public ReceiveMessage(
@@ -64,12 +69,25 @@ public class ReceiveMessage extends BaseEntity {
         this.notification = Notification.builder().build();
     }
 
-    public void removeReceiveMessage() {
+    public void deleteReceiveMessage() {
         if (Objects.equals(sender.getId(), targetMember.getId())) {
             hiddenFromSender = true;
         } else {
             hiddenFromTargetMember = true;
         }
+    }
+
+    public void deleteNotification() {
+        this.notification.delete();
+    }
+
+    public void changeToReadNotification() {
+        this.notification.toRead();
+    }
+
+    public void validateReceiveMessageByTargetMember(Long replyMemberId, Long messageNotificationId) {
+        validateTargetMemberIdEqual(replyMemberId);
+        validateNotificationIdEqual(messageNotificationId);
     }
 
     public void validateTargetMemberIdEqual(Long replyMemberId) {
@@ -78,10 +96,20 @@ public class ReceiveMessage extends BaseEntity {
         }
     }
 
+    public void validateNotificationIdEqual(Long messageNotificationId) {
+        if (!Objects.equals(this.notification.getId(), messageNotificationId)) {
+            throw new NotMyReceiveMessageException();
+        }
+    }
+
     public void validateMessageIdEqual(Long messageId) {
         if (!Objects.equals(this.message.getId(), messageId)) {
             throw new NotMyReceiveMessageException();
         }
+    }
+
+    public void validateMessageBy(Long replyMemberId) {
+        this.message.validateMessageBy(replyMemberId);
     }
 
     public void setMessage(Message message) {

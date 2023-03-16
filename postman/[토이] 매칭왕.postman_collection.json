@@ -198,17 +198,21 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/v1/members/5/receive-messages/notifications",
+							"raw": "{{url}}/api/v1/receive-messages/notifications?targetMemberId=28",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"members",
-								"5",
 								"receive-messages",
 								"notifications"
+							],
+							"query": [
+								{
+									"key": "targetMemberId",
+									"value": "28"
+								}
 							]
 						}
 					},
@@ -219,21 +223,28 @@
 					"request": {
 						"method": "PATCH",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"targetMemberId\": 63\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url}}/api/v1/members/4/receive-messages/224/notifications/224/change-to-read",
+							"raw": "{{url}}/api/v1/receive-messages/10/notifications/10/hide",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"members",
-								"4",
 								"receive-messages",
-								"224",
+								"10",
 								"notifications",
-								"224",
-								"change-to-read"
+								"10",
+								"hide"
 							]
 						}
 					},
@@ -244,20 +255,27 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"targetMemberId\": 63\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url}}/api/v1/members/4/receive-messages/224/notifications/224",
+							"raw": "{{url}}/api/v1/receive-messages/10/notifications/10",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"members",
-								"4",
 								"receive-messages",
-								"224",
+								"10",
 								"notifications",
-								"224"
+								"10"
 							]
 						}
 					},
@@ -274,16 +292,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/v1/members/56/receive-messages",
+							"raw": "{{url}}/api/v1/receive-messages?targetMemberId=3",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"members",
-								"56",
 								"receive-messages"
+							],
+							"query": [
+								{
+									"key": "targetMemberId",
+									"value": "3"
+								}
 							]
 						}
 					},
@@ -294,18 +316,25 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"targetMemberId\": 20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url}}/api/v1/members/12/receive-messages/426",
+							"raw": "{{url}}/api/v1/receive-messages/108",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"members",
-								"12",
 								"receive-messages",
-								"426"
+								"108"
 							]
 						}
 					},
@@ -317,13 +346,13 @@
 			"name": "[쪽지 답장]",
 			"item": [
 				{
-					"name": "단건 등록 (쪽지 답장)",
+					"name": "단건 등록 (수신된 쪽지에 답장)",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"messageReplyContent\": \"{{$randomLoremSentence}}\"\n}",
+							"raw": "{\n    \"messageReplyContent\": \"{{$randomLoremSentence}}\",\n    \"replyMemberId\": 3\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -331,19 +360,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/members/56/receive-messages/6/messages/1/replies",
+							"raw": "{{url}}/api/v1/receive-messages/2/replies",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"members",
-								"56",
 								"receive-messages",
-								"6",
-								"messages",
-								"1",
+								"2",
 								"replies"
 							]
 						}

@@ -1,8 +1,7 @@
 package com.soon83.interfaces.reply;
 
 import com.soon83.CommonResponse;
-import com.soon83.application.MessageApplication;
-import com.soon83.interfaces.message.MessageDto;
+import com.soon83.application.ReceiveMessageApplication;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,25 +11,24 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/members/{memberId}/receive-messages/{receiveMessageId}/messages/{messageId}/replies")
+@RequestMapping("/api/v1/receive-messages/{receiveMessageId}/replies")
 public class MessageReplyController {
 
-    private final MessageApplication messageApplication;
+    private final ReceiveMessageApplication receiveMessageApplication;
 
     /**
-     * [답장] 단건 등록
+     * [쪽지 답장] 단건 등록
+     * - 수신된 쪽지에 답장
      */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public CommonResponse<MessageReplyDto.RegisterResponse> registerMessageReply(
-            @PathVariable Long memberId,
             @PathVariable Long receiveMessageId,
-            @PathVariable Long messageId,
             @RequestBody @Valid MessageReplyDto.RegisterRequest request
     ) {
         log.debug("# registerMessageReply # request: {}", request);
-        var createMessageReplyCommand = request.toCreateMessageReplyCommand(memberId, messageId);
-        Long messageReplyId = messageApplication.registerMessageReply(receiveMessageId, createMessageReplyCommand);
+        var command = request.toCreateMessageReplyCommand();
+        Long messageReplyId = receiveMessageApplication.registerMessageReply(receiveMessageId, command);
         MessageReplyDto.RegisterResponse response = new MessageReplyDto.RegisterResponse(messageReplyId);
         return CommonResponse.success(response);
     }

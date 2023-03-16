@@ -1,12 +1,12 @@
-package com.soon83.infrastructure.message.reply;
+package com.soon83.infrastructure.receivemessage.reply;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.soon83.domain.message.reply.MessageReply;
+import com.soon83.domain.receivemessage.reply.MessageReply;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
-import static com.soon83.domain.message.reply.QMessageReply.messageReply;
+import static com.soon83.domain.receivemessage.reply.QMessageReply.messageReply;
 import static com.soon83.infrastructure.CustomExpressionUtil.eq;
 
 @RequiredArgsConstructor
@@ -15,11 +15,11 @@ public class MessageReplyRepositoryQuerydslImpl implements MessageReplyRepositor
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public Optional<MessageReply> findLatelyMessageReplyById(Long messageId) {
+    public Optional<MessageReply> findLatelyMessageReplyByMessageId(Long messageId) {
         return Optional.ofNullable(queryFactory
                 .selectFrom(messageReply)
-                .where(eq(messageReply.message.id, messageId))
-                .orderBy(messageReply.message.id.desc())
+                .where(eq(messageReply.receiveMessage.message.id, messageId))
+                .orderBy(messageReply.receiveMessage.message.id.desc())
                 .fetchFirst());
     }
 }

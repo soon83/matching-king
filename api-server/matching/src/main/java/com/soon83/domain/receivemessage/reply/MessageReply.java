@@ -1,8 +1,8 @@
-package com.soon83.domain.message.reply;
+package com.soon83.domain.receivemessage.reply;
 
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.member.Member;
-import com.soon83.domain.message.Message;
+import com.soon83.domain.receivemessage.ReceiveMessage;
 import com.soon83.exception.message.MessageReplySeriesException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -30,24 +30,24 @@ public class MessageReply extends BaseEntity {
     @JoinColumn(name = "reply_member_id", nullable = false, foreignKey = @ForeignKey(name = "FK_messageReply_member"))
     private Member replyMember;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "message_id", nullable = false, foreignKey = @ForeignKey(name = "FK_messageReply_message"))
-    private Message message;
+    @JoinColumn(name = "receive_message_id", nullable = false, foreignKey = @ForeignKey(name = "FK_messageReply_receiveMessage"))
+    private ReceiveMessage receiveMessage;
 
     @Builder
     public MessageReply(
             String content,
             boolean isRead,
             Member replyMember,
-            Message message
+            ReceiveMessage receiveMessage
     ) {
         if (content == null) throw new IllegalArgumentException("content");
         if (replyMember == null) throw new IllegalArgumentException("replyMember");
-        if (message == null) throw new IllegalArgumentException("message");
+        if (receiveMessage == null) throw new IllegalArgumentException("receiveMessage");
 
         this.content = content;
         this.isRead = isRead;
         this.replyMember = replyMember;
-        this.message = message;
+        setReceiveMessage(receiveMessage); //this.receiveMessage = receiveMessage;
     }
 
     public void validateReplyMemberEqual(Long replyMemberId) {
@@ -56,11 +56,11 @@ public class MessageReply extends BaseEntity {
         }
     }
 
-    public void setMessage(Message message) {
-        if(this.message != null) {
-            this.message.getMessageReplies().remove(this);
+    public void setReceiveMessage(ReceiveMessage receiveMessage) {
+        if(this.receiveMessage != null) {
+            this.receiveMessage.getMessageReplies().remove(this);
         }
-        this.message = message;
-        message.getMessageReplies().add(this);
+        this.receiveMessage = receiveMessage;
+        receiveMessage.getMessageReplies().add(this);
     }
 }

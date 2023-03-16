@@ -17,14 +17,14 @@ public class MessageController {
     private final MessageApplication messageApplication;
 
     /**
-     * [쪽지] 단건 등록
+     * [쪽지 보내기] 단건 등록
      */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public CommonResponse<MessageDto.RegisterResponse> registerMessage(@RequestBody @Valid MessageDto.RegisterRequest request) {
         log.debug("# registerMessage # request: {}", request);
-        var createMessageCommand = request.toCreateMessageCommand();
-        Long messageId = messageApplication.registerMessage(createMessageCommand);
+        var command = request.toCreateMessageCommand();
+        Long messageId = messageApplication.registerMessage(command);
         MessageDto.RegisterResponse response = new MessageDto.RegisterResponse(messageId);
         return CommonResponse.success(response);
     }
