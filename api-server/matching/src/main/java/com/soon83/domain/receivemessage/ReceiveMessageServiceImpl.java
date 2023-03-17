@@ -3,6 +3,7 @@ package com.soon83.domain.receivemessage;
 import com.soon83.domain.receivemessage.notification.NotificationCommand;
 import com.soon83.domain.receivemessage.reply.MessageReply;
 import com.soon83.domain.receivemessage.reply.MessageReplyCommand;
+import com.soon83.domain.receivemessage.reply.MessageReplyQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,11 @@ public class ReceiveMessageServiceImpl implements ReceiveMessageService {
     @Override
     @Transactional(readOnly = true)
     public List<ReceiveMessageQuery.Main> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
-        return receiveMessageReader.searchReceiveMessagesOfTargetMember(targetMemberId).stream()
-                .map(ReceiveMessageQuery.Main::new)
+        List<ReceiveMessage> receiveMessages = receiveMessageReader.searchReceiveMessagesOfTargetMember(targetMemberId);
+        return receiveMessages.stream()
+                .map(rm -> new ReceiveMessageQuery.Main(rm, rm.getMessageReplies().stream()
+                        .map(MessageReplyQuery.Main::new)
+                        .toList()))
                 .toList();
     }
 

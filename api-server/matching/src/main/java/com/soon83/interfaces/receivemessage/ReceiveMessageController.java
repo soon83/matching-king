@@ -59,7 +59,7 @@ public class ReceiveMessageController {
     }
 
     /**
-     * [받은 쪽지함] 목록 조회
+     * [받은 쪽지함] 목록 조회 + 답장 목록 조회
      * - 내 쪽지함 보기
      */
     @GetMapping
@@ -67,7 +67,9 @@ public class ReceiveMessageController {
         log.debug("# searchReceiveMessagesOfTargetMember # request: {}", request);
         List<ReceiveMessageQuery.Main> receiveMessagesOfMember = receiveMessageApplication.searchReceiveMessagesOfTargetMember(request.getTargetMemberId());
         List<ReceiveMessageDto.Main> response = receiveMessagesOfMember.stream()
-                .map(ReceiveMessageDto.Main::new)
+                .map(rm -> new ReceiveMessageDto.Main(rm, rm.getMessageReplies().stream()
+                        .map(new ReceiveMessageQuery)
+                        .toList()))
                 .toList();
         return CommonResponse.success(response);
     }
