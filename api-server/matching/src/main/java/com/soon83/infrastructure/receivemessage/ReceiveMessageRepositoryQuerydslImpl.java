@@ -22,21 +22,18 @@ public class ReceiveMessageRepositoryQuerydslImpl implements ReceiveMessageRepos
                 .join(receiveMessage.notification).fetchJoin()
                 .join(receiveMessage.sender).fetchJoin()
                 .where(
-                        eq(receiveMessage.targetMember.id, targetMemberId),
-                        (
-                                receiveMessage.sender.id.eq(receiveMessage.targetMember.id)
-                                        .and(receiveMessage.hiddenFromSender.isFalse())
-                                        .or(receiveMessage.sender.id.ne(receiveMessage.targetMember.id)
-                                                .and(receiveMessage.hiddenFromTargetMember.isFalse()))
+                        eq(receiveMessage.targetMember.id, targetMemberId), (
+                                receiveMessage.sender.id.eq(receiveMessage.targetMember.id).and(receiveMessage.hiddenFromSender.isFalse())
+                                        .or(receiveMessage.sender.id.ne(receiveMessage.targetMember.id).and(receiveMessage.hiddenFromTargetMember.isFalse()))
                         )
                 )
                 .fetch();
         /**
          * where target_member_id = 1
          *   and (
-         *         (sender_id = 1 and hidden_from_sender = false)
+         *         sender_id = 1 and hidden_from_sender = false
          *         or
-         *         (sender_id != 1 and hidden_from_target_member = false)
+         *         sender_id != 1 and hidden_from_target_member = false
          *   )
          */
     }

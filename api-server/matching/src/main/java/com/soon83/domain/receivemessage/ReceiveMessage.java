@@ -3,8 +3,8 @@ package com.soon83.domain.receivemessage;
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.member.Member;
 import com.soon83.domain.message.Message;
-import com.soon83.domain.receivemessage.reply.MessageReply;
 import com.soon83.domain.receivemessage.notification.Notification;
+import com.soon83.domain.receivemessage.reply.MessageReply;
 import com.soon83.exception.receivemessage.NotMyReceiveMessageException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -98,12 +98,6 @@ public class ReceiveMessage extends BaseEntity {
 
     public void validateNotificationIdEqual(Long messageNotificationId) {
         if (!Objects.equals(this.notification.getId(), messageNotificationId)) {
-            throw new NotMyReceiveMessageException();
-        }
-    }
-
-    public void validateMessageIdEqual(Long messageId) {
-        if (!Objects.equals(this.message.getId(), messageId)) {
             throw new NotMyReceiveMessageException();
         }
     }

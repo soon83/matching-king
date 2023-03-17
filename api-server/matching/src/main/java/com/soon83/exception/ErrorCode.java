@@ -30,7 +30,7 @@ public enum ErrorCode {
 
     // 5. 메시지 답장 오류
     MESSAGE_REPLY_NOT_FOUND_ERROR(404, "MRP001", "존재하지 않는 메시지입니다."),
-    MESSAGE_REPLY_SERIES_ERROR(404, "MRP002", "연속된 답장은 불가합니다."),
+    MESSAGE_REPLY_SERIES_ERROR(404, "MRP002", "상대방의 쪽지에만 답장이 가능합니다."),
     ;
 
     private final int status;

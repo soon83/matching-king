@@ -40,6 +40,7 @@ public class ReceiveMessageController {
      */
     @PatchMapping("/{receiveMessageId}/notifications/{messageNotificationId}/hide")
     public CommonResponse<Void> changeToReadNotification(@PathVariable Long receiveMessageId, @PathVariable Long messageNotificationId, @RequestBody @Valid NotificationDto.ChangeReadRequest request) {
+        log.debug("# changeToReadNotification # request: {}", request);
         var command = request.toUpdateNotificationCommand(messageNotificationId);
         notificationApplication.changeToReadNotification(receiveMessageId, command);
         return CommonResponse.success();
@@ -51,6 +52,7 @@ public class ReceiveMessageController {
      */
     @DeleteMapping("/{receiveMessageId}/notifications/{messageNotificationId}")
     public CommonResponse<Void> removeNotification(@PathVariable Long receiveMessageId, @PathVariable Long messageNotificationId, @RequestBody @Valid NotificationDto.RemoveRequest request) {
+        log.debug("# removeNotification # request: {}", request);
         var command = request.toDeleteNotificationCommand(messageNotificationId);
         notificationApplication.removeNotification(receiveMessageId, command);
         return CommonResponse.success();
