@@ -51,6 +51,7 @@ public class NotificationDto {
             this.isRead = isRead;
             this.isDeleted = isDeleted;
         }
+
         public Main(NotificationQuery.Main query) {
             this.messageNotificationId = query.getId();
             this.isRead = query.isRead();

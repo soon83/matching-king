@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 public class ReceiveMessageDto {
 
     @Data
@@ -89,6 +91,7 @@ public class ReceiveMessageDto {
         private final Long targetMemberId;
         private final MessageDto.Main message;
         private final NotificationDto.Main messageNotification;
+        private final List<MessageReplyDto.Main> messageReplies;
 
         @Builder
         public Main(
@@ -98,7 +101,8 @@ public class ReceiveMessageDto {
                 MemberDto.Main sender,
                 Long targetMemberId,
                 MessageDto.Main message,
-                NotificationDto.Main messageNotification
+                NotificationDto.Main messageNotification,
+                List<MessageReplyDto.Main> messageReplies
         ) {
             this.receiveMessageId = receiveMessageId;
             this.hiddenFromSender = hiddenFromSender;
@@ -107,9 +111,10 @@ public class ReceiveMessageDto {
             this.targetMemberId = targetMemberId;
             this.message = message;
             this.messageNotification = messageNotification;
+            this.messageReplies = messageReplies;
         }
 
-        public Main(ReceiveMessageQuery.Main query) {
+        public Main(ReceiveMessageQuery.Main query, List<MessageReplyDto.Main> messageReplies) {
             this.receiveMessageId = query.getId();
             this.hiddenFromSender = query.isHiddenFromSender();
             this.hiddenFromTargetMember = query.isHiddenFromTargetMember();
@@ -117,6 +122,7 @@ public class ReceiveMessageDto {
             this.targetMemberId = query.getTargetMemberId();
             this.message = new MessageDto.Main(query.getMessage());
             this.messageNotification = new NotificationDto.Main(query.getMessageNotification());
+            this.messageReplies = messageReplies;
         }
 
         public String getDescription() {

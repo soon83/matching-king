@@ -68,7 +68,7 @@ public class ReceiveMessageController {
         List<ReceiveMessageQuery.Main> receiveMessagesOfMember = receiveMessageApplication.searchReceiveMessagesOfTargetMember(request.getTargetMemberId());
         List<ReceiveMessageDto.Main> response = receiveMessagesOfMember.stream()
                 .map(rm -> new ReceiveMessageDto.Main(rm, rm.getMessageReplies().stream()
-                        .map(new ReceiveMessageQuery)
+                        .map(MessageReplyDto.Main::new)
                         .toList()))
                 .toList();
         return CommonResponse.success(response);
