@@ -198,7 +198,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/v1/receive-messages/notifications?targetMemberId=28",
+							"raw": "{{url}}/api/v1/receive-messages/notifications?targetMemberId=5",
 							"host": [
 								"{{url}}"
 							],
@@ -211,7 +211,7 @@
 							"query": [
 								{
 									"key": "targetMemberId",
-									"value": "28"
+									"value": "5"
 								}
 							]
 						}
@@ -292,7 +292,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/v1/receive-messages?targetMemberId=3",
+							"raw": "{{url}}/api/v1/receive-messages?targetMemberId=5",
 							"host": [
 								"{{url}}"
 							],
@@ -304,7 +304,7 @@
 							"query": [
 								{
 									"key": "targetMemberId",
-									"value": "3"
+									"value": "5"
 								}
 							]
 						}
@@ -352,7 +352,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"messageReplyContent\": \"{{$randomLoremSentence}}\",\n    \"replyMemberId\": 3\n}",
+							"raw": "{\n    \"messageReplyContent\": \"{{$randomLoremSentence}}\",\n    \"replyMemberId\": 5\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -360,7 +360,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/receive-messages/2/replies",
+							"raw": "{{url}}/api/v1/receive-messages/4/replies",
 							"host": [
 								"{{url}}"
 							],
@@ -368,7 +368,7 @@
 								"api",
 								"v1",
 								"receive-messages",
-								"2",
+								"4",
 								"replies"
 							]
 						}
