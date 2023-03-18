@@ -1,5 +1,6 @@
-package com.soon83.domain;
+package com.soon83.domain.auth;
 
+import com.soon83.domain.member.Member;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -25,6 +26,10 @@ public class AuthQuery {
                     authorities(authUser.getMemberRole().name())
             );
             this.authUser = authUser;
+        }
+
+        public AuthUser getAuthUser() {
+            return new AuthUser(authUser);
         }
 
         private static void addAuthority(List<GrantedAuthority> authorities, String role) {
@@ -60,48 +65,19 @@ public class AuthQuery {
         private Long memberId;
         private String memberEmail;
         private String memberPassword;
-        private Role memberRole;
+        private Member.Role memberRole;
 
         @Builder
         public Info(
                 Long memberId,
                 String memberEmail,
                 String memberPassword,
-                Role memberRole
+                Member.Role memberRole
         ) {
             this.memberId = memberId;
             this.memberEmail = memberEmail;
             this.memberPassword = memberPassword;
             this.memberRole = memberRole;
         }
-    }
-
-    @Data
-    public static class Main {
-        private final Long memberId;
-        private final String memberEmail;
-        private final Role memberRole;
-
-        @Builder
-        public Main(
-                Long memberId,
-                String memberEmail,
-                Role memberRole
-        ) {
-            this.memberId = memberId;
-            this.memberEmail = memberEmail;
-            this.memberRole = memberRole;
-        }
-
-        public Main(Info info) {
-            this.memberId = info.getMemberId();
-            this.memberEmail = info.getMemberEmail();
-            this.memberRole = info.getMemberRole();
-        }
-    }
-
-    @Getter
-    public enum Role {
-        ADMIN, MANAGER, MEMBER
     }
 }

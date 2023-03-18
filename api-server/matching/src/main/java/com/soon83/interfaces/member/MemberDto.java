@@ -17,6 +17,8 @@ public class MemberDto {
         @Email(message = "올바른 이메일 형식을 입력해주세요")
         private String memberEmail;
         @NotBlank(message = "필수값")
+        private String memberPassword;
+        @NotBlank(message = "필수값")
         private String memberNickname;
         @NotNull(message = "필수값")
         @Min(value = 5, message = "최소 5 이상")
@@ -33,6 +35,7 @@ public class MemberDto {
         public MemberCommand.CreateMember toCreateMemberCommand() {
             return MemberCommand.CreateMember.builder()
                     .email(memberEmail)
+                    .password(memberPassword)
                     .nickname(memberNickname)
                     .age(memberAge)
                     .gender(memberGender)

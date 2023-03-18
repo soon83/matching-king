@@ -2,6 +2,7 @@ package com.soon83.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soon83.CommonResponse;
+import com.soon83.JwtUtil;
 import com.soon83.domain.AuthQuery;
 import com.soon83.exception.auth.AuthMemberNotFoundException;
 import com.soon83.exception.auth.AuthMethodNotAllowedException;
@@ -23,10 +24,10 @@ import java.nio.charset.StandardCharsets;
 import static com.soon83.config.SecurityConfig.GET_AUTH_TOKEN_URL;
 
 @Slf4j
-public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
+public class AuthFilter extends UsernamePasswordAuthenticationFilter {
     private final ObjectMapper objectMapper;
 
-    public JwtAuthFilter(AuthenticationManager authenticationManager, ObjectMapper objectMapper) {
+    public AuthFilter(AuthenticationManager authenticationManager, ObjectMapper objectMapper) {
         super(authenticationManager);
         setFilterProcessesUrl(GET_AUTH_TOKEN_URL);
         this.objectMapper = objectMapper;

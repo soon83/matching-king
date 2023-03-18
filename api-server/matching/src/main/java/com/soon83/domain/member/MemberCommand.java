@@ -10,6 +10,7 @@ public class MemberCommand {
     @Data
     public static class CreateMember {
         private String email;
+        private String password;
         private String nickname;
         private int age;
         private Member.Gender gender;
@@ -20,12 +21,14 @@ public class MemberCommand {
         @Builder
         public CreateMember(
                 String email,
+                String password,
                 String nickname,
                 int age,
                 Member.Gender gender,
                 Member.Mbti mbti
         ) {
             this.email = email;
+            this.password = password;
             this.nickname = nickname;
             this.age = age;
             this.gender = gender;
@@ -34,10 +37,12 @@ public class MemberCommand {
 
         public Member toEntity(
                 Limit limit,
-                MatchingCondition matchingCondition
+                MatchingCondition matchingCondition,
+                String encodedPassword
         ) {
             return Member.builder()
                     .email(email)
+                    .password(encodedPassword)
                     .nickname(nickname)
                     .age(age)
                     .gender(gender)

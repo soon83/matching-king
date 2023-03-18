@@ -5,6 +5,7 @@ import com.soon83.domain.limit.LimitReader;
 import com.soon83.domain.member.matchingcondition.MatchingConditionCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
+    private final PasswordEncoder passwordEncoder;
     private final LimitReader limitReader;
     private final MemberReader memberReader;
     private final MemberStore memberStore;
@@ -27,7 +29,8 @@ public class MemberServiceImpl implements MemberService {
     ) {
         memberReader.checkAlreadyExistsEmail(createMemberCommand.getEmail());
         Limit limit = limitReader.readByMemberType(createMemberCommand.getType());
-        Member member = createMemberCommand.toEntity(limit, createMatchingConditionCommand.toEntity());
+        String encodedPassword = passwordEncoder.encode(createMemberCommand.getPassword());
+        Member member = createMemberCommand.toEntity(limit, createMatchingConditionCommand.toEntity(), encodedPassword);
         Member createdMember = memberStore.create(member);
         return createdMember.getId();
     }

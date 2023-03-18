@@ -2,11 +2,13 @@ package com.soon83.interfaces.member;
 
 import com.soon83.CommonResponse;
 import com.soon83.application.MemberApplication;
+import com.soon83.domain.auth.AuthUser;
 import com.soon83.domain.member.MemberQuery;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,7 +53,8 @@ public class MemberController {
      * [회원] 단건 조회
      */
     @GetMapping("/{memberId}")
-    public CommonResponse<MemberDto.Main> searchMember(@PathVariable Long memberId) {
+    public CommonResponse<MemberDto.Main> searchMember(@PathVariable Long memberId, @AuthenticationPrincipal AuthUser authUser) {
+        log.debug("# searchMember # authUser: {}", authUser);
         log.debug("# searchMember # memberId: {}", memberId);
         MemberQuery.Main member = memberApplication.searchMember(memberId);
         MemberDto.Main response = new MemberDto.Main(member);

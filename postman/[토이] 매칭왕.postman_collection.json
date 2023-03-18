@@ -7,11 +7,93 @@
 	},
 	"item": [
 		{
-			"name": "[공통코드]",
-			"item": []
+			"name": "[인증]",
+			"item": [
+				{
+					"name": "토큰 발급",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log('0. responseHeaders: ', responseHeaders);",
+									"",
+									"if (!responseHeaders.access_token) {",
+									"    pm.collectionVariables.set(\"accessToken\", \"\");",
+									"} else {",
+									"    pm.collectionVariables.set(\"accessToken\", responseHeaders.access_token);",
+									"    console.log('1. accessToken: ', responseHeaders.access_token);",
+									"}",
+									"",
+									"if (!responseHeaders.refresh_token) {",
+									"    pm.collectionVariables.set(\"refreshToken\", \"\");",
+									"} else {",
+									"    pm.collectionVariables.set(\"refreshToken\", responseHeaders.refresh_token);",
+									"    console.log('2. refreshToken: ', responseHeaders.refresh_token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"memberEmail\": \"2601948@gmail.com\",\n    \"memberPassword\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/auth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "토큰 갱신 - 귀찮,, 보류",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"memberEmail\": \"admin@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/refresh",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"name": "[인증]",
+			"name": "[공통코드]",
 			"item": []
 		},
 		{
@@ -24,7 +106,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"memberEmail\": \"{{$randomEmail}}\",\n    \"memberNickname\": \"{{$randomFirstName}}\",\n    \"memberGender\": \"{{randomArrayNumber0_1}}\",\n    \"memberMbti\": \"{{randomArrayNumber0_15}}\",\n    \"memberAge\": {{randomNumberLength2}},\n    \"memberMatchingCondition\": {\n        \"minAge\": 25,\n        \"maxAge\": 50,\n        \"gender\": {\n            \"male\": true,\n            \"female\": true\n        },\n        \"mbti\": {\n            \"esfj\": false,\n            \"esfp\": false,\n            \"enfj\": true,\n            \"enfp\": false,\n            \"estj\": false,\n            \"estp\": false,\n            \"entj\": false,\n            \"entp\": true,\n            \"isfj\": false,\n            \"isfp\": false,\n            \"infj\": false,\n            \"infp\": false,\n            \"istj\": false,\n            \"istp\": false,\n            \"intj\": true,\n            \"intp\": true\n        }\n    }\n}",
+							"raw": "{\n    \"memberEmail\": \"{{$randomEmail}}\",\n    \"memberPassword\": \"1234\",\n    \"memberNickname\": \"{{$randomFirstName}}\",\n    \"memberGender\": \"{{randomArrayNumber0_1}}\",\n    \"memberMbti\": \"{{randomArrayNumber0_15}}\",\n    \"memberAge\": {{randomNumberLength2}},\n    \"memberMatchingCondition\": {\n        \"minAge\": 25,\n        \"maxAge\": 50,\n        \"gender\": {\n            \"male\": true,\n            \"female\": true\n        },\n        \"mbti\": {\n            \"esfj\": false,\n            \"esfp\": false,\n            \"enfj\": true,\n            \"enfp\": false,\n            \"estj\": false,\n            \"estp\": false,\n            \"entj\": false,\n            \"entp\": true,\n            \"isfj\": false,\n            \"isfp\": false,\n            \"infj\": false,\n            \"infp\": false,\n            \"istj\": false,\n            \"istp\": false,\n            \"intj\": true,\n            \"intp\": true\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -153,6 +235,36 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{accessToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -432,6 +544,16 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "refreshToken",
+			"value": ""
 		}
 	]
 }

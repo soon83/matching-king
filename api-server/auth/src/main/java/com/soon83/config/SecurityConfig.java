@@ -3,7 +3,7 @@ package com.soon83.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soon83.domain.AuthService;
 import com.soon83.exception.ExceptionHandlerFilter;
-import com.soon83.jwt.JwtAuthFilter;
+import com.soon83.jwt.AuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +36,8 @@ public class SecurityConfig {
                 .passwordEncoder(passwordEncoder)
                 .and()
                 .build();
-        var loginFilter = new JwtAuthFilter(authenticationManager, objectMapper);
+        AuthFilter authFilter = new AuthFilter(authenticationManager, objectMapper);
+        ExceptionHandlerFilter exceptionHandlerFilter = new ExceptionHandlerFilter(objectMapper);
 
         http
                 .authenticationManager(authenticationManager)
@@ -48,8 +49,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, GET_REFRESH_TOKEN_URL).permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(new ExceptionHandlerFilter(objectMapper), UsernamePasswordAuthenticationFilter.class)
-                .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(exceptionHandlerFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAt(authFilter, UsernamePasswordAuthenticationFilter.class)
         ;
         return http.build();
     }
