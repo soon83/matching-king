@@ -36,6 +36,10 @@ public class MemberApplication {
         return memberService.searchMemberDetail(memberId);
     }
 
+    public MemberQuery.Main searchMemberByEmail(String memberEmail) {
+        return memberService.searchMemberByEmail(memberEmail);
+    }
+
     public void editMember(
             Long memberId,
             MemberCommand.EditMember editMemberCommand,

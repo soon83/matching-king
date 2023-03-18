@@ -1,15 +1,17 @@
 package com.soon83;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import static com.soon83.CommonResponse.ResponseType.SUCCESS;
 
 @Getter
+@NoArgsConstructor
 public class CommonResponse<T> {
-    private final boolean success; // success: 200, 300, failure: 400, 500
-    private final String code;
-    private final String message;
+    private boolean success; // success: 200, 300, failure: 400, 500
+    private String code;
+    private String message;
     private T data;
 
     private CommonResponse(ResponseType responseType) {

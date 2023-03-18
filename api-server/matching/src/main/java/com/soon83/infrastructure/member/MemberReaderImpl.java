@@ -45,6 +45,13 @@ public class MemberReaderImpl implements MemberReader {
     }
 
     @Override
+    public Member readByEmail(String memberEmail) {
+        return memberRepository.findByEmail(memberEmail)
+                .filter(Member::isActivated)
+                .orElseThrow(MemberNotFoundException::new);
+    }
+
+    @Override
     public Member readMemberMatchingConditionAndLimitById(Long memberId) {
         return memberRepository.readMemberMatchingConditionAndLimitById(memberId)
                 .filter(Member::isActivated)

@@ -10,6 +10,7 @@ import com.soon83.infrastructure.limit.LimitRepository;
 import com.soon83.infrastructure.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class InitDb implements InitializingBean {
 
     private final LimitRepository limitRepository;
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void afterPropertiesSet() {
@@ -51,6 +53,7 @@ public class InitDb implements InitializingBean {
 
             memberRepository.save(Member.builder()
                     .email("2601948@gmail.com")
+                    .password(passwordEncoder.encode("1234"))
                     .nickname("DidierDrogba")
                     .age(41)
                     .gender(Member.Gender.MALE)

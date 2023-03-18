@@ -9,6 +9,7 @@ public interface MemberReader {
     List<Member> readLimitMembersByMatchingCondition(Long senderId, MatchingCondition matchingCondition, int limit);
     Member readById(Long memberId);
     Member readMemberDetailById(Long memberId);
+    Member readByEmail(String memberEmail);
     Member readMemberMatchingConditionAndLimitById(Long memberId);
     void checkAlreadyExistsEmail(String email);
 }

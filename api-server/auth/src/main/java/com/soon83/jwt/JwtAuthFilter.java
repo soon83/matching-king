@@ -3,8 +3,8 @@ package com.soon83.jwt;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soon83.CommonResponse;
 import com.soon83.domain.AuthQuery;
-import com.soon83.exception.auth.AuthMethodNotAllowedException;
 import com.soon83.exception.auth.AuthMemberNotFoundException;
+import com.soon83.exception.auth.AuthMethodNotAllowedException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import static com.soon83.config.SecurityConfig.AUTH;
+import static com.soon83.config.SecurityConfig.GET_AUTH_TOKEN_URL;
 
 @Slf4j
 public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
@@ -28,14 +28,13 @@ public class JwtAuthFilter extends UsernamePasswordAuthenticationFilter {
 
     public JwtAuthFilter(AuthenticationManager authenticationManager, ObjectMapper objectMapper) {
         super(authenticationManager);
-        setFilterProcessesUrl(AUTH);
+        setFilterProcessesUrl(GET_AUTH_TOKEN_URL);
         this.objectMapper = objectMapper;
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         if (!request.getMethod().equals("POST")) {
-            log.error("# Authentication method not supported: {}", request.getMethod());
             throw new AuthMethodNotAllowedException();
         }
 

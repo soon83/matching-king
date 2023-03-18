@@ -75,6 +75,7 @@ public class Member extends BaseEntity {
             MatchingCondition matchingCondition
     ) {
         if (email == null) throw new IllegalArgumentException("email");
+        if (password == null) throw new IllegalArgumentException("password");
         if (nickname == null) throw new IllegalArgumentException("nickname");
         if (gender == null) throw new IllegalArgumentException("gender");
         if (mbti == null) throw new IllegalArgumentException("mbti");
@@ -84,7 +85,7 @@ public class Member extends BaseEntity {
         if (matchingCondition == null) throw new IllegalArgumentException("matchingCondition");
 
         this.email = email;
-        //this.password = password;
+        this.password = password;
         this.nickname = nickname;
         this.age = age;
         this.gender = gender;

@@ -59,13 +59,24 @@ public class MemberController {
     }
 
     /**
-     * [회원] 단건 상세 조회
+     * [회원] 단건 조회 (상세)
      */
     @GetMapping("/{memberId}/detail")
     public CommonResponse<MemberDto.Detail> searchMemberDetail(@PathVariable Long memberId) {
         log.debug("# searchMemberDetail # memberId: {}", memberId);
         MemberQuery.Detail member = memberApplication.searchMemberDetail(memberId);
         MemberDto.Detail response = new MemberDto.Detail(member);
+        return CommonResponse.success(response);
+    }
+
+    /**
+     * [회원] 단건 조회 (인증)
+     */
+    @GetMapping("/{memberEmail}/auth")
+    public CommonResponse<MemberDto.Auth> searchMemberAuth(@PathVariable String memberEmail) {
+        log.debug("# searchMemberAuth # memberEmail: {}", memberEmail);
+        MemberQuery.Main member = memberApplication.searchMemberByEmail(memberEmail);
+        MemberDto.Auth response = new MemberDto.Auth(member);
         return CommonResponse.success(response);
     }
 

@@ -102,6 +102,35 @@ public class MemberDto {
     }
 
     @Data
+    public static class Auth {
+        private final Long memberId;
+        private final String memberEmail;
+        private final String memberPassword;
+        private final Member.Role memberRole;
+
+        @Builder
+        public Auth(
+                Long memberId,
+                String memberEmail,
+                String memberPassword,
+                Member.Role memberRole
+        ) {
+            this.memberId = memberId;
+            this.memberEmail = memberEmail;
+            this.memberPassword = memberPassword;
+            this.memberRole = memberRole;
+        }
+
+        @Builder
+        public Auth(MemberQuery.Main query) {
+            this.memberId = query.getId();
+            this.memberEmail = query.getEmail();
+            this.memberPassword = query.getPassword();
+            this.memberRole = query.getRole();
+        }
+    }
+
+    @Data
     public static class Main {
         private final Long memberId;
         private final String memberEmail;

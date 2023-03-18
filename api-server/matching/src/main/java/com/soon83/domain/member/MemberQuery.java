@@ -41,6 +41,7 @@ public class MemberQuery {
     public static class Main {
         private final Long id;
         private final String email;
+        private final String password;
         private final String nickname;
         private final int age;
         private final Member.Gender gender;
@@ -53,6 +54,7 @@ public class MemberQuery {
                 Long id,
                 String email,
                 String nickname,
+                String password,
                 int age,
                 Member.Gender gender,
                 Member.Mbti mbti,
@@ -61,6 +63,7 @@ public class MemberQuery {
         ) {
             this.id = id;
             this.email = email;
+            this.password = password;
             this.nickname = nickname;
             this.age = age;
             this.gender = gender;
@@ -72,6 +75,7 @@ public class MemberQuery {
         public Main(Member entity) {
             this.id = entity.getId();
             this.email = entity.getEmail();
+            this.password = entity.getPassword();
             this.nickname = entity.getNickname();
             this.age = entity.getAge();
             this.gender = entity.getGender();

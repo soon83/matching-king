@@ -55,6 +55,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public MemberQuery.Main searchMemberByEmail(String memberEmail) {
+        Member member = memberReader.readByEmail(memberEmail);
+        return new MemberQuery.Main(member);
+    }
+
+    @Override
     @Transactional
     public void editMember(
             Long memberId,
