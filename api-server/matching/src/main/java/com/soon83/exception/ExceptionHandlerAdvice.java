@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -57,7 +58,11 @@ public class ExceptionHandlerAdvice {
         return ResponseEntity.status(errorCode.getStatus()).body(errorResponse);
     }
 
-    // TODO 인증 401
-    // TODO 권한 403
-    // TODO 올바르지 않은 resource mapping 405
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    protected ResponseEntity<CommonErrorResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        log.error("[HttpRequestMethodNotSupportedException] cause: {}, message: {}", NestedExceptionUtils.getMostSpecificCause(e), e.getMessage());
+        ErrorCode errorCode = ErrorCode.METHOD_NOT_ALLOWED_ERROR;
+        CommonErrorResponse errorResponse = CommonErrorResponse.of(errorCode.getStatus(), errorCode.getCode(), errorCode.getMessage());
+        return ResponseEntity.status(errorCode.getStatus()).body(errorResponse);
+    }
 }

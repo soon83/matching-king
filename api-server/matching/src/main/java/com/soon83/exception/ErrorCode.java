@@ -12,8 +12,9 @@ public enum ErrorCode {
     REQUEST_JSON_PARSE_ERROR(400, "COM003", "올바르지 않은 포맷입니다."),
     ARGUMENT_TYPE_MISMATCH_ERROR(400, "COM004", "올바르지 않은 파라미터입니다."),
     ILLEGAL_ARGUMENT_ERROR(400, "COM005", "필수 파라미터가 없습니다."),
-    METHOD_NOT_ALLOWED_ERROR(405, "COM006", "지원하지 않는 메서드입니다."),
-    COMMON_INVALID_TOKEN_ERROR(401, "COM007", "유효하지 않은 토큰입니다."),
+    COMMON_INVALID_TOKEN_ERROR(401, "COM006", "유효하지 않은 토큰입니다."),
+    FORBIDDEN_ERROR(403, "COM007", "접근이 불가합니다."),
+    METHOD_NOT_ALLOWED_ERROR(405, "COM008", "지원하지 않는 메서드입니다."),
 
     // 인증 오류
     UNAUTHORIZED_ERROR(401, "ATH001", "인증오류가 발생하였습니다."),

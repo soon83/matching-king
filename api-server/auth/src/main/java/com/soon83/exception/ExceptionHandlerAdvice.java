@@ -56,8 +56,4 @@ public class ExceptionHandlerAdvice {
         CommonErrorResponse errorResponse = CommonErrorResponse.of(errorCode.getStatus(), errorCode.getCode(), errorCode.getMessage());
         return ResponseEntity.status(errorCode.getStatus()).body(errorResponse);
     }
-
-    // TODO 인증 401
-    // TODO 권한 403
-    // TODO 올바르지 않은 resource mapping 405
 }

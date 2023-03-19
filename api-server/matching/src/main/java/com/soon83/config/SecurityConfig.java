@@ -2,6 +2,7 @@ package com.soon83.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soon83.domain.auth.AuthService;
+import com.soon83.exception.CustomAuthenticationEntryPoint;
 import com.soon83.exception.ExceptionHandlerFilter;
 import com.soon83.jwt.AuthCheckFilter;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,7 @@ public class SecurityConfig {
                 .build();
         AuthCheckFilter authCheckFilter = new AuthCheckFilter(authenticationManager, authService, objectMapper);
         ExceptionHandlerFilter exceptionHandlerFilter = new ExceptionHandlerFilter(objectMapper);
+        var authenticationEntryPoint = new CustomAuthenticationEntryPoint();
 
         http
                 .authenticationManager(authenticationManager)
@@ -49,6 +51,7 @@ public class SecurityConfig {
                 )
                 .addFilterBefore(exceptionHandlerFilter, BasicAuthenticationFilter.class)
                 .addFilterAt(authCheckFilter, BasicAuthenticationFilter.class)
+                .exceptionHandling(handler -> handler.authenticationEntryPoint(authenticationEntryPoint))
         ;
         return http.build();
     }
