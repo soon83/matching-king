@@ -20,7 +20,7 @@ public abstract class BaseEntity {
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
     @CreatedBy
-    private String createdBy;
+    private Long createdBy;
     @LastModifiedBy
-    private String modifiedBy;
+    private Long modifiedBy;
 }
