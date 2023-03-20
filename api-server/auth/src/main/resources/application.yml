@@ -26,3 +26,13 @@ spring:
 
 file-path:
   root: /Users/ds/Downloads/springboot/${application.title}/${spring.application.name}
+
+---
+# LOCAL
+spring:
+  config:
+    activate:
+      on-profile: test
+
+file-path:
+  root: /Users/ds/Downloads/springboot/${application.title}/${spring.application.name}

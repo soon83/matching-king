@@ -10,21 +10,6 @@ spring:
     name: matching-api-service
   jackson:
     default-property-inclusion: non_null
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/random_matching?serverTimezone=UTC
-    username: random_matching
-    password: random_matching!@34
-  jpa:
-    open-in-view: false
-    database-platform: org.hibernate.dialect.MariaDBDialect
-    hibernate:
-#      ddl-auto: update
-      ddl-auto: create-drop
-    properties:
-      hibernate:
-        default_batch_fetch_size: 100
-        format_sql: true
 
 logging:
   file:
@@ -43,6 +28,59 @@ spring:
   config:
     activate:
       on-profile: local
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/random_matching?serverTimezone=UTC&characterEncoding=UTF-8
+    username: random_matching
+    password: random_matching!@34
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    hibernate:
+      #      ddl-auto: update
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
+        format_sql: true
+
+file-path:
+  root: /Users/ds/Downloads/springboot/${application.title}/${spring.application.name}
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
+
+---
+# TEST
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    master:
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mariadb://localhost:13306/random_matching?serverTimezone=UTC&characterEncoding=UTF-8
+      username: random_matching
+      password: random_matching!@34
+    slave:
+      - name: slave-1
+        url: jdbc:mariadb://localhost:13307/random_matching?serverTimezone=UTC&characterEncoding=UTF-8
+      - name: slave-2
+        url: jdbc:mariadb://localhost:13308/random_matching?serverTimezone=UTC&characterEncoding=UTF-8
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    hibernate:
+      #      ddl-auto: update
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
+        format_sql: true
+        generate-ddl: false
+        show_sql: false
 
 file-path:
   root: /Users/ds/Downloads/springboot/${application.title}/${spring.application.name}
