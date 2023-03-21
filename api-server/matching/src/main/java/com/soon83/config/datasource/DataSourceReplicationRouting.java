@@ -26,14 +26,16 @@ public class DataSourceReplicationRouting extends AbstractRoutingDataSource {
 
     @Override
     protected Object determineCurrentLookupKey() {
-        boolean isReadOnly = TransactionSynchronizationManager.isCurrentTransactionReadOnly();
-        if (isReadOnly) {
-            String slave = dataSourceNameList.getOne();
-            log.info("# Connection Slave: {}", slave);
-            return slave;
-        } else {
-            logger.info("# Connection Master");
-            return "master";
+        if (TransactionSynchronizationManager.isActualTransactionActive()) {
+            boolean isReadOnly = TransactionSynchronizationManager.isCurrentTransactionReadOnly();
+            if (isReadOnly) {
+                String slave = dataSourceNameList.getOne();
+                log.info("# Connection Slave: {}", slave);
+                return slave;
+            } else {
+                logger.info("# Connection Master");
+                return "master";
+            }
         }
     }
 
