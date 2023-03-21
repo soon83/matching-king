@@ -9,9 +9,9 @@ import java.util.List;
 
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "spring.datasource.slave")
+@ConfigurationProperties(prefix = "spring.datasource")
 public class DataSourceSlaveProperties {
-    private List<Slave> slaveList = new ArrayList<>();
+    private List<Slave> slaves = new ArrayList<>();
 
     @Getter
     @Setter

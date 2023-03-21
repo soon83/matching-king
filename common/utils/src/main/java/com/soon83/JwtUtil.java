@@ -13,7 +13,7 @@ import java.time.Instant;
 public class JwtUtil {
     public static final String BEARER_TOKEN_PREFIX = "Bearer ";
     private static final Algorithm ALGORITHM = Algorithm.HMAC256("DidierDrogba");
-    private static final long AUTH_TIME = 60 * 30; // 30분
+    private static final long AUTH_TIME = 60 * 60 * 24; // 1일
     private static final long REFRESH_TIME = 60 * 60 * 24 * 14; // 2주
 
     public static String makeAuthToken(String username) {

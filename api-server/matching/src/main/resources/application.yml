@@ -30,7 +30,7 @@ spring:
       on-profile: local
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/random_matching?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mariadb://localhost:13306/random_matching?serverTimezone=UTC&characterEncoding=UTF-8
     username: random_matching
     password: random_matching!@34
   jpa:
@@ -64,7 +64,7 @@ spring:
       url: jdbc:mariadb://localhost:13306/random_matching?serverTimezone=UTC&characterEncoding=UTF-8
       username: random_matching
       password: random_matching!@34
-    slave:
+    slaves:
       - name: slave-1
         url: jdbc:mariadb://localhost:13307/random_matching?serverTimezone=UTC&characterEncoding=UTF-8
       - name: slave-2
@@ -77,10 +77,10 @@ spring:
       ddl-auto: create-drop
     properties:
       hibernate:
-        default_batch_fetch_size: 100
-        format_sql: true
-        generate-ddl: false
         show_sql: false
+        format_sql: true
+        generate-ddl: true
+        default_batch_fetch_size: 100
 
 file-path:
   root: /Users/ds/Downloads/springboot/${application.title}/${spring.application.name}
@@ -88,4 +88,4 @@ file-path:
 decorator:
   datasource:
     p6spy:
-      enable-logging: true
+      enable-logging: false

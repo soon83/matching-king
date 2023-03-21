@@ -2,6 +2,7 @@ package com.soon83.config.datasource;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.List;
@@ -28,10 +29,10 @@ public class DataSourceReplicationRouting extends AbstractRoutingDataSource {
         boolean isReadOnly = TransactionSynchronizationManager.isCurrentTransactionReadOnly();
         if (isReadOnly) {
             String slave = dataSourceNameList.getOne();
-            log.info("Connection Slave: {}", slave);
+            log.info("# Connection Slave: {}", slave);
             return slave;
         } else {
-            logger.info("Connection Master");
+            logger.info("# Connection Master");
             return "master";
         }
     }
