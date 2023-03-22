@@ -15,15 +15,14 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(
+        name = "rm_member",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"matching_condition_id"}, name = "UIX_matchingConditionId"),
         },
         indexes = {
                 @Index(columnList = "email", name = "IX_email"),
                 @Index(columnList = "age", name = "IX_age"),
-                @Index(columnList = "gender", name = "IX_gender"),
                 @Index(columnList = "mbti", name = "IX_mbti"),
-                @Index(columnList = "isActivated", name = "IX_isActivated"),
         }
 )
 public class Member extends BaseEntity {

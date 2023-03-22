@@ -18,6 +18,7 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(
+        name = "rm_message",
         indexes = {
                 @Index(columnList = "createdAt", name = "IX_createdAt"),
         }

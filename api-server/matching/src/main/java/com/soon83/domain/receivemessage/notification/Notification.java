@@ -10,12 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "message_notification",
-        indexes = {
-                @Index(columnList = "isRead", name = "IX_isRead"),
-                @Index(columnList = "isDeleted", name = "IX_isDeleted"),
-        }
-)
+@Table(name = "rm_message_notification")
 public class Notification extends BaseEntity {
 
     @Id

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "member_limit")
+@Table(name = "rm_member_limit")
 public class Limit extends BaseEntity {
 
     @Id

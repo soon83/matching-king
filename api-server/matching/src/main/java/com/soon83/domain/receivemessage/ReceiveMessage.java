@@ -20,6 +20,7 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(
+        name="rm_receive_message",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"message_notification_id"}, name = "UIX_messageNotificationId"),
         },

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "member_matching_condition")
+@Table(name = "rm_member_matching_condition")
 public class MatchingCondition extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

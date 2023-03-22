@@ -15,7 +15,7 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table
+@Table(name = "rm_message_reply")
 public class MessageReply extends BaseEntity {
 
     @Id
