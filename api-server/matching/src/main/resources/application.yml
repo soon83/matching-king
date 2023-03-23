@@ -24,18 +24,18 @@ spring:
     activate:
       on-profile: local
   datasource:
-#    driver-class-name: org.mariadb.jdbc.Driver
-#    url: jdbc:mariadb://localhost:13306/random_matching?serverTimezone=UTC&characterEncoding=UTF-8
-#    username: random_matching
-#    password: random_matching!@34
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:15432/testdb
-    username: testuser
-    password: testpass
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:13306/random_matching?serverTimezone=UTC&characterEncoding=UTF-8
+    username: random_matching
+    password: random_matching!@34
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:15432/testdb
+#    username: testuser
+#    password: testpass
   jpa:
     open-in-view: false
-#    database-platform: org.hibernate.dialect.MariaDBDialect
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.MariaDBDialect
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       #      ddl-auto: update
       ddl-auto: create-drop
