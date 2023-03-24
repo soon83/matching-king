@@ -7,7 +7,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 import static com.soon83.domain.receivemessage.QReceiveMessage.receiveMessage;
-import static com.soon83.infrastructure.CustomExpressionUtil.*;
+import static com.soon83.infrastructure.CustomExpressionUtil.eq;
+import static com.soon83.infrastructure.CustomExpressionUtil.ne;
 
 @RequiredArgsConstructor
 public class ReceiveMessageRepositoryQuerydslImpl implements ReceiveMessageRepositoryQuerydsl {

@@ -3,7 +3,6 @@ package com.soon83.domain.receivemessage;
 import com.soon83.domain.member.MemberQuery;
 import com.soon83.domain.message.MessageQuery;
 import com.soon83.domain.receivemessage.notification.NotificationQuery;
-import com.soon83.domain.receivemessage.reply.MessageReply;
 import com.soon83.domain.receivemessage.reply.MessageReplyQuery;
 import lombok.Builder;
 import lombok.Data;
