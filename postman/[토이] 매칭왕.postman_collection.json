@@ -16,21 +16,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"console.log('0. responseHeaders: ', responseHeaders);",
-									"",
-									"if (!responseHeaders.access_token) {",
-									"    pm.collectionVariables.set(\"accessToken\", \"\");",
-									"} else {",
-									"    pm.collectionVariables.set(\"accessToken\", responseHeaders.access_token);",
-									"    console.log('1. accessToken: ', responseHeaders.access_token);",
-									"}",
-									"",
-									"if (!responseHeaders.refresh_token) {",
-									"    pm.collectionVariables.set(\"refreshToken\", \"\");",
-									"} else {",
-									"    pm.collectionVariables.set(\"refreshToken\", responseHeaders.refresh_token);",
-									"    console.log('2. refreshToken: ', responseHeaders.refresh_token);",
-									"}"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -63,13 +49,16 @@
 					"response": []
 				},
 				{
-					"name": "토큰 갱신 - 귀찮,, 보류",
+					"name": "토큰 갱신",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"memberEmail\": \"admin@email.com\"\n}",
+							"raw": "{\n    \"memberEmail\": \"2601948@gmail.com\",\n    \"memberAuthToken\": \"{{authToken}}\",\n    \"memberRefreshToken\": \"{{refreshToken}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -89,6 +78,40 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"console.log('0. responseHeaders: ', responseHeaders);",
+							"",
+							"if (!responseHeaders.auth_token) {",
+							"    pm.collectionVariables.set(\"authToken\", \"\");",
+							"} else {",
+							"    pm.collectionVariables.set(\"authToken\", responseHeaders.auth_token);",
+							"    console.log('1. authToken: ', responseHeaders.auth_token);",
+							"}",
+							"",
+							"if (!responseHeaders.refresh_token) {",
+							"    pm.collectionVariables.set(\"refreshToken\", \"\");",
+							"} else {",
+							"    pm.collectionVariables.set(\"refreshToken\", responseHeaders.refresh_token);",
+							"    console.log('2. refreshToken: ', responseHeaders.refresh_token);",
+							"}"
+						]
+					}
 				}
 			]
 		},
@@ -242,7 +265,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "{{accessToken}}",
+						"value": "{{authToken}}",
 						"type": "string"
 					}
 				]
@@ -298,6 +321,36 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{authToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -393,6 +446,36 @@
 					},
 					"response": []
 				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{authToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -452,6 +535,36 @@
 					},
 					"response": []
 				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{authToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -486,6 +599,36 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{authToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
@@ -553,6 +696,10 @@
 		},
 		{
 			"key": "refreshToken",
+			"value": ""
+		},
+		{
+			"key": "authToken",
 			"value": ""
 		}
 	]
