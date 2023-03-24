@@ -109,6 +109,7 @@ public class MemberDto {
         private final Long memberId;
         private final String memberEmail;
         private final String memberPassword;
+        private final String memberNickname;
         private final Member.Role memberRole;
 
         @Builder
@@ -116,11 +117,13 @@ public class MemberDto {
                 Long memberId,
                 String memberEmail,
                 String memberPassword,
+                String memberNickname,
                 Member.Role memberRole
         ) {
             this.memberId = memberId;
             this.memberEmail = memberEmail;
             this.memberPassword = memberPassword;
+            this.memberNickname = memberNickname;
             this.memberRole = memberRole;
         }
 
@@ -129,6 +132,7 @@ public class MemberDto {
             this.memberId = query.getId();
             this.memberEmail = query.getEmail();
             this.memberPassword = query.getPassword();
+            this.memberNickname = query.getNickname();
             this.memberRole = query.getRole();
         }
     }

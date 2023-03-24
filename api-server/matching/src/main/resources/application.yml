@@ -84,7 +84,6 @@ decorator:
   datasource:
     p6spy:
       enable-logging: false
-      isMultiline: true
     ignore-routing-data-sources: true
     enabled: false
 

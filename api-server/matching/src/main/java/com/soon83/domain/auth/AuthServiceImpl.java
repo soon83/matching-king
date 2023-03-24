@@ -19,11 +19,7 @@ public class AuthServiceImpl implements AuthService {
     @Transactional(readOnly = true)
     public AuthQuery.AuthAdaptor loadUserByUsername(String memberEmail) throws UsernameNotFoundException {
         Member member = memberReader.readByEmail(memberEmail);
-        return new AuthQuery.AuthAdaptor(AuthQuery.Info.builder()
-                .memberId(member.getId())
-                .memberEmail(member.getEmail())
-                .memberPassword(member.getPassword())
-                .memberRole(member.getRole())
-                .build());
+        AuthQuery.Info authMemberInfo = new AuthQuery.Info(member);
+        return new AuthQuery.AuthAdaptor(authMemberInfo);
     }
 }

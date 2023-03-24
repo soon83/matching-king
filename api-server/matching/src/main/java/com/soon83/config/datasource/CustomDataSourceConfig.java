@@ -66,12 +66,6 @@ public class CustomDataSourceConfig extends HikariConfig {
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         localContainerEntityManagerFactoryBean.setJpaPropertyMap(properties);
         return localContainerEntityManagerFactoryBean;
-//        EntityManagerFactoryBuilder entityManagerFactoryBuilder = new EntityManagerFactoryBuilder(new HibernateJpaVendorAdapter(), jpaProperties.getProperties(), null);
-//        return entityManagerFactoryBuilder
-//                .dataSource(dataSource(routingDataSource()))
-//                .packages("com.soon83")
-//                .properties(properties)
-//                .build();
     }
 
     @Bean

@@ -3,6 +3,7 @@ package com.soon83.jwt;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soon83.CommonResponse;
 import com.soon83.JwtUtil;
+import com.soon83.domain.AuthCommand;
 import com.soon83.domain.AuthQuery;
 import com.soon83.exception.auth.AuthMemberNotFoundException;
 import com.soon83.exception.auth.AuthMethodNotAllowedException;
@@ -39,18 +40,16 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
             throw new AuthMethodNotAllowedException();
         }
 
-        AuthQuery.Info authRequest;
+        AuthCommand.AuthRequest authRequest;
         try {
-            authRequest = objectMapper.readValue(request.getInputStream(), AuthQuery.Info.class);
-
+            authRequest = objectMapper.readValue(request.getInputStream(), AuthCommand.AuthRequest.class);
         } catch (IOException e) {
             throw new IllegalArgumentException();
         }
 
         var authenticationToken = new UsernamePasswordAuthenticationToken(authRequest.getMemberEmail(), authRequest.getMemberPassword(), null);
         try {
-            Authentication authenticate = getAuthenticationManager().authenticate(authenticationToken);
-            return authenticate;
+            return getAuthenticationManager().authenticate(authenticationToken);
         } catch (AuthenticationException e) {
             throw new AuthMemberNotFoundException();
         }
@@ -64,8 +63,7 @@ public class AuthFilter extends UsernamePasswordAuthenticationFilter {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        response.setHeader("access_token", JwtUtil.makeAuthToken(authUser.getMemberEmail()));
-        response.setHeader("refresh_token", JwtUtil.makeRefreshToken(authUser.getMemberEmail()));
+        JwtUtil.issueTokenToResponseHeader(authUser.getMemberEmail(), authUser.getMemberId(), authUser.getMemberNickname(), response);
 
         objectMapper.writeValue(response.getWriter(), CommonResponse.success(new AuthQuery.Main(authUser)));
     }

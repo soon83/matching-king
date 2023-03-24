@@ -21,9 +21,9 @@ public class AuthQuery {
 
         public AuthAdaptor(AuthQuery.Info authUser) {
             super(
-                    authUser.getMemberEmail(),
-                    authUser.getMemberPassword(),
-                    authorities(authUser.getMemberRole().name())
+                    authUser.getEmail(),
+                    authUser.getPassword(),
+                    authorities(authUser.getRole().name())
             );
             this.authUser = authUser;
         }
@@ -62,22 +62,33 @@ public class AuthQuery {
     @Data
     @NoArgsConstructor
     public static class Info {
-        private Long memberId;
-        private String memberEmail;
-        private String memberPassword;
-        private Member.Role memberRole;
+        private Long id;
+        private String email;
+        private String password;
+        private String nickname;
+        private Member.Role role;
 
         @Builder
         public Info(
-                Long memberId,
-                String memberEmail,
-                String memberPassword,
-                Member.Role memberRole
+                Long id,
+                String email,
+                String password,
+                String nickname,
+                Member.Role role
         ) {
-            this.memberId = memberId;
-            this.memberEmail = memberEmail;
-            this.memberPassword = memberPassword;
-            this.memberRole = memberRole;
+            this.id = id;
+            this.email = email;
+            this.password = password;
+            this.nickname = nickname;
+            this.role = role;
+        }
+
+        public Info(Member entity) {
+            this.id = entity.getId();
+            this.email = entity.getEmail();
+            this.password = entity.getPassword();
+            this.nickname = entity.getNickname();
+            this.role = entity.getRole();
         }
     }
 }

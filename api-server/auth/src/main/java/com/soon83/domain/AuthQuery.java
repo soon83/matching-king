@@ -60,6 +60,7 @@ public class AuthQuery {
         private Long memberId;
         private String memberEmail;
         private String memberPassword;
+        private String memberNickname;
         private Role memberRole;
 
         @Builder
@@ -67,11 +68,13 @@ public class AuthQuery {
                 Long memberId,
                 String memberEmail,
                 String memberPassword,
+                String memberNickname,
                 Role memberRole
         ) {
             this.memberId = memberId;
             this.memberEmail = memberEmail;
             this.memberPassword = memberPassword;
+            this.memberNickname = memberNickname;
             this.memberRole = memberRole;
         }
     }
@@ -80,22 +83,26 @@ public class AuthQuery {
     public static class Main {
         private final Long memberId;
         private final String memberEmail;
+        private final String memberNickname;
         private final Role memberRole;
 
         @Builder
         public Main(
                 Long memberId,
                 String memberEmail,
+                String memberNickname,
                 Role memberRole
         ) {
             this.memberId = memberId;
             this.memberEmail = memberEmail;
+            this.memberNickname = memberNickname;
             this.memberRole = memberRole;
         }
 
         public Main(Info info) {
             this.memberId = info.getMemberId();
             this.memberEmail = info.getMemberEmail();
+            this.memberNickname = info.getMemberNickname();
             this.memberRole = info.getMemberRole();
         }
     }

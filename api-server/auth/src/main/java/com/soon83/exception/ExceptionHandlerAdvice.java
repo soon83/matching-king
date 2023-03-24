@@ -1,6 +1,7 @@
 package com.soon83.exception;
 
 import com.soon83.CommonErrorResponse;
+import com.soon83.exception.auth.AuthInvalidTokenException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,14 @@ public class ExceptionHandlerAdvice {
                 errorCode.getCode(),
                 String.format("%s %s", errorCode.getMessage(), NestedExceptionUtils.getMostSpecificCause(e).getMessage())
         );
+        return ResponseEntity.status(errorCode.getStatus()).body(errorResponse);
+    }
+
+    @ExceptionHandler(AuthInvalidTokenException.class)
+    protected ResponseEntity<CommonErrorResponse> handleAuthInvalidTokenException(AuthInvalidTokenException e) {
+        log.error("[AuthInvalidTokenException] cause: {}, message: {}", NestedExceptionUtils.getMostSpecificCause(e), e.getMessage());
+        ErrorCode errorCode = ErrorCode.COMMON_INVALID_TOKEN_ERROR;
+        CommonErrorResponse errorResponse = CommonErrorResponse.of(errorCode.getStatus(), errorCode.getCode(), errorCode.getMessage());
         return ResponseEntity.status(errorCode.getStatus()).body(errorResponse);
     }
 
