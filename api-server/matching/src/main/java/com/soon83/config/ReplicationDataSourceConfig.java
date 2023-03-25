@@ -1,5 +1,6 @@
-package com.soon83.config.datasource;
+package com.soon83.config;
 
+import com.soon83.config.datasource.DataSourceReplicationRouting;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Getter;
@@ -27,10 +28,10 @@ import java.util.*;
 @Configuration
 @RequiredArgsConstructor
 @EnableConfigurationProperties({
-        CustomDataSourceConfig.DataSourceMasterProperties.class,
-        CustomDataSourceConfig.DataSourceSlaveProperties.class
+        ReplicationDataSourceConfig.DataSourceMasterProperties.class,
+        ReplicationDataSourceConfig.DataSourceSlaveProperties.class
 })
-public class CustomDataSourceConfig extends HikariConfig {
+public class ReplicationDataSourceConfig extends HikariConfig {
     private final DataSourceMasterProperties masterDatabase;
     private final DataSourceSlaveProperties slaveDatabase;
     private final JpaProperties jpaProperties;

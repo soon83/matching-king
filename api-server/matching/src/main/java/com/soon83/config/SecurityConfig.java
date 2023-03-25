@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/api/v1/members/*/auth").permitAll()
-                        .requestMatchers("/api/v1/code**").permitAll()
+                        .requestMatchers("/api/v1/codes", "/api/v1/codes/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(exceptionHandlerFilter, BasicAuthenticationFilter.class)

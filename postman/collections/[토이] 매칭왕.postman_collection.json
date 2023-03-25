@@ -7,6 +7,50 @@
 	},
 	"item": [
 		{
+			"name": "[공통코드]",
+			"item": [
+				{
+					"name": "목록 조회",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/codes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"codes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "단건 조회",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/codes/member-role",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"codes",
+								"member-role"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "[인증]",
 			"item": [
 				{
@@ -114,10 +158,6 @@
 					}
 				}
 			]
-		},
-		{
-			"name": "[공통코드]",
-			"item": []
 		},
 		{
 			"name": "[회원]",
@@ -690,10 +730,6 @@
 		}
 	],
 	"variable": [
-		{
-			"key": "accessToken",
-			"value": ""
-		},
 		{
 			"key": "refreshToken",
 			"value": ""

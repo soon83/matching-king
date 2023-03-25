@@ -1,13 +1,11 @@
 package com.soon83.domain.member;
 
+import com.soon83.config.enumcode.EnumMapperType;
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.limit.Limit;
 import com.soon83.domain.member.matchingcondition.MatchingCondition;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -109,22 +107,73 @@ public class Member extends BaseEntity {
     }
 
     @Getter
-    public enum Role {
-        ADMIN, MANAGER, MEMBER
+    @RequiredArgsConstructor
+    public enum Role implements EnumMapperType {
+        ADMIN("관리자"),
+        MANAGER("운영자"),
+        MEMBER("회원");
+
+        private final String title;
+
+        @Override
+        public String getCode() {
+            return this.name();
+        }
     }
 
     @Getter
-    public enum Type {
-        FREE, PAID
+    @RequiredArgsConstructor
+    public enum Type implements EnumMapperType {
+        FREE("무료회원"),
+        PAID("유료회원");
+
+        private final String title;
+
+        @Override
+        public String getCode() {
+            return this.name();
+        }
     }
 
     @Getter
-    public enum Gender {
-        MALE, FEMALE
+    @RequiredArgsConstructor
+    public enum Gender implements EnumMapperType {
+        MALE("남성"),
+        FEMALE("여성");
+
+        private final String title;
+
+        @Override
+        public String getCode() {
+            return this.name();
+        }
     }
 
     @Getter
-    public enum Mbti {
-        ESFJ, ESFP, ENFJ, ENFP, ESTJ, ESTP, ENTJ, ENTP, ISFJ, ISFP, INFJ, INFP, ISTJ, ISTP, INTJ, INTP
+    @RequiredArgsConstructor
+    public enum Mbti implements EnumMapperType {
+        ESFJ("ESFJ"),
+        ESFP("ESFP"),
+        ENFJ("ENFJ"),
+        ENFP("ENFP"),
+        ESTJ("ESTJ"),
+        ESTP("ESTP"),
+        ENTJ("ENTJ"),
+        ENTP("ENTP"),
+        ISFJ("ISFJ"),
+        ISFP("ISFP"),
+        INFJ("INFJ"),
+        INFP("INFP"),
+        ISTJ("ISTJ"),
+        ISTP("ISTP"),
+        INTJ("INTJ"),
+        INTP("INTP");
+
+        private final String title;
+
+        @Override
+        public String getCode() {
+            return this.name();
+        }
     }
 }
