@@ -124,7 +124,7 @@ log-slave_updates=1
 # docker-compose -f ~/{님이 원하는 디렉토리}/docker-volume/mariadb/docker-compose-mariadb.yml up -d
 ```
 
-## mariadb-master docker container 진입
+## mariadb-master docker container 진입 및 db 설정
 ```
 # docker exec -it mariadb-master /bin/bash
 ```
@@ -137,7 +137,7 @@ MariaDB [(none)]> grant replication slave on *.* to 'random_matching'@'%';
 MariaDB [(none)]> flush privileges;
 ```
 
-## mariadb-slave-1 docker container 진입
+## mariadb-slave-1 docker container 진입 및 db 설정
 ```
 # docker exec -it mariadb-slave-1 /bin/bash
 ```
@@ -213,7 +213,7 @@ Slave_Non_Transactional_Groups: 3
     Slave_Transactional_Groups: 2
 ```
 
-## mariadb-slave-2 docker container 진입
+## mariadb-slave-2 docker container 진입 및 db 설정
 ```
 # docker exec -it mariadb-slave-2 /bin/bash
 ```
