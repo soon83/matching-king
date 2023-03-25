@@ -9,12 +9,12 @@ import java.util.Map;
 
 @Slf4j
 public class DataSourceReplicationRouting extends AbstractRoutingDataSource {
-    private DataSourceRoundRobinList<String> dataSourceNameList;
+    private DataSourceList<String> dataSourceNameList;
 
     @Override
     public void setTargetDataSources(Map<Object, Object> targetDataSources) {
         super.setTargetDataSources(targetDataSources);
-        dataSourceNameList = new DataSourceRoundRobinList<>(
+        dataSourceNameList = new DataSourceList<>(
                 targetDataSources.keySet()
                         .stream()
                         .map(Object::toString)
@@ -36,11 +36,11 @@ public class DataSourceReplicationRouting extends AbstractRoutingDataSource {
         }
     }
 
-    public static class DataSourceRoundRobinList<T> {
+    public static class DataSourceList<T> {
         private final List<T> list;
         private Integer counter = 0;
 
-        public DataSourceRoundRobinList(List<T> list) {
+        public DataSourceList(List<T> list) {
             this.list = list;
         }
 

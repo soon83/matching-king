@@ -4,9 +4,11 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateSettings;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -19,15 +21,15 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
-@Getter
 @Profile("test")
 @Configuration
 @RequiredArgsConstructor
-@EnableConfigurationProperties({DataSourceMasterProperties.class, DataSourceSlaveProperties.class})
+@EnableConfigurationProperties({
+        CustomDataSourceConfig.DataSourceMasterProperties.class,
+        CustomDataSourceConfig.DataSourceSlaveProperties.class
+})
 public class CustomDataSourceConfig extends HikariConfig {
     private final DataSourceMasterProperties masterDatabase;
     private final DataSourceSlaveProperties slaveDatabase;
@@ -76,5 +78,29 @@ public class CustomDataSourceConfig extends HikariConfig {
     @Bean
     public LazyConnectionDataSourceProxy dataSource(DataSource routingDataSource) {
         return new LazyConnectionDataSourceProxy(routingDataSource);
+    }
+
+    @Getter
+    @Setter
+    @ConfigurationProperties(prefix = "spring.datasource.master")
+    public static class DataSourceMasterProperties {
+        private String driverClassName;
+        private String url;
+        private String username;
+        private String password;
+    }
+
+    @Getter
+    @Setter
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public static class DataSourceSlaveProperties {
+        private List<Slave> slaves = new ArrayList<>();
+
+        @Getter
+        @Setter
+        public static class Slave {
+            private String url;
+            private String name;
+        }
     }
 }
