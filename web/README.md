@@ -96,3 +96,8 @@ Vue CLI v5.0.8
     ```
 
  - vscode 에 prettier 플러그인을 안깔아도 됨
+
+## add vue-router
+```
+# vue add router
+```

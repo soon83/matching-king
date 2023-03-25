@@ -4,4 +4,4 @@ server:
 
 spring:
   application:
-    name: admin-web-service
+    name: member-web-service
