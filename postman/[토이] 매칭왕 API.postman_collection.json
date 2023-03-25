@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "b8307d94-4ae8-4d84-8443-a9cdc8813c93",
-		"name": "[토이] 매칭왕",
+		"name": "[토이] 매칭왕 API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4819278"
 	},
@@ -79,9 +79,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/auth",
+							"raw": "{{auth-url}}/api/v1/auth",
 							"host": [
-								"{{url}}"
+								"{{auth-url}}"
 							],
 							"path": [
 								"api",
@@ -110,9 +110,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/refresh",
+							"raw": "{{auth-url}}/api/v1/refresh",
 							"host": [
-								"{{url}}"
+								"{{auth-url}}"
 							],
 							"path": [
 								"api",
