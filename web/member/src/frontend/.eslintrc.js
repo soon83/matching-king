@@ -3,13 +3,9 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:vue/recommended', // Use this if you are using Vue.js 2.x.
-    'plugin:prettier/recommended',
-  ],
+  extends: ['plugin:vue/vue3-essential', 'eslint:recommended', 'plugin:prettier/recommended'],
   parserOptions: {
-    ecmaVersion: 2020,
+    parser: '@babel/eslint-parser',
   },
   rules: {
     'prettier/prettier': [
@@ -26,9 +22,16 @@ module.exports = {
         bracketSpacing: true,
       },
     ],
-    // override/add rules settings here, such as:
     'vue/no-unused-vars': 'error',
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
+  overrides: [
+    {
+      files: ['**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
+      env: {
+        jest: true,
+      },
+    },
+  ],
 };
