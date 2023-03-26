@@ -101,3 +101,52 @@ Vue CLI v5.0.8
 ```
 # vue add router
 ```
+
+## Tailwind CSS 설치
+```
+# npm install tailwindcss@latest postcss@latest autoprefixer@latest
+```
+
+## PostCSS 플러그인에 Tailwind CSS 추가
+```
+// postcss.config.js
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+```
+
+## tailwind 설정 파일 생성
+```
+// tailwind.config.js
+module.exports = {
+  purge: ['./src/**/*.{vue,js,jsx,ts,tsx}'], // 프로덕션 빌드 시 사용되지 않는 클래스 삭제
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+};
+```
+
+## Tailwind CSS 스타일 추가
+```
+// assets/tailwind.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+## import tailwind css
+```
+// main.js
+import '@/assets/tailwind.css';
+```
+
+## TailwindUI 의존성 라이브러리 설치
+```
+# npm install @headlessui/vue @heroicons/vue
+```
