@@ -12,7 +12,7 @@
               id="memberEmail"
               name="memberEmail"
               type="email"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+              class="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -26,7 +26,7 @@
               id="memberPassword"
               name="memberPassword"
               type="password"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+              class="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -42,7 +42,7 @@
               id="memberPasswordConfirm"
               name="memberPasswordConfirm"
               type="password"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+              class="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -56,7 +56,7 @@
               id="memberAge"
               name="memberAge"
               type="number"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+              class="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -69,7 +69,7 @@
             <select
               id="memberGender"
               name="memberGender"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+              class="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             >
               <option>선택</option>
               <option>남성</option>
@@ -86,7 +86,7 @@
             <select
               id="memberMbti"
               name="memberMbti"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+              class="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             >
               <option>선택</option>
               <option>ESFJ</option>
@@ -194,7 +194,7 @@
                     id="memberMatchingCondition-minAge"
                     name="memberMatchingCondition-minAge"
                     type="number"
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+                    class="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
@@ -210,7 +210,7 @@
                     id="memberMatchingCondition-maxAge"
                     name="memberMatchingCondition-maxAge"
                     type="number"
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+                    class="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
