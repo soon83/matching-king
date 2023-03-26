@@ -1,6 +1,6 @@
 <template lang="">
   <div>
-    <form class="mt-8 space-y-6" action="#" method="POST">
+    <form class="mt-8 space-y-6">
       <input type="hidden" name="remember" value="true" />
       <div class="mt-10 grid grid-cols-1 gap-y-4 gap-x-6 sm:grid-cols-6">
         <div class="col-span-full">
@@ -70,6 +70,6 @@
   </div>
 </template>
 <script setup>
-//import { PhotoIcon, UserCircleIcon } from '@heroicons/vue/24/solid';
+import { LockClosedIcon } from '@heroicons/vue/20/solid';
 </script>
 <style lang=""></style>

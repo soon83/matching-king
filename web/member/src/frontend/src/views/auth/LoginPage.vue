@@ -21,6 +21,8 @@
 // import { LockClosedIcon } from '@heroicons/vue/20/solid';
 import LoginForm from '@/components/auth/LoginForm.vue';
 export default {
-  components: { LoginForm },
+  components: {
+    LoginForm,
+  },
 };
 </script>

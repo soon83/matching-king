@@ -1,121 +1,116 @@
 <template lang="">
   <div>
     <form class="mt-8 space-y-6">
-      <!-- <div class="border-b border-gray-900/10 pb-12"> -->
-      <div>
-        <h2 class="text-base font-semibold leading-7 text-gray-900">나는 누구인가요?</h2>
-        <p class="mt-1 text-sm leading-6 text-gray-600">대충 적으셈</p>
-
-        <div class="mt-10 grid grid-cols-1 gap-y-4 gap-x-6 sm:grid-cols-6">
-          <div class="col-span-full">
-            <label for="memberEmail" class="block text-sm font-medium leading-6 text-gray-900"
-              >이메일</label
-            >
-            <div class="mt-2">
-              <input
-                id="memberEmail"
-                name="memberEmail"
-                type="email"
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
-              />
-            </div>
+      <input type="hidden" name="remember" value="true" />
+      <div class="mt-10 grid grid-cols-1 gap-y-4 gap-x-6 sm:grid-cols-6">
+        <div class="col-span-full">
+          <label for="memberEmail" class="block text-sm font-medium leading-6 text-gray-900"
+            >이메일</label
+          >
+          <div class="mt-2">
+            <input
+              id="memberEmail"
+              name="memberEmail"
+              type="email"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+            />
           </div>
+        </div>
 
-          <div class="col-span-full">
-            <label for="memberPassword" class="block text-sm font-medium leading-6 text-gray-900"
-              >비밀번호</label
-            >
-            <div class="mt-2">
-              <input
-                id="memberPassword"
-                name="memberPassword"
-                type="password"
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
-              />
-            </div>
+        <div class="col-span-full">
+          <label for="memberPassword" class="block text-sm font-medium leading-6 text-gray-900"
+            >비밀번호</label
+          >
+          <div class="mt-2">
+            <input
+              id="memberPassword"
+              name="memberPassword"
+              type="password"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+            />
           </div>
+        </div>
 
-          <div class="col-span-full">
-            <label
-              for="memberPasswordConfirm"
-              class="block text-sm font-medium leading-6 text-gray-900"
-              >비밀번호 확인</label
-            >
-            <div class="mt-2">
-              <input
-                id="memberPasswordConfirm"
-                name="memberPasswordConfirm"
-                type="password"
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
-              />
-            </div>
+        <div class="col-span-full">
+          <label
+            for="memberPasswordConfirm"
+            class="block text-sm font-medium leading-6 text-gray-900"
+            >비밀번호 확인</label
+          >
+          <div class="mt-2">
+            <input
+              id="memberPasswordConfirm"
+              name="memberPasswordConfirm"
+              type="password"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+            />
           </div>
+        </div>
 
-          <div class="col-span-full">
-            <label for="memberAge" class="block text-sm font-medium leading-6 text-gray-900"
-              >나이</label
-            >
-            <div class="mt-2">
-              <input
-                id="memberAge"
-                name="memberAge"
-                type="number"
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
-              />
-            </div>
+        <div class="col-span-full">
+          <label for="memberAge" class="block text-sm font-medium leading-6 text-gray-900"
+            >나이</label
+          >
+          <div class="mt-2">
+            <input
+              id="memberAge"
+              name="memberAge"
+              type="number"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+            />
           </div>
+        </div>
 
-          <div class="col-span-full">
-            <label for="memberGender" class="block text-sm font-medium leading-6 text-gray-900"
-              >성별</label
+        <div class="col-span-full">
+          <label for="memberGender" class="block text-sm font-medium leading-6 text-gray-900"
+            >성별</label
+          >
+          <div class="mt-2">
+            <select
+              id="memberGender"
+              name="memberGender"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             >
-            <div class="mt-2">
-              <select
-                id="memberGender"
-                name="memberGender"
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
-              >
-                <option>선택</option>
-                <option>남성</option>
-                <option>여성</option>
-              </select>
-            </div>
+              <option>선택</option>
+              <option>남성</option>
+              <option>여성</option>
+            </select>
           </div>
+        </div>
 
-          <div class="col-span-full">
-            <label for="memberMbti" class="block text-sm font-medium leading-6 text-gray-900"
-              >MBTI</label
+        <div class="col-span-full">
+          <label for="memberMbti" class="block text-sm font-medium leading-6 text-gray-900"
+            >MBTI</label
+          >
+          <div class="mt-2">
+            <select
+              id="memberMbti"
+              name="memberMbti"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             >
-            <div class="mt-2">
-              <select
-                id="memberMbti"
-                name="memberMbti"
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
-              >
-                <option>선택</option>
-                <option>ESFJ</option>
-                <option>ESFP</option>
-                <option>ENFJ</option>
-                <option>ENFP</option>
-                <option>ESTJ</option>
-                <option>ESTP</option>
-                <option>ENTJ</option>
-                <option>ENTP</option>
-                <option>ISFJ</option>
-                <option>ISFP</option>
-                <option>INFJ</option>
-                <option>INFP</option>
-                <option>ISTJ</option>
-                <option>ISTP</option>
-                <option>INTJ</option>
-                <option>INTP</option>
-              </select>
-            </div>
+              <option>선택</option>
+              <option>ESFJ</option>
+              <option>ESFP</option>
+              <option>ENFJ</option>
+              <option>ENFP</option>
+              <option>ESTJ</option>
+              <option>ESTP</option>
+              <option>ENTJ</option>
+              <option>ENTP</option>
+              <option>ISFJ</option>
+              <option>ISFP</option>
+              <option>INFJ</option>
+              <option>INFP</option>
+              <option>ISTJ</option>
+              <option>ISTP</option>
+              <option>INTJ</option>
+              <option>INTP</option>
+            </select>
           </div>
         </div>
       </div>
 
-      <div v-show="false" class="border-b border-gray-900/10 pb-12">
+      <!-- <div v-show="false" class="border-b border-gray-900/10 pb-12">
         <h2 class="text-base font-semibold leading-7 text-gray-900">누구랑 놀고 싶어요?</h2>
         <p class="mt-1 text-sm leading-6 text-gray-600">성별, 나이대, MBTI 를 골라요</p>
 
@@ -467,7 +462,7 @@
             </div>
           </fieldset>
         </div>
-      </div>
+      </div> -->
 
       <div class="flex items-center justify-between">
         <div class="flex items-center">
