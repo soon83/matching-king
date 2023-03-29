@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "rm_message_notification")
+@Table(schema = "message", name = "rm_message_notification")
 public class Notification extends BaseEntity {
 
     @Id

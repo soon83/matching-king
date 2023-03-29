@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(
-        name = "rm_member",
+        schema = "member", name = "rm_member",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"matching_condition_id"}, name = "UIX_matchingConditionId"),
         },
