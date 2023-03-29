@@ -12,17 +12,21 @@
         </h2>
         <p class="mt-2 text-center text-sm text-red-800">절대로 회원가입을 하지마세요,,</p>
       </div>
-      <LoginForm />
+      <LoginForm :member-email="member.email" :member-password="member.password" />
     </div>
   </div>
 </template>
 
-<script>
-// import { LockClosedIcon } from '@heroicons/vue/20/solid';
+<script setup>
+import { reactive } from 'vue';
 import LoginForm from '@/components/auth/LoginForm.vue';
-export default {
-  components: {
-    LoginForm,
-  },
+
+const member = reactive({
+  email: '2601948@gmail.com',
+  password: '1234',
+});
+
+() => {
+  member;
 };
 </script>

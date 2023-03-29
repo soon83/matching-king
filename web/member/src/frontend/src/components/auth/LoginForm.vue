@@ -13,6 +13,7 @@
               name="memberEmail"
               type="email"
               class="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+              :value="memberEmail"
             />
           </div>
         </div>
@@ -26,6 +27,7 @@
               name="memberPassword"
               type="password"
               class="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+              :value="memberPassword"
             />
           </div>
         </div>
@@ -70,6 +72,15 @@
   </div>
 </template>
 <script setup>
+import { toRefs, defineProps } from 'vue';
 import { LockClosedIcon } from '@heroicons/vue/20/solid';
+
+const props = defineProps({
+  memberEmail: String,
+  memberPassword: String,
+});
+
+const { memberEmail, memberPassword } = toRefs(props);
+console.log({ memberEmail, memberPassword });
 </script>
 <style lang=""></style>
