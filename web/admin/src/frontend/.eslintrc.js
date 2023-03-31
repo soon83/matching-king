@@ -14,6 +14,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
+    parser: '@babel/eslint-parser',
     ecmaFeatures: {
       jsx: true,
     },
@@ -25,6 +26,11 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     'react/jsx-one-expression-per-line': 0,
     'no-nested-ternary': 0,
+    'no-unused-vars': 'warn',
+    'react/jsx-props-no-spreading': ['warn'],
+    'import/no-extraneous-dependencies': 0,
+    'react/forbid-prop-types': 0,
+    'react/require-default-props': 0,
     'prettier/prettier': [
       'error',
       {
