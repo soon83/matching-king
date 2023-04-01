@@ -4,7 +4,7 @@
 
 install:
 
-```
+```bash
 npm install -g @vue/cli
 ```
 
@@ -12,7 +12,7 @@ npm install -g @vue/cli
 
 create project:
 
-```
+```bash
 vue create vue-project
 ```
 
@@ -32,7 +32,7 @@ final fetures:
 Vue CLI v5.0.8
 ? Please pick a preset: Manually select features
 ? Check the features needed for your project: Babel, Linter, Unit
-? Choose a version of Vue.js that you want to start the project with 2.x
+? Choose a version of Vue.js that you want to start the project with 3.x
 ? Pick a linter / formatter config: Prettier
 ? Pick additional lint features: Lint on save
 ? Pick a unit testing solution: Jest
@@ -50,13 +50,9 @@ Vue CLI v5.0.8
       env: {
         node: true,
       },
-      extends: [
-        'eslint:recommended',
-        'plugin:vue/recommended', // Use this if you are using Vue.js 2.x.
-        'plugin:prettier/recommended',
-      ],
+      extends: ['plugin:vue/vue3-essential', 'eslint:recommended', 'plugin:prettier/recommended'],
       parserOptions: {
-        ecmaVersion: 2020,
+        parser: '@babel/eslint-parser',
       },
       rules: {
         'prettier/prettier': [
@@ -78,6 +74,14 @@ Vue CLI v5.0.8
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
       },
+      overrides: [
+        {
+          files: ['**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
+          env: {
+            jest: true,
+          },
+        },
+     ],
     };
     ```
 
@@ -95,21 +99,24 @@ Vue CLI v5.0.8
     }
     ```
 
- - vscode 에 prettier 플러그인을 안깔아도 됨
+ - install vscode extension
+   - ESLint
+   - Vue 3 Snippets
+   - Vue Language Features (Volar)
 
 ## add vue-router
-```
-# vue add router
-```
-
-## Tailwind CSS 설치
-```
-# npm install tailwindcss@latest postcss@latest autoprefixer@latest
+```bash
+vue add router
 ```
 
-## PostCSS 플러그인에 Tailwind CSS 추가
+## tailwind CSS 설치
+```bash
+npm install tailwindcss@latest postcss@latest autoprefixer@latest
 ```
-// postcss.config.js
+
+## postCSS 플러그인에 tailwind CSS 추가
+```javascript
+  // postcss.config.js
 module.exports = {
   plugins: {
     tailwindcss: {},
@@ -119,7 +126,7 @@ module.exports = {
 ```
 
 ## tailwind 설정 파일 생성
-```
+```javascript
 // tailwind.config.js
 module.exports = {
   purge: ['./src/**/*.{vue,js,jsx,ts,tsx}'], // 프로덕션 빌드 시 사용되지 않는 클래스 삭제
@@ -132,7 +139,7 @@ module.exports = {
 };
 ```
 
-## Tailwind CSS 스타일 추가
+## tailwind CSS 스타일 추가
 ```
 // assets/tailwind.css
 @tailwind base;
@@ -146,7 +153,7 @@ module.exports = {
 import '@/assets/tailwind.css';
 ```
 
-## TailwindUI 의존성 라이브러리 설치
-```
-# npm install @headlessui/vue @heroicons/vue
+## tailwindUI 의존성 라이브러리 설치
+```bash
+npm install @headlessui/vue @heroicons/vue
 ```
