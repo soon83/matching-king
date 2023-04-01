@@ -89,33 +89,3 @@ decorator:
 
 file-path:
   root: /Users/ds/Downloads/springboot/${application.title}/${spring.application.name}
-
----
-# POSTGRESQL
-spring:
-  config:
-    activate:
-      on-profile: postgresql-test
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:15432/random_matching
-    username: random_matching
-    password: random_matching!@34
-  jpa:
-    open-in-view: false
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        show_sql: false
-        format_sql: true
-        default_batch_fetch_size: 100
-
-decorator:
-  datasource:
-    p6spy:
-      enable-logging: true
-
-file-path:
-  root: /Users/ds/Downloads/springboot/${application.title}/${spring.application.name}
