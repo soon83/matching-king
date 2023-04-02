@@ -1,7 +1,7 @@
 package com.soon83.interfaces.member;
 
 import com.soon83.domain.member.Member;
-import com.soon83.domain.member.MemberQuery;
+import com.soon83.domain.member.MemberSearchConditionQuery;
 import jakarta.validation.constraints.Email;
 import lombok.Builder;
 
@@ -16,8 +16,8 @@ public record MemberSearchCondition(
         Member.Type memberType,
         Member.Role memberRole
 ) {
-    public MemberQuery.SearchCondition toSearchMemberCondition() {
-        return MemberQuery.SearchCondition.builder()
+    public MemberSearchConditionQuery toSearchMemberCondition() {
+        return MemberSearchConditionQuery.builder()
                 .email(memberEmail)
                 .nickname(memberNickname)
                 .age(memberAge)

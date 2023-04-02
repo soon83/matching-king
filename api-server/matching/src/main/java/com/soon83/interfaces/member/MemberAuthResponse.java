@@ -12,13 +12,13 @@ public record MemberAuthResponse(
         String memberNickname,
         Member.Role memberRole
 ) {
-    public MemberAuthResponse(MemberQuery.Main query) {
+    public MemberAuthResponse(MemberQuery query) {
         this(
-                query.getId(),
-                query.getEmail(),
-                query.getPassword(),
-                query.getNickname(),
-                query.getRole()
+                query.id(),
+                query.email(),
+                query.password(),
+                query.nickname(),
+                query.role()
         );
     }
 }

@@ -3,7 +3,9 @@ package com.soon83.interfaces.member;
 import com.soon83.CommonResponse;
 import com.soon83.application.MemberApplication;
 import com.soon83.domain.auth.AuthUser;
+import com.soon83.domain.member.MemberDetailQuery;
 import com.soon83.domain.member.MemberQuery;
+import com.soon83.domain.member.MemberSearchConditionQuery;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +43,8 @@ public class MemberController {
     @GetMapping
     public CommonResponse<List<MemberResponse>> searchMembers(@ModelAttribute @Valid MemberSearchCondition request) {
         log.debug("# searchMembers # request: {}", request);
-        MemberQuery.SearchCondition condition = request.toSearchMemberCondition();
-        List<MemberQuery.Main> memberList = memberApplication.searchMembers(condition);
+        MemberSearchConditionQuery condition = request.toSearchMemberCondition();
+        List<MemberQuery> memberList = memberApplication.searchMembers(condition);
         List<MemberResponse> response = memberList.stream()
                 .map(MemberResponse::new)
                 .toList();
@@ -56,7 +58,7 @@ public class MemberController {
     public CommonResponse<MemberResponse> searchMember(@PathVariable Long memberId, @AuthenticationPrincipal AuthUser authUser) {
         log.debug("# searchMember # authUser: {}", authUser);
         log.debug("# searchMember # memberId: {}", memberId);
-        MemberQuery.Main member = memberApplication.searchMember(memberId);
+        MemberQuery member = memberApplication.searchMember(memberId);
         MemberResponse response = new MemberResponse(member);
         return CommonResponse.success(response);
     }
@@ -67,7 +69,7 @@ public class MemberController {
     @GetMapping("/{memberId}/detail")
     public CommonResponse<MemberDetailResponse> searchMemberDetail(@PathVariable Long memberId) {
         log.debug("# searchMemberDetail # memberId: {}", memberId);
-        MemberQuery.Detail member = memberApplication.searchMemberDetail(memberId);
+        MemberDetailQuery member = memberApplication.searchMemberDetail(memberId);
         MemberDetailResponse response = new MemberDetailResponse(member);
         return CommonResponse.success(response);
     }
@@ -78,7 +80,7 @@ public class MemberController {
     @GetMapping("/{memberEmail}/auth")
     public CommonResponse<MemberAuthResponse> searchMemberAuth(@PathVariable String memberEmail) {
         log.debug("# searchMemberAuth # memberEmail: {}", memberEmail);
-        MemberQuery.Main member = memberApplication.searchMemberByEmail(memberEmail);
+        MemberQuery member = memberApplication.searchMemberByEmail(memberEmail);
         MemberAuthResponse response = new MemberAuthResponse(member);
         return CommonResponse.success(response);
     }

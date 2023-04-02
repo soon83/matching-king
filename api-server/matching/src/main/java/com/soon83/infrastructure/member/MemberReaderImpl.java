@@ -1,8 +1,8 @@
 package com.soon83.infrastructure.member;
 
 import com.soon83.domain.member.Member;
-import com.soon83.domain.member.MemberQuery;
 import com.soon83.domain.member.MemberReader;
+import com.soon83.domain.member.MemberSearchConditionQuery;
 import com.soon83.domain.member.matchingcondition.MatchingCondition;
 import com.soon83.exception.member.MemberAlreadyExistsException;
 import com.soon83.exception.member.MemberNotFoundException;
@@ -20,7 +20,7 @@ public class MemberReaderImpl implements MemberReader {
     private final MemberRepository memberRepository;
 
     @Override
-    public List<Member> readAll(MemberQuery.SearchCondition condition) {
+    public List<Member> readAll(MemberSearchConditionQuery condition) {
         // TODO queryDsl 로 조회하도록 변경, 페이징도 하자
         return memberRepository.findAll();
     }

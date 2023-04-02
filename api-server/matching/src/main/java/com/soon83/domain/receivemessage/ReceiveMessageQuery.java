@@ -16,7 +16,7 @@ public class ReceiveMessageQuery {
         private final Long id;
         private boolean hiddenFromSender;
         private boolean hiddenFromTargetMember;
-        private final MemberQuery.Main sender;
+        private final MemberQuery sender;
         private final Long targetMemberId;
         private final Long messageId;
         private final NotificationQuery.Main messageNotification;
@@ -26,7 +26,7 @@ public class ReceiveMessageQuery {
                 Long id,
                 boolean hiddenFromSender,
                 boolean hiddenFromTargetMember,
-                MemberQuery.Main sender,
+                MemberQuery sender,
                 Long targetMemberId,
                 Long messageId,
                 NotificationQuery.Main messageNotification
@@ -44,7 +44,7 @@ public class ReceiveMessageQuery {
             this.id = entity.getId();
             this.hiddenFromSender = entity.isHiddenFromSender();
             this.hiddenFromTargetMember = entity.isHiddenFromTargetMember();
-            this.sender = new MemberQuery.Main(entity.getSender());
+            this.sender = new MemberQuery(entity.getSender());
             this.targetMemberId = entity.getTargetMember().getId();
             this.messageId = entity.getMessage().getId();
             this.messageNotification = new NotificationQuery.Main(entity.getNotification());
@@ -56,7 +56,7 @@ public class ReceiveMessageQuery {
         private final Long id;
         private boolean hiddenFromSender;
         private boolean hiddenFromTargetMember;
-        private final MemberQuery.Main sender;
+        private final MemberQuery sender;
         private final Long targetMemberId;
         private final MessageQuery.Main message;
         private final NotificationQuery.Main messageNotification;
@@ -67,7 +67,7 @@ public class ReceiveMessageQuery {
                 Long id,
                 boolean hiddenFromSender,
                 boolean hiddenFromTargetMember,
-                MemberQuery.Main sender,
+                MemberQuery sender,
                 Long targetMemberId,
                 MessageQuery.Main message,
                 NotificationQuery.Main messageNotification,
@@ -87,7 +87,7 @@ public class ReceiveMessageQuery {
             this.id = entity.getId();
             this.hiddenFromSender = entity.isHiddenFromSender();
             this.hiddenFromTargetMember = entity.isHiddenFromTargetMember();
-            this.sender = new MemberQuery.Main(entity.getSender());
+            this.sender = new MemberQuery(entity.getSender());
             this.targetMemberId = entity.getTargetMember().getId();
             this.message = new MessageQuery.Main(entity.getMessage());
             this.messageNotification = new NotificationQuery.Main(entity.getNotification());
@@ -98,7 +98,7 @@ public class ReceiveMessageQuery {
             this.id = entity.getId();
             this.hiddenFromSender = entity.isHiddenFromSender();
             this.hiddenFromTargetMember = entity.isHiddenFromTargetMember();
-            this.sender = new MemberQuery.Main(entity.getSender());
+            this.sender = new MemberQuery(entity.getSender());
             this.targetMemberId = entity.getTargetMember().getId();
             this.message = new MessageQuery.Main(entity.getMessage());
             this.messageNotification = new NotificationQuery.Main(entity.getNotification());

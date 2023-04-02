@@ -1,8 +1,6 @@
 package com.soon83.application;
 
-import com.soon83.domain.member.MemberCommand;
-import com.soon83.domain.member.MemberQuery;
-import com.soon83.domain.member.MemberService;
+import com.soon83.domain.member.*;
 import com.soon83.domain.member.matchingcondition.MatchingConditionCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,19 +22,19 @@ public class MemberApplication {
         return memberService.registerMember(createMemberCommand, createMatchingConditionCommand);
     }
 
-    public List<MemberQuery.Main> searchMembers(MemberQuery.SearchCondition condition) {
+    public List<MemberQuery> searchMembers(MemberSearchConditionQuery condition) {
         return memberService.searchMembers(condition);
     }
 
-    public MemberQuery.Main searchMember(Long memberId) {
+    public MemberQuery searchMember(Long memberId) {
         return memberService.searchMember(memberId);
     }
 
-    public MemberQuery.Detail searchMemberDetail(Long memberId) {
+    public MemberDetailQuery searchMemberDetail(Long memberId) {
         return memberService.searchMemberDetail(memberId);
     }
 
-    public MemberQuery.Main searchMemberByEmail(String memberEmail) {
+    public MemberQuery searchMemberByEmail(String memberEmail) {
         return memberService.searchMemberByEmail(memberEmail);
     }
 

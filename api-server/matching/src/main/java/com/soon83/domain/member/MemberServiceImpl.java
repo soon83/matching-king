@@ -37,30 +37,30 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<MemberQuery.Main> searchMembers(MemberQuery.SearchCondition condition) {
+    public List<MemberQuery> searchMembers(MemberSearchConditionQuery condition) {
         return memberReader.readAll(condition).stream()
-                .map(MemberQuery.Main::new)
+                .map(MemberQuery::new)
                 .toList();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public MemberQuery.Main searchMember(Long memberId) {
+    public MemberQuery searchMember(Long memberId) {
         Member member = memberReader.readById(memberId);
-        return new MemberQuery.Main(member);
+        return new MemberQuery(member);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public MemberQuery.Detail searchMemberDetail(Long memberId) {
+    public MemberDetailQuery searchMemberDetail(Long memberId) {
         Member member = memberReader.readMemberDetailById(memberId);
-        return new MemberQuery.Detail(member);
+        return new MemberDetailQuery(member);
     }
 
     @Override
-    public MemberQuery.Main searchMemberByEmail(String memberEmail) {
+    public MemberQuery searchMemberByEmail(String memberEmail) {
         Member member = memberReader.readByEmail(memberEmail);
-        return new MemberQuery.Main(member);
+        return new MemberQuery(member);
     }
 
     @Override

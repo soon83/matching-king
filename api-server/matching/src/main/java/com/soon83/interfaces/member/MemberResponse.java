@@ -15,16 +15,16 @@ public record MemberResponse(
         Member.Type memberType,
         Member.Role memberRole
 ) {
-    public MemberResponse(MemberQuery.Main query) {
+    public MemberResponse(MemberQuery query) {
         this(
-                query.getId(),
-                query.getEmail(),
-                query.getNickname(),
-                query.getAge(),
-                query.getGender(),
-                query.getMbti(),
-                query.getType(),
-                query.getRole()
+                query.id(),
+                query.email(),
+                query.nickname(),
+                query.age(),
+                query.gender(),
+                query.mbti(),
+                query.type(),
+                query.role()
         );
     }
 }
