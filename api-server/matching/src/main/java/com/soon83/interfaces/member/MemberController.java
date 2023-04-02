@@ -26,12 +26,12 @@ public class MemberController {
      */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public CommonResponse<MemberDto.CreateResponse> registerMember(@RequestBody @Valid MemberDto.RegisterRequest request) {
+    public CommonResponse<MemberCreateResponse> registerMember(@RequestBody @Valid MemberRegisterRequest request) {
         log.debug("# registerMember # request: {}", request);
         var createMemberCommand = request.toCreateMemberCommand();
-        var createMatchingConditionCommand = request.getMemberMatchingCondition().toCreateMatchingConditionCommand();
+        var createMatchingConditionCommand = request.memberMatchingCondition().toCreateMatchingConditionCommand();
         Long memberId = memberApplication.registerMember(createMemberCommand, createMatchingConditionCommand);
-        MemberDto.CreateResponse response = new MemberDto.CreateResponse(memberId);
+        MemberCreateResponse response = new MemberCreateResponse(memberId);
         return CommonResponse.success(response);
     }
 
@@ -39,12 +39,12 @@ public class MemberController {
      * [회원] 목록 조회
      */
     @GetMapping
-    public CommonResponse<List<MemberDto.Main>> searchMembers(@ModelAttribute @Valid MemberDto.SearchCondition request) {
+    public CommonResponse<List<MemberResponse>> searchMembers(@ModelAttribute @Valid MemberSearchCondition request) {
         log.debug("# searchMembers # request: {}", request);
         MemberQuery.SearchCondition condition = request.toSearchMemberCondition();
         List<MemberQuery.Main> memberList = memberApplication.searchMembers(condition);
-        List<MemberDto.Main> response = memberList.stream()
-                .map(MemberDto.Main::new)
+        List<MemberResponse> response = memberList.stream()
+                .map(MemberResponse::new)
                 .toList();
         return CommonResponse.success(response);
     }
@@ -53,11 +53,11 @@ public class MemberController {
      * [회원] 단건 조회
      */
     @GetMapping("/{memberId}")
-    public CommonResponse<MemberDto.Main> searchMember(@PathVariable Long memberId, @AuthenticationPrincipal AuthUser authUser) {
+    public CommonResponse<MemberResponse> searchMember(@PathVariable Long memberId, @AuthenticationPrincipal AuthUser authUser) {
         log.debug("# searchMember # authUser: {}", authUser);
         log.debug("# searchMember # memberId: {}", memberId);
         MemberQuery.Main member = memberApplication.searchMember(memberId);
-        MemberDto.Main response = new MemberDto.Main(member);
+        MemberResponse response = new MemberResponse(member);
         return CommonResponse.success(response);
     }
 
@@ -65,10 +65,10 @@ public class MemberController {
      * [회원] 단건 조회 (상세)
      */
     @GetMapping("/{memberId}/detail")
-    public CommonResponse<MemberDto.Detail> searchMemberDetail(@PathVariable Long memberId) {
+    public CommonResponse<MemberDetailResponse> searchMemberDetail(@PathVariable Long memberId) {
         log.debug("# searchMemberDetail # memberId: {}", memberId);
         MemberQuery.Detail member = memberApplication.searchMemberDetail(memberId);
-        MemberDto.Detail response = new MemberDto.Detail(member);
+        MemberDetailResponse response = new MemberDetailResponse(member);
         return CommonResponse.success(response);
     }
 
@@ -76,10 +76,10 @@ public class MemberController {
      * [회원] 단건 조회 (인증)
      */
     @GetMapping("/{memberEmail}/auth")
-    public CommonResponse<MemberDto.Auth> searchMemberAuth(@PathVariable String memberEmail) {
+    public CommonResponse<MemberAuthResponse> searchMemberAuth(@PathVariable String memberEmail) {
         log.debug("# searchMemberAuth # memberEmail: {}", memberEmail);
         MemberQuery.Main member = memberApplication.searchMemberByEmail(memberEmail);
-        MemberDto.Auth response = new MemberDto.Auth(member);
+        MemberAuthResponse response = new MemberAuthResponse(member);
         return CommonResponse.success(response);
     }
 
@@ -87,10 +87,10 @@ public class MemberController {
      * [회원] 단건 수정
      */
     @PutMapping("/{memberId}")
-    public CommonResponse<Void> editMember(@PathVariable Long memberId, @RequestBody @Valid MemberDto.EditRequest request) {
+    public CommonResponse<Void> editMember(@PathVariable Long memberId, @RequestBody @Valid MemberEditRequest request) {
         log.debug("# editMember # memberId: {}, request: {}", memberId, request);
         var editMemberCommand = request.toEditMemberCommand();
-        var editMatchingConditionCommand = request.getMemberMatchingCondition().toEditMatchingConditionCommand();
+        var editMatchingConditionCommand = request.memberMatchingCondition().toEditMatchingConditionCommand();
         memberApplication.editMember(memberId, editMemberCommand, editMatchingConditionCommand);
         return CommonResponse.success();
     }

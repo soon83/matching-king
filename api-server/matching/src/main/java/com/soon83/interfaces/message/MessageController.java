@@ -21,11 +21,11 @@ public class MessageController {
      */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public CommonResponse<MessageDto.RegisterResponse> registerMessage(@RequestBody @Valid MessageDto.RegisterRequest request) {
+    public CommonResponse<MessageRegisterResponse> registerMessage(@RequestBody @Valid MessageRegisterRequest request) {
         log.debug("# registerMessage # request: {}", request);
         var command = request.toCreateMessageCommand();
         Long messageId = messageApplication.registerMessage(command);
-        MessageDto.RegisterResponse response = new MessageDto.RegisterResponse(messageId);
+        MessageRegisterResponse response = new MessageRegisterResponse(messageId);
         return CommonResponse.success(response);
     }
 }

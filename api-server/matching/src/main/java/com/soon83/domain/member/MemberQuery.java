@@ -11,7 +11,7 @@ public class MemberQuery {
     public static class SearchCondition {
         private String email;
         private String nickname;
-        private int age;
+        private Integer age;
         private Member.Gender gender;
         private Member.Mbti mbti;
         private Member.Type type;
@@ -21,7 +21,7 @@ public class MemberQuery {
         public SearchCondition(
                 String email,
                 String nickname,
-                int age,
+                Integer age,
                 Member.Gender gender,
                 Member.Mbti mbti,
                 Member.Type type,

@@ -22,14 +22,14 @@ public class MessageReplyController {
      */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public CommonResponse<MessageReplyDto.RegisterResponse> registerMessageReply(
+    public CommonResponse<MessageReplyRegisterResponse> registerMessageReply(
             @PathVariable Long receiveMessageId,
-            @RequestBody @Valid MessageReplyDto.RegisterRequest request
+            @RequestBody @Valid MessageReplyRegisterRequest request
     ) {
         log.debug("# registerMessageReply # request: {}", request);
         var command = request.toCreateMessageReplyCommand();
         Long messageReplyId = receiveMessageApplication.registerMessageReply(receiveMessageId, command);
-        MessageReplyDto.RegisterResponse response = new MessageReplyDto.RegisterResponse(messageReplyId);
+        MessageReplyRegisterResponse response = new MessageReplyRegisterResponse(messageReplyId);
         return CommonResponse.success(response);
     }
 }

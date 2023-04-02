@@ -4,6 +4,7 @@ import com.soon83.CommonResponse;
 import com.soon83.application.NotificationApplication;
 import com.soon83.application.ReceiveMessageApplication;
 import com.soon83.domain.receivemessage.ReceiveMessageQuery;
+import com.soon83.interfaces.reply.MessageReplyResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,11 +26,11 @@ public class ReceiveMessageController {
      * - 수신된 쪽지 알림
      */
     @GetMapping("/notifications")
-    public CommonResponse<List<ReceiveMessageDto.NotificationResponse>> searchNotificationsOfTargetMember(@ModelAttribute @Valid ReceiveMessageDto.SearchCondition request) {
+    public CommonResponse<List<ReceiveMessageNotificationResponse>> searchNotificationsOfTargetMember(@ModelAttribute @Valid ReceiveMessageSearchCondition request) {
         log.debug("# searchNotificationsOfTargetMember # request: {}", request);
-        List<ReceiveMessageQuery.Notification> notifications = receiveMessageApplication.searchNotificationsOfTargetMember(request.getTargetMemberId());
-        List<ReceiveMessageDto.NotificationResponse> response = notifications.stream()
-                .map(ReceiveMessageDto.NotificationResponse::new)
+        List<ReceiveMessageQuery.Notification> notifications = receiveMessageApplication.searchNotificationsOfTargetMember(request.targetMemberId());
+        List<ReceiveMessageNotificationResponse> response = notifications.stream()
+                .map(ReceiveMessageNotificationResponse::new)
                 .toList();
         return CommonResponse.success(response);
     }
@@ -39,7 +40,7 @@ public class ReceiveMessageController {
      * - 쪽지 읽음 / 읽음 표시
      */
     @PatchMapping("/{receiveMessageId}/notifications/{messageNotificationId}/hide")
-    public CommonResponse<Void> changeToReadNotification(@PathVariable Long receiveMessageId, @PathVariable Long messageNotificationId, @RequestBody @Valid NotificationDto.ChangeReadRequest request) {
+    public CommonResponse<Void> changeToReadNotification(@PathVariable Long receiveMessageId, @PathVariable Long messageNotificationId, @RequestBody @Valid NotificationChangeReadRequest request) {
         log.debug("# changeToReadNotification # request: {}", request);
         var command = request.toUpdateNotificationCommand(messageNotificationId);
         notificationApplication.changeToReadNotification(receiveMessageId, command);
@@ -51,7 +52,7 @@ public class ReceiveMessageController {
      * - 쪽지 알림 삭제
      */
     @DeleteMapping("/{receiveMessageId}/notifications/{messageNotificationId}")
-    public CommonResponse<Void> removeNotification(@PathVariable Long receiveMessageId, @PathVariable Long messageNotificationId, @RequestBody @Valid NotificationDto.RemoveRequest request) {
+    public CommonResponse<Void> removeNotification(@PathVariable Long receiveMessageId, @PathVariable Long messageNotificationId, @RequestBody @Valid NotificationRemoveRequest request) {
         log.debug("# removeNotification # request: {}", request);
         var command = request.toDeleteNotificationCommand(messageNotificationId);
         notificationApplication.removeNotification(receiveMessageId, command);
@@ -63,12 +64,12 @@ public class ReceiveMessageController {
      * - 내 쪽지함 보기
      */
     @GetMapping
-    public CommonResponse<List<ReceiveMessageDto.Main>> searchReceiveMessagesOfTargetMember(@ModelAttribute @Valid ReceiveMessageDto.SearchCondition request) {
+    public CommonResponse<List<ReceiveMessageResponse>> searchReceiveMessagesOfTargetMember(@ModelAttribute @Valid ReceiveMessageSearchCondition request) {
         log.debug("# searchReceiveMessagesOfTargetMember # request: {}", request);
-        List<ReceiveMessageQuery.Main> receiveMessagesOfMember = receiveMessageApplication.searchReceiveMessagesOfTargetMember(request.getTargetMemberId());
-        List<ReceiveMessageDto.Main> response = receiveMessagesOfMember.stream()
-                .map(rm -> new ReceiveMessageDto.Main(rm, rm.getMessageReplies().stream()
-                        .map(MessageReplyDto.Main::new)
+        List<ReceiveMessageQuery.Main> receiveMessagesOfMember = receiveMessageApplication.searchReceiveMessagesOfTargetMember(request.targetMemberId());
+        List<ReceiveMessageResponse> response = receiveMessagesOfMember.stream()
+                .map(rm -> new ReceiveMessageResponse(rm, rm.getMessageReplies().stream()
+                        .map(MessageReplyResponse::new)
                         .toList()))
                 .toList();
         return CommonResponse.success(response);
@@ -79,7 +80,7 @@ public class ReceiveMessageController {
      * - 쪽지 삭제
      */
     @DeleteMapping("{receiveMessageId}")
-    public CommonResponse<Void> removeReceiveMessage(@PathVariable Long receiveMessageId, @RequestBody @Valid ReceiveMessageDto.RemoveRequest request) {
+    public CommonResponse<Void> removeReceiveMessage(@PathVariable Long receiveMessageId, @RequestBody @Valid ReceiveMessageRemoveRequest request) {
         log.debug("# removeReceiveMessage # request: {}", request);
         var command = request.toDeleteReceiveMessageCommand();
         receiveMessageApplication.removeReceiveMessage(receiveMessageId, command);
