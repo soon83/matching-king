@@ -52,7 +52,7 @@ public class MessageReply extends BaseEntity {
         this.content = content;
         this.isRead = isRead;
         this.replyMember = replyMember;
-        setReceiveMessage(receiveMessage); // this.receiveMessage = receiveMessage;
+        this.receiveMessage = receiveMessage; // setReceiveMessage(receiveMessage);
         setMessage(message); // this.message = message;
     }
 
@@ -62,13 +62,13 @@ public class MessageReply extends BaseEntity {
         }
     }
 
-    public void setReceiveMessage(ReceiveMessage receiveMessage) {
+    /*public void setReceiveMessage(ReceiveMessage receiveMessage) {
         if (this.receiveMessage != null) {
             this.receiveMessage.getMessageReplies().remove(this);
         }
         this.receiveMessage = receiveMessage;
         receiveMessage.getMessageReplies().add(this);
-    }
+    }*/
 
     public void setMessage(Message message) {
         if (this.message != null) {

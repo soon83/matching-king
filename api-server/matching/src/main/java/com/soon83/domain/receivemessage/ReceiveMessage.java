@@ -50,8 +50,6 @@ public class ReceiveMessage extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "message_notification_id", nullable = false, foreignKey = @ForeignKey(name = "FK_receiveMessage_messageNotification"))
     private Notification notification;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "receiveMessage")
-    private List<MessageReply> messageReplies = new ArrayList<>();
 
     @Builder
     public ReceiveMessage(
