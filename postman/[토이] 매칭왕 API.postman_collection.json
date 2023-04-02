@@ -403,7 +403,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/v1/receive-messages/notifications?targetMemberId=5",
+							"raw": "{{url}}/api/v1/receive-messages/notifications?targetMemberId=8",
 							"host": [
 								"{{url}}"
 							],
@@ -416,7 +416,7 @@
 							"query": [
 								{
 									"key": "targetMemberId",
-									"value": "5"
+									"value": "8"
 								}
 							]
 						}
@@ -430,7 +430,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"targetMemberId\": 63\n}",
+							"raw": "{\n    \"targetMemberId\": 12\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -438,7 +438,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/receive-messages/10/notifications/10/hide",
+							"raw": "{{url}}/api/v1/receive-messages/331/notifications/331/hide",
 							"host": [
 								"{{url}}"
 							],
@@ -446,9 +446,9 @@
 								"api",
 								"v1",
 								"receive-messages",
-								"10",
+								"331",
 								"notifications",
-								"10",
+								"331",
 								"hide"
 							]
 						}
@@ -462,7 +462,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"targetMemberId\": 63\n}",
+							"raw": "{\n    \"targetMemberId\": 12\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -470,7 +470,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/receive-messages/10/notifications/10",
+							"raw": "{{url}}/api/v1/receive-messages/331/notifications/331",
 							"host": [
 								"{{url}}"
 							],
@@ -478,9 +478,9 @@
 								"api",
 								"v1",
 								"receive-messages",
-								"10",
+								"331",
 								"notifications",
-								"10"
+								"331"
 							]
 						}
 					},
@@ -527,7 +527,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/v1/receive-messages?targetMemberId=5",
+							"raw": "{{url}}/api/v1/receive-messages?targetMemberId=11",
 							"host": [
 								"{{url}}"
 							],
@@ -539,7 +539,7 @@
 							"query": [
 								{
 									"key": "targetMemberId",
-									"value": "5"
+									"value": "11"
 								}
 							]
 						}
@@ -553,7 +553,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"targetMemberId\": 20\n}",
+							"raw": "{\n    \"targetMemberId\": 12\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -561,7 +561,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/receive-messages/108",
+							"raw": "{{url}}/api/v1/receive-messages/4",
 							"host": [
 								"{{url}}"
 							],
@@ -569,7 +569,7 @@
 								"api",
 								"v1",
 								"receive-messages",
-								"108"
+								"4"
 							]
 						}
 					},
@@ -617,7 +617,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"messageReplyContent\": \"{{$randomLoremSentence}}\",\n    \"replyMemberId\": 5\n}",
+							"raw": "{\n    \"messageReplyContent\": \"{{$randomLoremSentence}}\",\n    \"replyMemberId\": 11\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -625,7 +625,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/receive-messages/4/replies",
+							"raw": "{{url}}/api/v1/receive-messages/6/replies",
 							"host": [
 								"{{url}}"
 							],
@@ -633,7 +633,7 @@
 								"api",
 								"v1",
 								"receive-messages",
-								"4",
+								"6",
 								"replies"
 							]
 						}

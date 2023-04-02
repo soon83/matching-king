@@ -33,7 +33,7 @@ public class ReceiveMessageServiceImpl implements ReceiveMessageService {
     public List<ReceiveMessageQuery> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
         List<ReceiveMessage> receiveMessages = receiveMessageReader.searchReceiveMessagesOfTargetMember(targetMemberId);
         return receiveMessages.stream()
-                .map(rm -> new ReceiveMessageQuery(rm, rm.getMessageReplies().stream()
+                .map(rm -> new ReceiveMessageQuery(rm, rm.getMessage().getMessageReplies().stream()
                         .map(MessageReplyQuery::new)
                         .toList()))
                 .toList();
@@ -70,7 +70,7 @@ public class ReceiveMessageServiceImpl implements ReceiveMessageService {
         receiveMessage.validateTargetMemberIdEqual(command.replyMemberId());
         MessageReply messageReply = receiveMessageReader.findLatelyMessageReplyByMessageId(receiveMessage.getMessage().getId());
         validateDoNotSeriesReply(command, receiveMessage, messageReply);
-        MessageReply createdMessageReply = receiveMessageStore.create(command.toEntity(receiveMessage.getTargetMember(), receiveMessage));
+        MessageReply createdMessageReply = receiveMessageStore.create(command.toEntity(receiveMessage.getTargetMember(), receiveMessage, receiveMessage.getMessage()));
         return createdMessageReply.getId();
     }
 

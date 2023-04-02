@@ -3,6 +3,7 @@ package com.soon83.domain.message;
 import com.soon83.domain.BaseEntity;
 import com.soon83.domain.member.Member;
 import com.soon83.domain.receivemessage.ReceiveMessage;
+import com.soon83.domain.receivemessage.reply.MessageReply;
 import com.soon83.exception.message.MessageReplySeriesException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -35,6 +36,8 @@ public class Message extends BaseEntity {
     private Member sender;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "message")
     private List<ReceiveMessage> receiveMessages = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "message")
+    private List<MessageReply> messageReplies = new ArrayList<>();
 
     @Builder
     public Message(
