@@ -2,7 +2,8 @@ package com.soon83.domain.member;
 
 import com.soon83.domain.limit.Limit;
 import com.soon83.domain.limit.LimitReader;
-import com.soon83.domain.member.matchingcondition.MatchingConditionCommand;
+import com.soon83.domain.member.matchingcondition.MatchingConditionCreateCommand;
+import com.soon83.domain.member.matchingcondition.MatchingConditionEditCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,12 +25,12 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public Long registerMember(
-            MemberCommand.CreateMember createMemberCommand,
-            MatchingConditionCommand.CreateMatchingCondition createMatchingConditionCommand
+            MemberCreateCommand createMemberCommand,
+            MatchingConditionCreateCommand createMatchingConditionCommand
     ) {
-        memberReader.checkAlreadyExistsEmail(createMemberCommand.getEmail());
-        Limit limit = limitReader.readByMemberType(createMemberCommand.getType());
-        String encodedPassword = passwordEncoder.encode(createMemberCommand.getPassword());
+        memberReader.checkAlreadyExistsEmail(createMemberCommand.email());
+        Limit limit = limitReader.readByMemberType(createMemberCommand.type());
+        String encodedPassword = passwordEncoder.encode(createMemberCommand.password());
         Member member = createMemberCommand.toEntity(limit, createMatchingConditionCommand.toEntity(), encodedPassword);
         Member createdMember = memberStore.create(member);
         return createdMember.getId();
@@ -67,8 +68,8 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public void editMember(
             Long memberId,
-            MemberCommand.EditMember editMemberCommand,
-            MatchingConditionCommand.EditMatchingCondition editMatchingConditionCommand
+            MemberEditCommand editMemberCommand,
+            MatchingConditionEditCommand editMatchingConditionCommand
     ) {
         Member member = memberReader.readById(memberId);
         editMemberCommand.update(member);

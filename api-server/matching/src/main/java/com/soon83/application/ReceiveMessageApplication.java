@@ -1,9 +1,10 @@
 package com.soon83.application;
 
-import com.soon83.domain.receivemessage.ReceiveMessageCommand;
+import com.soon83.domain.receivemessage.ReceiveMessageDeleteCommand;
+import com.soon83.domain.receivemessage.ReceiveMessageNotificationQuery;
 import com.soon83.domain.receivemessage.ReceiveMessageQuery;
 import com.soon83.domain.receivemessage.ReceiveMessageService;
-import com.soon83.domain.receivemessage.reply.MessageReplyCommand;
+import com.soon83.domain.receivemessage.reply.MessageReplyCreateCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,22 +15,21 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ReceiveMessageApplication {
-
     private final ReceiveMessageService receiveMessageService;
 
-    public List<ReceiveMessageQuery.Notification> searchNotificationsOfTargetMember(Long targetMemberId) {
+    public List<ReceiveMessageNotificationQuery> searchNotificationsOfTargetMember(Long targetMemberId) {
         return receiveMessageService.searchNotificationsOfTargetMember(targetMemberId);
     }
 
-    public List<ReceiveMessageQuery.Main> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
+    public List<ReceiveMessageQuery> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
         return receiveMessageService.searchReceiveMessagesOfTargetMember(targetMemberId);
     }
 
-    public void removeReceiveMessage(Long receiveMessageId, ReceiveMessageCommand.DeleteReceiveMessage command) {
+    public void removeReceiveMessage(Long receiveMessageId, ReceiveMessageDeleteCommand command) {
         receiveMessageService.removeReceiveMessage(receiveMessageId, command);
     }
 
-    public Long registerMessageReply(Long receiveMessageId, MessageReplyCommand.CreateReply command) {
+    public Long registerMessageReply(Long receiveMessageId, MessageReplyCreateCommand command) {
         return receiveMessageService.registerMessageReply(receiveMessageId, command);
     }
 }

@@ -1,8 +1,9 @@
 package com.soon83.domain.receivemessage;
 
-import com.soon83.domain.receivemessage.notification.NotificationCommand;
+import com.soon83.domain.receivemessage.notification.NotificationDeleteCommand;
+import com.soon83.domain.receivemessage.notification.NotificationUpdateToReadCommand;
 import com.soon83.domain.receivemessage.reply.MessageReply;
-import com.soon83.domain.receivemessage.reply.MessageReplyCommand;
+import com.soon83.domain.receivemessage.reply.MessageReplyCreateCommand;
 import com.soon83.domain.receivemessage.reply.MessageReplyQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,60 +22,60 @@ public class ReceiveMessageServiceImpl implements ReceiveMessageService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ReceiveMessageQuery.Notification> searchNotificationsOfTargetMember(Long targetMemberId) {
+    public List<ReceiveMessageNotificationQuery> searchNotificationsOfTargetMember(Long targetMemberId) {
         return receiveMessageReader.searchNotificationsOfTargetMember(targetMemberId).stream()
-                .map(ReceiveMessageQuery.Notification::new)
+                .map(ReceiveMessageNotificationQuery::new)
                 .toList();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ReceiveMessageQuery.Main> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
+    public List<ReceiveMessageQuery> searchReceiveMessagesOfTargetMember(Long targetMemberId) {
         List<ReceiveMessage> receiveMessages = receiveMessageReader.searchReceiveMessagesOfTargetMember(targetMemberId);
         return receiveMessages.stream()
-                .map(rm -> new ReceiveMessageQuery.Main(rm, rm.getMessageReplies().stream()
-                        .map(MessageReplyQuery.Main::new)
+                .map(rm -> new ReceiveMessageQuery(rm, rm.getMessageReplies().stream()
+                        .map(MessageReplyQuery::new)
                         .toList()))
                 .toList();
     }
 
     @Override
     @Transactional
-    public void removeReceiveMessage(Long receiveMessageId, ReceiveMessageCommand.DeleteReceiveMessage command) {
+    public void removeReceiveMessage(Long receiveMessageId, ReceiveMessageDeleteCommand command) {
         ReceiveMessage receiveMessage = receiveMessageReader.readById(receiveMessageId);
-        receiveMessage.validateTargetMemberIdEqual(command.getTargetMemberId());
+        receiveMessage.validateTargetMemberIdEqual(command.targetMemberId());
         receiveMessage.deleteReceiveMessage();
     }
 
     @Override
     @Transactional
-    public void changeToReadNotification(Long receiveMessageId, NotificationCommand.UpdateToRead command) {
+    public void changeToReadNotification(Long receiveMessageId, NotificationUpdateToReadCommand command) {
         ReceiveMessage receiveMessage = receiveMessageReader.readById(receiveMessageId);
-        receiveMessage.validateReceiveMessageByTargetMember(command.getTargetMemberId(), command.getMessageNotificationId());
+        receiveMessage.validateReceiveMessageByTargetMember(command.targetMemberId(), command.messageNotificationId());
         receiveMessage.changeToReadNotification();
     }
 
     @Override
     @Transactional
-    public void removeReceiveMessageNotification(Long receiveMessageId, NotificationCommand.DeleteNotification command) {
+    public void removeReceiveMessageNotification(Long receiveMessageId, NotificationDeleteCommand command) {
         ReceiveMessage receiveMessage = receiveMessageReader.readById(receiveMessageId);
-        receiveMessage.validateReceiveMessageByTargetMember(command.getTargetMemberId(), command.getMessageNotificationId());
+        receiveMessage.validateReceiveMessageByTargetMember(command.targetMemberId(), command.messageNotificationId());
         receiveMessage.deleteNotification();
     }
 
     @Override
     @Transactional
-    public Long registerMessageReply(Long receiveMessageId, MessageReplyCommand.CreateReply command) {
+    public Long registerMessageReply(Long receiveMessageId, MessageReplyCreateCommand command) {
         ReceiveMessage receiveMessage = receiveMessageReader.readById(receiveMessageId);
-        receiveMessage.validateTargetMemberIdEqual(command.getReplyMemberId());
+        receiveMessage.validateTargetMemberIdEqual(command.replyMemberId());
         MessageReply messageReply = receiveMessageReader.findLatelyMessageReplyByMessageId(receiveMessage.getMessage().getId());
         validateDoNotSeriesReply(command, receiveMessage, messageReply);
         MessageReply createdMessageReply = receiveMessageStore.create(command.toEntity(receiveMessage.getTargetMember(), receiveMessage));
         return createdMessageReply.getId();
     }
 
-    private static void validateDoNotSeriesReply(MessageReplyCommand.CreateReply command, ReceiveMessage receiveMessage, MessageReply messageReply) {
-        if (messageReply == null) receiveMessage.validateMessageBy(command.getReplyMemberId());
-        else messageReply.validateReplyMemberEqual(command.getReplyMemberId());
+    private static void validateDoNotSeriesReply(MessageReplyCreateCommand command, ReceiveMessage receiveMessage, MessageReply messageReply) {
+        if (messageReply == null) receiveMessage.validateMessageBy(command.replyMemberId());
+        else messageReply.validateReplyMemberEqual(command.replyMemberId());
     }
 }

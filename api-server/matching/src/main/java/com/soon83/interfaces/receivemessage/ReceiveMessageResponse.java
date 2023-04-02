@@ -19,15 +19,18 @@ public record ReceiveMessageResponse(
         NotificationResponse messageNotification,
         List<MessageReplyResponse> messageReplies
 ) {
-    public ReceiveMessageResponse(ReceiveMessageQuery.Main query, List<MessageReplyResponse> messageReplies) {
+    public ReceiveMessageResponse(
+            ReceiveMessageQuery query,
+            List<MessageReplyResponse> messageReplies
+    ) {
         this(
-                query.getId(),
-                query.isHiddenFromSender(),
-                query.isHiddenFromTargetMember(),
-                new MemberResponse(query.getSender()),
-                query.getTargetMemberId(),
-                new MessageResponse(query.getMessage()),
-                new NotificationResponse(query.getMessageNotification()),
+                query.id(),
+                query.hiddenFromSender(),
+                query.hiddenFromTargetMember(),
+                new MemberResponse(query.sender()),
+                query.targetMemberId(),
+                new MessageResponse(query.message()),
+                new NotificationResponse(query.messageNotification()),
                 messageReplies
         );
     }

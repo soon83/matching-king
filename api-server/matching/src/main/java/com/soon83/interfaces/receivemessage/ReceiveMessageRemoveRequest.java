@@ -1,14 +1,14 @@
 package com.soon83.interfaces.receivemessage;
 
-import com.soon83.domain.receivemessage.ReceiveMessageCommand;
+import com.soon83.domain.receivemessage.ReceiveMessageDeleteCommand;
 import lombok.Builder;
 
 @Builder
 public record ReceiveMessageRemoveRequest(
         Long targetMemberId
 ) {
-    public ReceiveMessageCommand.DeleteReceiveMessage toDeleteReceiveMessageCommand() {
-        return ReceiveMessageCommand.DeleteReceiveMessage.builder()
+    public ReceiveMessageDeleteCommand toDeleteReceiveMessageCommand() {
+        return ReceiveMessageDeleteCommand.builder()
                 .targetMemberId(targetMemberId)
                 .build();
     }

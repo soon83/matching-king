@@ -7,7 +7,6 @@ import org.springframework.util.ObjectUtils;
 import java.util.List;
 
 public class CustomExpressionUtil {
-
     public static OrderSpecifier<Double> rand() {
         return Expressions.numberTemplate(Double.class, "function('rand')").asc();
     }

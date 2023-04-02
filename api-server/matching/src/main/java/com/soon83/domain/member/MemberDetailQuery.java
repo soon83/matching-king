@@ -14,8 +14,8 @@ public record MemberDetailQuery(
         Member.Mbti mbti,
         Member.Type type,
         Member.Role role,
-        LimitQuery.Main limit,
-        MatchingConditionQuery.Main matchingCondition
+        LimitQuery limit,
+        MatchingConditionQuery matchingCondition
 ) {
     public MemberDetailQuery(Member entity) {
         this(
@@ -27,8 +27,8 @@ public record MemberDetailQuery(
                 entity.getMbti(),
                 entity.getType(),
                 entity.getRole(),
-                new LimitQuery.Main(entity.getLimit()),
-                new MatchingConditionQuery.Main(entity.getMatchingCondition())
+                new LimitQuery(entity.getLimit()),
+                new MatchingConditionQuery(entity.getMatchingCondition())
         );
     }
 }

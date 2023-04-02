@@ -13,7 +13,6 @@ import static com.soon83.infrastructure.CustomExpressionUtil.*;
 
 @RequiredArgsConstructor
 public class MemberRepositoryQuerydslImpl implements MemberRepositoryQuerydsl {
-
     private final JPAQueryFactory queryFactory;
 
     @Override

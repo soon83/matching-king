@@ -11,15 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements AuthService {
-
+public class AuthUserUserServiceImpl implements AuthUserService {
     private final MemberReader memberReader;
 
     @Override
     @Transactional(readOnly = true)
-    public AuthQuery.AuthAdaptor loadUserByUsername(String memberEmail) throws UsernameNotFoundException {
+    public AuthUserAdaptor loadUserByUsername(String memberEmail) throws UsernameNotFoundException {
         Member member = memberReader.readByEmail(memberEmail);
-        AuthQuery.Info authMemberInfo = new AuthQuery.Info(member);
-        return new AuthQuery.AuthAdaptor(authMemberInfo);
+        AuthUserQuery authMemberInfo = new AuthUserQuery(member);
+        return new AuthUserAdaptor(authMemberInfo);
     }
 }

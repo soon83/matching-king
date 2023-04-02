@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(schema = "member", name = "rm_member_limit")
 public class Limit extends BaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -16,7 +16,6 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class MemberReaderImpl implements MemberReader {
-
     private final MemberRepository memberRepository;
 
     @Override

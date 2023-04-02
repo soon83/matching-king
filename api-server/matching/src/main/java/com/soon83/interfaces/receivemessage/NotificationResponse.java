@@ -9,9 +9,9 @@ public record NotificationResponse(
         boolean isRead,
         boolean isDeleted
 ) {
-    public NotificationResponse(NotificationQuery.Main query) {
+    public NotificationResponse(NotificationQuery query) {
         this(
-                query.getId(),
+                query.id(),
                 query.isRead(),
                 query.isDeleted()
         );

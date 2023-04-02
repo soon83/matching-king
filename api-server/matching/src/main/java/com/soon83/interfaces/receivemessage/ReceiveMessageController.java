@@ -3,6 +3,7 @@ package com.soon83.interfaces.receivemessage;
 import com.soon83.CommonResponse;
 import com.soon83.application.NotificationApplication;
 import com.soon83.application.ReceiveMessageApplication;
+import com.soon83.domain.receivemessage.ReceiveMessageNotificationQuery;
 import com.soon83.domain.receivemessage.ReceiveMessageQuery;
 import com.soon83.interfaces.reply.MessageReplyResponse;
 import jakarta.validation.Valid;
@@ -17,7 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/receive-messages")
 public class ReceiveMessageController {
-
     private final NotificationApplication notificationApplication;
     private final ReceiveMessageApplication receiveMessageApplication;
 
@@ -28,7 +28,7 @@ public class ReceiveMessageController {
     @GetMapping("/notifications")
     public CommonResponse<List<ReceiveMessageNotificationResponse>> searchNotificationsOfTargetMember(@ModelAttribute @Valid ReceiveMessageSearchCondition request) {
         log.debug("# searchNotificationsOfTargetMember # request: {}", request);
-        List<ReceiveMessageQuery.Notification> notifications = receiveMessageApplication.searchNotificationsOfTargetMember(request.targetMemberId());
+        List<ReceiveMessageNotificationQuery> notifications = receiveMessageApplication.searchNotificationsOfTargetMember(request.targetMemberId());
         List<ReceiveMessageNotificationResponse> response = notifications.stream()
                 .map(ReceiveMessageNotificationResponse::new)
                 .toList();
@@ -66,9 +66,9 @@ public class ReceiveMessageController {
     @GetMapping
     public CommonResponse<List<ReceiveMessageResponse>> searchReceiveMessagesOfTargetMember(@ModelAttribute @Valid ReceiveMessageSearchCondition request) {
         log.debug("# searchReceiveMessagesOfTargetMember # request: {}", request);
-        List<ReceiveMessageQuery.Main> receiveMessagesOfMember = receiveMessageApplication.searchReceiveMessagesOfTargetMember(request.targetMemberId());
+        List<ReceiveMessageQuery> receiveMessagesOfMember = receiveMessageApplication.searchReceiveMessagesOfTargetMember(request.targetMemberId());
         List<ReceiveMessageResponse> response = receiveMessagesOfMember.stream()
-                .map(rm -> new ReceiveMessageResponse(rm, rm.getMessageReplies().stream()
+                .map(rm -> new ReceiveMessageResponse(rm, rm.messageReplies().stream()
                         .map(MessageReplyResponse::new)
                         .toList()))
                 .toList();

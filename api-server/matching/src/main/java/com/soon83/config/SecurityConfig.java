@@ -1,7 +1,7 @@
 package com.soon83.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.soon83.domain.auth.AuthService;
+import com.soon83.domain.auth.AuthUserService;
 import com.soon83.exception.CustomAuthenticationEntryPoint;
 import com.soon83.exception.ExceptionHandlerFilter;
 import com.soon83.jwt.AuthCheckFilter;
@@ -24,18 +24,18 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private final AuthService authService;
+    private final AuthUserService authUserService;
     private final ObjectMapper objectMapper;
     private final PasswordEncoder passwordEncoder;
 
     @Bean
     public SecurityFilterChain jwtFilterChain(HttpSecurity http) throws Exception {
         var authenticationManager = http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(authService)
+                .userDetailsService(authUserService)
                 .passwordEncoder(passwordEncoder)
                 .and()
                 .build();
-        AuthCheckFilter authCheckFilter = new AuthCheckFilter(authenticationManager, authService, objectMapper);
+        AuthCheckFilter authCheckFilter = new AuthCheckFilter(authenticationManager, authUserService, objectMapper);
         ExceptionHandlerFilter exceptionHandlerFilter = new ExceptionHandlerFilter(objectMapper);
         var authenticationEntryPoint = new CustomAuthenticationEntryPoint();
 

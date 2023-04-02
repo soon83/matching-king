@@ -18,7 +18,6 @@ import java.nio.charset.StandardCharsets;
 
 @Slf4j
 public class ExceptionHandlerFilter extends OncePerRequestFilter {
-
     private final ObjectMapper objectMapper;
 
     public ExceptionHandlerFilter(ObjectMapper objectMapper) {

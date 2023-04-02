@@ -13,7 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @Embeddable
 public class Gender {
-
     private boolean male = false;
     private boolean female = false;
 

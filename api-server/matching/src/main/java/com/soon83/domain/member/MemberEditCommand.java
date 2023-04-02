@@ -3,7 +3,7 @@ package com.soon83.domain.member;
 import lombok.Builder;
 
 @Builder
-public record MemberEditMemberCommand(
+public record MemberEditCommand(
         String nickname,
         int age,
         Member.Gender gender,

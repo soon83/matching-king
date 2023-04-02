@@ -1,13 +1,14 @@
 package com.soon83.domain.member;
 
-import com.soon83.domain.member.matchingcondition.MatchingConditionCommand;
+import com.soon83.domain.member.matchingcondition.MatchingConditionCreateCommand;
+import com.soon83.domain.member.matchingcondition.MatchingConditionEditCommand;
 
 import java.util.List;
 
 public interface MemberService {
     Long registerMember(
-            MemberCommand.CreateMember createMemberCommand,
-            MatchingConditionCommand.CreateMatchingCondition createMatchingConditionCommand
+            MemberCreateCommand createMemberCommand,
+            MatchingConditionCreateCommand createMatchingConditionCommand
     );
 
     List<MemberQuery> searchMembers(MemberSearchConditionQuery condition);
@@ -20,8 +21,8 @@ public interface MemberService {
 
     void editMember(
             Long memberId,
-            MemberCommand.EditMember command,
-            MatchingConditionCommand.EditMatchingCondition editMatchingConditionCommand
+            MemberEditCommand command,
+            MatchingConditionEditCommand editMatchingConditionCommand
     );
 
     void removeMember(Long memberId);

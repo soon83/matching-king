@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class MessageReaderImpl implements MessageReader {
-
     private final MessageRepository messageRepository;
 
     @Override

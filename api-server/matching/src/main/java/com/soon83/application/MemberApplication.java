@@ -1,7 +1,8 @@
 package com.soon83.application;
 
 import com.soon83.domain.member.*;
-import com.soon83.domain.member.matchingcondition.MatchingConditionCommand;
+import com.soon83.domain.member.matchingcondition.MatchingConditionCreateCommand;
+import com.soon83.domain.member.matchingcondition.MatchingConditionEditCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MemberApplication {
-
     private final MemberService memberService;
 
     public Long registerMember(
-            MemberCommand.CreateMember createMemberCommand,
-            MatchingConditionCommand.CreateMatchingCondition createMatchingConditionCommand
+            MemberCreateCommand createMemberCommand,
+            MatchingConditionCreateCommand createMatchingConditionCommand
     ) {
         return memberService.registerMember(createMemberCommand, createMatchingConditionCommand);
     }
@@ -40,8 +40,8 @@ public class MemberApplication {
 
     public void editMember(
             Long memberId,
-            MemberCommand.EditMember editMemberCommand,
-            MatchingConditionCommand.EditMatchingCondition editMatchingConditionCommand
+            MemberEditCommand editMemberCommand,
+            MatchingConditionEditCommand editMatchingConditionCommand
     ) {
         memberService.editMember(memberId, editMemberCommand, editMatchingConditionCommand);
     }

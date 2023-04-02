@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {
-
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<CommonErrorResponse> handleException(Exception e) {
         log.error("[Exception] cause: {}, message: {}", NestedExceptionUtils.getMostSpecificCause(e), e.getMessage());

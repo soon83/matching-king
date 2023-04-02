@@ -13,13 +13,13 @@ public record MatchingConditionResponse(
         Gender gender,
         Mbti mbti
 ) {
-    public MatchingConditionResponse(MatchingConditionQuery.Main query) {
+    public MatchingConditionResponse(MatchingConditionQuery query) {
         this(
-                query.getId(),
-                query.getMinAge(),
-                query.getMaxAge(),
-                query.getGender(),
-                query.getMbti()
+                query.id(),
+                query.minAge(),
+                query.maxAge(),
+                query.gender(),
+                query.mbti()
         );
     }
 }

@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface ReceiveMessageRepositoryQuerydsl {
     List<ReceiveMessage> searchNotificationsOfTargetMember(Long targetMemberId);
+
     List<ReceiveMessage> searchReceiveMessagesOfTargetMember(Long targetMemberId);
 }

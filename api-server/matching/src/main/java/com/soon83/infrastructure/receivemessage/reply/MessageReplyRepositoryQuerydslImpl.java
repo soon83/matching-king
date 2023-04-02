@@ -11,7 +11,6 @@ import static com.soon83.infrastructure.CustomExpressionUtil.eq;
 
 @RequiredArgsConstructor
 public class MessageReplyRepositoryQuerydslImpl implements MessageReplyRepositoryQuerydsl {
-
     private final JPAQueryFactory queryFactory;
 
     @Override

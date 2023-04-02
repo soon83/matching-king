@@ -15,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @Embeddable
 public class Mbti {
-
     private boolean esfj = false;
     private boolean esfp = false;
     private boolean enfj = false;

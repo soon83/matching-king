@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class MessageStoreImpl implements MessageStore {
-
     private final MessageRepository messageRepository;
 
     @Override

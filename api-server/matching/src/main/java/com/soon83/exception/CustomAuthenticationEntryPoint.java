@@ -12,7 +12,6 @@ import java.io.IOException;
 
 @Slf4j
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
-
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authenticationException) throws IOException, ServletException {
         throw new AuthForbiddenException();
     }

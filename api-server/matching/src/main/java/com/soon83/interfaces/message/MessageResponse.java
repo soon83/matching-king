@@ -9,11 +9,11 @@ public record MessageResponse(
         String content,
         Long senderId
 ) {
-    public MessageResponse(MessageQuery.Main query) {
+    public MessageResponse(MessageQuery query) {
         this(
-                query.getId(),
-                query.getContent(),
-                query.getSenderId()
+                query.id(),
+                query.content(),
+                query.senderId()
         );
     }
 }

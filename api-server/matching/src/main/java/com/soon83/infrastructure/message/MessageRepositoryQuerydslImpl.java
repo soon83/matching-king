@@ -12,7 +12,6 @@ import static com.soon83.infrastructure.CustomExpressionUtil.goe;
 
 @RequiredArgsConstructor
 public class MessageRepositoryQuerydslImpl implements MessageRepositoryQuerydsl {
-
     private final JPAQueryFactory queryFactory;
 
     @Override

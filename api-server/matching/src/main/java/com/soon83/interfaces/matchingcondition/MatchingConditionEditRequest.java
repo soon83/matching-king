@@ -1,6 +1,6 @@
 package com.soon83.interfaces.matchingcondition;
 
-import com.soon83.domain.member.matchingcondition.MatchingConditionCommand;
+import com.soon83.domain.member.matchingcondition.MatchingConditionEditCommand;
 import com.soon83.domain.valuetype.Gender;
 import com.soon83.domain.valuetype.Mbti;
 import jakarta.validation.constraints.Max;
@@ -23,8 +23,8 @@ public record MatchingConditionEditRequest(
         @NotNull(message = "필수값")
         Mbti mbti
 ) {
-    public MatchingConditionCommand.EditMatchingCondition toEditMatchingConditionCommand() {
-        return MatchingConditionCommand.EditMatchingCondition.builder()
+    public MatchingConditionEditCommand toEditMatchingConditionCommand() {
+        return MatchingConditionEditCommand.builder()
                 .minAge(minAge)
                 .maxAge(maxAge)
                 .gender(gender)

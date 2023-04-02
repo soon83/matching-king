@@ -1,7 +1,7 @@
 package com.soon83.interfaces.member;
 
 import com.soon83.domain.member.Member;
-import com.soon83.domain.member.MemberCommand;
+import com.soon83.domain.member.MemberEditCommand;
 import com.soon83.interfaces.matchingcondition.MatchingConditionEditRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -26,8 +26,8 @@ public record MemberEditRequest(
         @NotNull(message = "필수값")
         MatchingConditionEditRequest memberMatchingCondition
 ) {
-    public MemberCommand.EditMember toEditMemberCommand() {
-        return MemberCommand.EditMember.builder()
+    public MemberEditCommand toEditMemberCommand() {
+        return MemberEditCommand.builder()
                 .nickname(memberNickname)
                 .age(memberAge)
                 .gender(memberGender)

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class ReceiveMessageStoreImpl implements ReceiveMessageStore {
-
     private final MessageReplyRepository messageReplyRepository;
 
     @Override

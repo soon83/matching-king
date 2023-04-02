@@ -1,6 +1,6 @@
 package com.soon83.interfaces.reply;
 
-import com.soon83.domain.receivemessage.reply.MessageReplyCommand;
+import com.soon83.domain.receivemessage.reply.MessageReplyCreateCommand;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -14,8 +14,8 @@ public record MessageReplyRegisterRequest(
         @NotNull(message = "필수값")
         Long replyMemberId
 ) {
-    public MessageReplyCommand.CreateReply toCreateMessageReplyCommand() {
-        return MessageReplyCommand.CreateReply.builder()
+    public MessageReplyCreateCommand toCreateMessageReplyCommand() {
+        return MessageReplyCreateCommand.builder()
                 .content(messageReplyContent)
                 .replyMemberId(replyMemberId)
                 .build();

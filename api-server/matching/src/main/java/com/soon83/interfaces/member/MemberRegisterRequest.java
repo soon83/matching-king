@@ -1,7 +1,7 @@
 package com.soon83.interfaces.member;
 
 import com.soon83.domain.member.Member;
-import com.soon83.domain.member.MemberCommand;
+import com.soon83.domain.member.MemberCreateCommand;
 import com.soon83.interfaces.matchingcondition.MatchingConditionRegisterRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -28,8 +28,8 @@ public record MemberRegisterRequest(
         @NotNull(message = "필수값")
         MatchingConditionRegisterRequest memberMatchingCondition
 ) {
-    public MemberCommand.CreateMember toCreateMemberCommand() {
-        return MemberCommand.CreateMember.builder()
+    public MemberCreateCommand toCreateMemberCommand() {
+        return MemberCreateCommand.builder()
                 .email(memberEmail)
                 .password(memberPassword)
                 .nickname(memberNickname)

@@ -3,8 +3,8 @@ package com.soon83.jwt;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soon83.CommonErrorResponse;
 import com.soon83.JwtUtil;
-import com.soon83.domain.auth.AuthQuery;
-import com.soon83.domain.auth.AuthService;
+import com.soon83.domain.auth.AuthUserAdaptor;
+import com.soon83.domain.auth.AuthUserService;
 import com.soon83.exception.ErrorCode;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -23,12 +23,12 @@ import java.nio.charset.StandardCharsets;
 
 @Slf4j
 public class AuthCheckFilter extends BasicAuthenticationFilter {
-    private final AuthService authService;
+    private final AuthUserService authUserService;
     private final ObjectMapper objectMapper;
 
-    public AuthCheckFilter(AuthenticationManager authenticationManager, AuthService authService, ObjectMapper objectMapper) {
+    public AuthCheckFilter(AuthenticationManager authenticationManager, AuthUserService authUserService, ObjectMapper objectMapper) {
         super(authenticationManager);
-        this.authService = authService;
+        this.authUserService = authUserService;
         this.objectMapper = objectMapper;
     }
 
@@ -42,8 +42,8 @@ public class AuthCheckFilter extends BasicAuthenticationFilter {
         String token = bearer.substring(JwtUtil.BEARER_TOKEN_PREFIX.length());
         var result = JwtUtil.verify(token);
         if (result.isSuccess()) {
-            AuthQuery.AuthAdaptor authRequest = (AuthQuery.AuthAdaptor) authService.loadUserByUsername(result.getUsername());
-            var authRequestToken = new UsernamePasswordAuthenticationToken(authRequest.getAuthUser(), null, authRequest.getAuthorities());
+            AuthUserAdaptor authRequest = (AuthUserAdaptor) authUserService.loadUserByUsername(result.getUsername());
+            var authRequestToken = new UsernamePasswordAuthenticationToken(authRequest.getCurrentUser(), null, authRequest.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authRequestToken);
             chain.doFilter(request, response);
         } else {

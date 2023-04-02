@@ -18,7 +18,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/codes")
 public class CodeApiController {
-
     private final EnumMapper enumMapper;
 
     @GetMapping

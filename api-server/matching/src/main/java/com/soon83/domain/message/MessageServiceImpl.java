@@ -14,15 +14,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MessageServiceImpl implements MessageService {
-
     private final MessageReader messageReader;
     private final MessageStore messageStore;
     private final MemberReader memberReader;
 
     @Override
     @Transactional
-    public Long registerMessage(MessageCommand.CreateMessage command) {
-        Member sender = memberReader.readMemberMatchingConditionAndLimitById(command.getSenderId());
+    public Long registerMessage(MessageCreateCommand command) {
+        Member sender = memberReader.readMemberMatchingConditionAndLimitById(command.senderId());
         messageReader.checkMessageLimit(sender.getId(), sender.getLimit().getSendMessageCount());
         Message createdMessage = messageStore.create(command.toEntity(sender));
         List<Member> targetMembers = memberReader.readLimitMembersByMatchingCondition(sender.getId(), sender.getMatchingCondition(), sender.getLimit().getSendMessageNotificationCount());

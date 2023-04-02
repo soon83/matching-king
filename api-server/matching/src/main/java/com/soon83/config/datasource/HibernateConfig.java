@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Profile;
 @Profile("test")
 @Configuration
 public class HibernateConfig {
-
     @Bean
     public HibernateProperties hibernateProperties() {
         return new HibernateProperties();

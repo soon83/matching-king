@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(schema = "message", name = "rm_message_notification")
 public class Notification extends BaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -19,7 +19,6 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class InitDb implements InitializingBean {
-
     private final LimitRepository limitRepository;
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;

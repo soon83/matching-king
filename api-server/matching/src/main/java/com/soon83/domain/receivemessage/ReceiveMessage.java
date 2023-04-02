@@ -20,7 +20,7 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(
-        schema = "message", name="rm_receive_message",
+        schema = "message", name = "rm_receive_message",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"message_notification_id"}, name = "UIX_messageNotificationId"),
         },
@@ -30,7 +30,6 @@ import java.util.Objects;
         }
 )
 public class ReceiveMessage extends BaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -108,7 +107,7 @@ public class ReceiveMessage extends BaseEntity {
     }
 
     public void setMessage(Message message) {
-        if(this.message != null) {
+        if (this.message != null) {
             this.message.getReceiveMessages().remove(this);
         }
         this.message = message;

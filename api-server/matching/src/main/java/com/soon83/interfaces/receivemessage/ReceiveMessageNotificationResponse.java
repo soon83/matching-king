@@ -1,6 +1,6 @@
 package com.soon83.interfaces.receivemessage;
 
-import com.soon83.domain.receivemessage.ReceiveMessageQuery;
+import com.soon83.domain.receivemessage.ReceiveMessageNotificationQuery;
 import com.soon83.interfaces.member.MemberResponse;
 import lombok.Builder;
 
@@ -14,15 +14,15 @@ public record ReceiveMessageNotificationResponse(
         Long messageId,
         NotificationResponse messageNotification
 ) {
-    public ReceiveMessageNotificationResponse(ReceiveMessageQuery.Notification query) {
+    public ReceiveMessageNotificationResponse(ReceiveMessageNotificationQuery query) {
         this(
-                query.getId(),
-                query.isHiddenFromSender(),
-                query.isHiddenFromTargetMember(),
-                new MemberResponse(query.getSender()),
-                query.getTargetMemberId(),
-                query.getMessageId(),
-                new NotificationResponse(query.getMessageNotification())
+                query.id(),
+                query.hiddenFromSender(),
+                query.hiddenFromTargetMember(),
+                new MemberResponse(query.sender()),
+                query.targetMemberId(),
+                query.messageId(),
+                new NotificationResponse(query.messageNotification())
         );
     }
 

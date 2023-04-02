@@ -9,11 +9,11 @@ public record MessageReplyResponse(
         String content,
         Long replyMemberId
 ) {
-    public MessageReplyResponse(MessageReplyQuery.Main query) {
+    public MessageReplyResponse(MessageReplyQuery query) {
         this(
-                query.getId(),
-                query.getContent(),
-                query.getReplyMemberId()
+                query.id(),
+                query.content(),
+                query.replyMemberId()
         );
     }
 }

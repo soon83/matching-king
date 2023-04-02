@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/messages")
 public class MessageController {
-
     private final MessageApplication messageApplication;
 
     /**

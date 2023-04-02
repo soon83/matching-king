@@ -1,6 +1,6 @@
 package com.soon83.interfaces.message;
 
-import com.soon83.domain.message.MessageCommand;
+import com.soon83.domain.message.MessageCreateCommand;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -14,8 +14,8 @@ public record MessageRegisterRequest(
         @NotNull(message = "필수값")
         Long messageSenderId
 ) {
-    public MessageCommand.CreateMessage toCreateMessageCommand() {
-        return MessageCommand.CreateMessage.builder()
+    public MessageCreateCommand toCreateMessageCommand() {
+        return MessageCreateCommand.builder()
                 .content(messageContent)
                 .senderId(messageSenderId)
                 .build();

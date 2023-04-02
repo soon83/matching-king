@@ -15,7 +15,6 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class ReceiveMessageReaderImpl implements ReceiveMessageReader {
-
     private final ReceiveMessageRepository receiveMessageRepository;
     private final MessageReplyRepository messageReplyRepository;
 

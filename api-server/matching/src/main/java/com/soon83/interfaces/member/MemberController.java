@@ -2,10 +2,10 @@ package com.soon83.interfaces.member;
 
 import com.soon83.CommonResponse;
 import com.soon83.application.MemberApplication;
-import com.soon83.domain.auth.AuthUser;
 import com.soon83.domain.member.MemberDetailQuery;
 import com.soon83.domain.member.MemberQuery;
 import com.soon83.domain.member.MemberSearchConditionQuery;
+import com.soon83.interfaces.auth.CurrentUser;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/members")
 public class MemberController {
-
     private final MemberApplication memberApplication;
 
     /**
@@ -55,8 +54,8 @@ public class MemberController {
      * [회원] 단건 조회
      */
     @GetMapping("/{memberId}")
-    public CommonResponse<MemberResponse> searchMember(@PathVariable Long memberId, @AuthenticationPrincipal AuthUser authUser) {
-        log.debug("# searchMember # authUser: {}", authUser);
+    public CommonResponse<MemberResponse> searchMember(@PathVariable Long memberId, @AuthenticationPrincipal CurrentUser currentUser) {
+        log.debug("# searchMember # currentUser: {}", currentUser);
         log.debug("# searchMember # memberId: {}", memberId);
         MemberQuery member = memberApplication.searchMember(memberId);
         MemberResponse response = new MemberResponse(member);

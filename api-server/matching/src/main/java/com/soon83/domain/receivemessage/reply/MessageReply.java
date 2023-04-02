@@ -17,7 +17,6 @@ import java.util.Objects;
 @Entity
 @Table(schema = "message", name = "rm_message_reply")
 public class MessageReply extends BaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -57,7 +56,7 @@ public class MessageReply extends BaseEntity {
     }
 
     public void setReceiveMessage(ReceiveMessage receiveMessage) {
-        if(this.receiveMessage != null) {
+        if (this.receiveMessage != null) {
             this.receiveMessage.getMessageReplies().remove(this);
         }
         this.receiveMessage = receiveMessage;

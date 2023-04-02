@@ -11,12 +11,12 @@ public record LimitResponse(
         int sendMessageCount,
         int sendMessageNotificationCount
 ) {
-    public LimitResponse(LimitQuery.Main limitQuery) {
+    public LimitResponse(LimitQuery query) {
         this(
-                limitQuery.getId(),
-                limitQuery.getMemberType(),
-                limitQuery.getSendMessageCount(),
-                limitQuery.getSendMessageNotificationCount()
+                query.id(),
+                query.memberType(),
+                query.sendMessageCount(),
+                query.sendMessageNotificationCount()
         );
     }
 }

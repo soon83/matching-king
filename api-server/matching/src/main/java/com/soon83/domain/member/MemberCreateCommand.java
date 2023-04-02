@@ -5,7 +5,7 @@ import com.soon83.domain.member.matchingcondition.MatchingCondition;
 import lombok.Builder;
 
 @Builder
-public record MemberCreateMemberCommand(
+public record MemberCreateCommand(
         String email,
         String password,
         String nickname,
@@ -15,7 +15,7 @@ public record MemberCreateMemberCommand(
         Member.Type type,
         Member.Role role
 ) {
-    public MemberCreateMemberCommand {
+    public MemberCreateCommand {
         type = Member.Type.FREE;
         role = Member.Role.MEMBER;
     }
