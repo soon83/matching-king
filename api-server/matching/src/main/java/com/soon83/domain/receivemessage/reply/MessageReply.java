@@ -62,14 +62,6 @@ public class MessageReply extends BaseEntity {
         }
     }
 
-    /*public void setReceiveMessage(ReceiveMessage receiveMessage) {
-        if (this.receiveMessage != null) {
-            this.receiveMessage.getMessageReplies().remove(this);
-        }
-        this.receiveMessage = receiveMessage;
-        receiveMessage.getMessageReplies().add(this);
-    }*/
-
     public void setMessage(Message message) {
         if (this.message != null) {
             this.message.getMessageReplies().remove(this);
