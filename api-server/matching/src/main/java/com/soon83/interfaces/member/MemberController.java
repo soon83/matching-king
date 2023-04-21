@@ -27,12 +27,12 @@ public class MemberController {
      */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public CommonResponse<MemberCreateResponse> registerMember(@RequestBody @Valid MemberRegisterRequest request) {
+    public CommonResponse<MemberRegisterResponse> registerMember(@RequestBody @Valid MemberRegisterRequest request) {
         log.debug("# registerMember # request: {}", request);
         var createMemberCommand = request.toCreateMemberCommand();
         var createMatchingConditionCommand = request.memberMatchingCondition().toCreateMatchingConditionCommand();
         Long memberId = memberApplication.registerMember(createMemberCommand, createMatchingConditionCommand);
-        MemberCreateResponse response = new MemberCreateResponse(memberId);
+        MemberRegisterResponse response = new MemberRegisterResponse(memberId);
         return CommonResponse.success(response);
     }
 
